@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>SkyNet Biometrics Security</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="src/main.css">
+</head>
+
+<body>
+    <style>
+  @font-face {
+        font-family: "After Burner";
+        src: url("src/G7AfterBurnerTTF.ttf");
+      }
+
+      body {
+        font-family: "After Burner", serif;
+      }
+      .backcanvas{    position: absolute;
+    top: 0;
+    opacity: .5;z-index: -1;}
+    .soundon{color: #000;}
+    .btn{display: flex;padding: 5px;}
+    .btn div{height: 50px;line-height: 50px;}
+    </style>
+   <style type="text/css">
+    /* rVitals table*/
+		body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Calibri"; font-size:x-small }
+		a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
+		a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
+		comment { display:none;  } 
+		.sorttable_sorted,.sorttable_sorted_reverse,table.sortable thead td:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort) { white-space: nowrap; cursor: pointer; }
+		table.sortable thead td:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { content:" \25B4\25BE"; }
+	</style> 
+    <header>
+        <h2>BIOLOGICAL METRIC SECURITY<img src="img/437-4379298_8-bit-heart-green-tata-bt21-pixel-art.png"></h2>
+        <img src="img/playstore.png">
+    </header>
+  
+    <main>
+        <div class="btn"> <img  src="src/20230516_104626.png" height="50px" id="record"><div>PPG</div></div>
+   
+      <!--  <button id="record">BIOMETRICS<img src="img/neon-fingerprint-animation.jpg"></button>-->
+        <div>
+            <video id='video'></video>
+        </div>
+        <div>
+            <canvas id="output-canvas"></canvas>
+        </div>
+        <div id="chart"></div>
+        <p id="resolution"></p>
+        <p id="delay"></p>
+        <p id="frame-fps"></p>
+        <p id="frame-time"></p>
+        <p id="video-time"></p>
+        <p id="signal"></p>
+        <p id="signal-window"></p>
+    </main>
+    <script src="./src/real-time-line-chart.js"></script>
+    <script src="./src/main.js"></script>
+   <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SOUND</div></div>
+  
+   <div id="container"></div>
+    <script id="rendered-js" type="module">
+        /**
+         * for documentation and more demos,
+         * visit https://audiomotion.dev
+         */
+        
+        // load module from Skypack CDN
+        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+        
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true });
+        
+        
+        
+        // display module version
+        //document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+        
+        // toggle microphone on/off
+        const micButton = document.getElementById('openaudio');
+        
+        micButton.addEventListener('click', () => {
+          if (navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
+              then(stream => {
+                // create stream using audioMotion audio context
+                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
+                audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
+                audioMotion.volume = 0;
+              }).
+              catch(err => {
+                alert('Microphone access denied by user');
+              });
+            } else
+            {
+              alert('User mediaDevices not available');
+            }
+          });
+            // disconnect all input audio sources
+          //  audioMotion.disconnectInput();
+        
+        
+        //# sourceURL=pen.js
+            </script>
+
+    <script src="./src/real-time-line-chart.js"></script>
+    <script src="./src/main.js"></script>
+   <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SOUND</div></div>
+  
+   <div id="container"></div>
+    <script id="rendered-js" type="module">
+        /**
+         * for documentation and more demos,
+         * visit https://audiomotion.dev
+         */
+        
+        // load module from Skypack CDN
+        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+        
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true });
+        
+        
+        
+        // display module version
+        //document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+        
+        // toggle microphone on/off
+        const micButton = document.getElementById('openaudio');
+        
+        micButton.addEventListener('click', () => {
+          if (navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
+              then(stream => {
+                // create stream using audioMotion audio context
+                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
+                audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
+                audioMotion.volume = 0;
+              }).
+              catch(err => {
+                alert('Microphone access denied by user');
+              });
+            } else
+            {
+              alert('User mediaDevices not available');
+            }
+          });
+            // disconnect all input audio sources
+          //  audioMotion.disconnectInput();
+        
+        
+        //# sourceURL=pen.js
+            </script>
+
+
+
+<table cellspacing="0" border="1" class="sortable">
+	<colgroup width="255"></colgroup>
+	<colgroup width="98"></colgroup>
+	<colgroup width="192"></colgroup>
+	<colgroup width="129"></colgroup>
+	<colgroup width="98"></colgroup>
+	<colgroup span="4" width="255"></colgroup>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">PARAMETER</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Abbrev</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">spcmn</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal Low</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal High</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">C UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#996633">CF&nbsp;1</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">SI UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#336699">EQUATION&nbsp;2</font></b></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Absolute Neutrophil Count</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">ANC</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1520" sdnum="1033;"><font face="Tahoma" color="#003366">1520</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6370" sdnum="1033;"><font face="Tahoma" color="#003366">6370</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/mm3</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/uL</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfkdc013.htm">WBC*((PMN+bands)/100)</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Absolute Reticulocyte Count</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">ARC</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="21000" sdnum="1033;"><font face="Tahoma" color="#003366">21000</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="94500" sdnum="1033;"><font face="Tahoma" color="#003366">94500</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/mm3</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/uL</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfgdc013.htm">(retis/100)*RBC</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">bands</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4" sdnum="1033;"><font face="Tahoma" color="#003366">4</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Hematocrit</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Hct</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="37" sdnum="1033;"><font face="Tahoma" color="#003366">37</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="52" sdnum="1033;"><font face="Tahoma" color="#003366">52</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Hematocrit (normal)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Hct (nl)</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="37" sdnum="1033;"><font face="Tahoma" color="#003366">37</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="52" sdnum="1033;"><font face="Tahoma" color="#003366">52</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Hematocrit (Patient)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Hct (Pt)</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="37" sdnum="1033;"><font face="Tahoma" color="#003366">37</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="52" sdnum="1033;"><font face="Tahoma" color="#003366">52</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Hemoglobin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Hb</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12" sdnum="1033;"><font face="Tahoma" color="#003366">12</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="18" sdnum="1033;"><font face="Tahoma" color="#003366">18</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.6206" sdnum="1033;"><u><font color="#0563C1">0.6206</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">International Normalized Ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">INR</font></b></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Iron Deficit</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Fe_def</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.001" sdnum="1033;"><u><font color="#0563C1">0.001</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfrdd018.htm">Wt*(15-Hb)+1000</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Mean Corpuscular Hemoglobin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MCH</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">Erc</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="27" sdnum="1033;"><font face="Tahoma" color="#003366">27</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="31" sdnum="1033;"><font face="Tahoma" color="#003366">31</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">pg/cell</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfdfv027.htm">Hb/RBC</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Mean Corpuscular Hemoglobin Concentration</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MCHC</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="32" sdnum="1033;"><font face="Tahoma" color="#003366">32</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="36" sdnum="1033;"><font face="Tahoma" color="#003366">36</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfdgv034.htm">Hb/Hct</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Mean Corpuscular Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MCV</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">Erc</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="83" sdnum="1033;"><font face="Tahoma" color="#003366">83</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="97" sdnum="1033;"><font face="Tahoma" color="#003366">97</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">um3</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfddv015.htm">Hct/RBC</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Polymorphonuclear cells</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PMN</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="41" sdnum="1033;"><font face="Tahoma" color="#003366">41</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="74" sdnum="1033;"><font face="Tahoma" color="#003366">74</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Red Blood Cells</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RBCs</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.2" sdnum="1033;"><font face="Tahoma" color="#003366">4.2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6.3" sdnum="1033;"><font face="Tahoma" color="#003366">6.3</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells* 10^6/mm3</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells* 10^12/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Red Blood Cells</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RBCs</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5000" sdnum="1033;"><font face="Tahoma" color="#003366">5000</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/field</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Reticulocyte %</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Retic%</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.5" sdnum="1033;"><font face="Tahoma" color="#003366">0.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.5" sdnum="1033;"><font face="Tahoma" color="#003366">1.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfgdp017.htm">(retis/RBC)*100</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Reticulocyte Count, Corrected</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Retic_c</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.5" sdnum="1033;"><font face="Tahoma" color="#003366">0.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.5" sdnum="1033;"><font face="Tahoma" color="#003366">1.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfgdc742.htm">retis*(Hct pt/Hct nl)</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Reticulocytes</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">retis</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.5" sdnum="1033;"><font face="Tahoma" color="#003366">0.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.5" sdnum="1033;"><font face="Tahoma" color="#003366">1.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Reticulocytes</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">retis</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="500" sdnum="1033;"><font face="Tahoma" color="#003366">500</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/field</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Total Iron Binding Capacity</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">TIBC</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="273" sdnum="1033;"><font face="Tahoma" color="#003366">273</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="337" sdnum="1033;"><font face="Tahoma" color="#003366">337</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ug/dL</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Transferrin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">TransFe</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="220" sdnum="1033;"><font face="Tahoma" color="#003366">220</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="400" sdnum="1033;"><font face="Tahoma" color="#003366">400</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpf/pfrfb012.htm">(0.8*TIBC)-43</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Transferrin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2.2" sdnum="1033;"><font face="Tahoma" color="#003366">2.2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4" sdnum="1033;"><font face="Tahoma" color="#003366">4</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="100" sdnum="1033;"><u><font color="#0563C1">100</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">White Blood Cells</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">WBCs</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3800" sdnum="1033;"><font face="Tahoma" color="#003366">3800</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="9800" sdnum="1033;"><font face="Tahoma" color="#003366">9800</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells/mm3</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.001" sdnum="1033;"><u><font color="#0563C1">0.001</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cells*10^9L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="31" align="left" valign=bottom bgcolor="#E6E6E6"><b><font face="Arial" size=1 color="#000000">1&nbsp;CF links connect to Unit Conversion Pages.&nbsp;2&nbsp;Equation links connect to Equation pages.</font></b></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">PARAMETER</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Abbrev</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">spcmn</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal Low</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal High</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">C UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#996633">CF&nbsp;1</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">SI UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#336699">EQUATION&nbsp;2</font></b></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Albumin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Alb</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.5" sdnum="1033;"><font face="Tahoma" color="#003366">3.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5.5" sdnum="1033;"><font face="Tahoma" color="#003366">5.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="10" sdnum="1033;"><u><font color="#0563C1">10</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ankle Brachial Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">ABI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1" sdnum="1033;"><font face="Tahoma" color="#003366">1</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.1" sdnum="1033;"><font face="Tahoma" color="#003366">1.1</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phgtk124.htm">(ankle SP/brachial SP)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Ankle Systolic Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">ankle SP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="100" sdnum="1033;"><font face="Tahoma" color="#003366">100</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="140" sdnum="1033;"><font face="Tahoma" color="#003366">140</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">a-v Oxygen Content Difference</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">C(a-v)O2</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4" sdnum="1033;"><font face="Tahoma" color="#003366">4</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5" sdnum="1033;"><font face="Tahoma" color="#003366">5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">vol%</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Blood Flow:Volume Ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">BFVR</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.9" sdnum="1033;"><font face="Tahoma" color="#003366">0.9</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.4" sdnum="1033;"><font face="Tahoma" color="#003366">1.4</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdhr219.htm">CI/BVI</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Blood Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">BV</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3" sdnum="1033;"><font face="Tahoma" color="#003366">3</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5.1" sdnum="1033;"><font face="Tahoma" color="#003366">5.1</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdhs014.htm">PV/(1-Hct)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Blood Volume Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">BVI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2" sdnum="1033;"><font face="Tahoma" color="#003366">2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3" sdnum="1033;"><font face="Tahoma" color="#003366">3</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/m2</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdht722.htm">PV/((1-Hct)*BSA)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Blood Volume Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">BVI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2" sdnum="1033;"><font face="Tahoma" color="#003366">2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3" sdnum="1033;"><font face="Tahoma" color="#003366">3</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/m2</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/m2</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Body Surface Area</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">BSA</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.3" sdnum="1033;"><font face="Tahoma" color="#003366">1.3</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2.5" sdnum="1033;"><font face="Tahoma" color="#003366">2.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">m2</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Brachial Systolic Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">brachial SP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="100" sdnum="1033;"><font face="Tahoma" color="#003366">100</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="140" sdnum="1033;"><font face="Tahoma" color="#003366">140</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2.5" sdnum="1033;"><font face="Tahoma" color="#003366">2.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.6" sdnum="1033;"><font face="Tahoma" color="#003366">3.6</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/min/m2</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/min/ m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdfd722.htm">CO/BSA</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Cardiac Output</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CO</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.25" sdnum="1033;"><font face="Tahoma" color="#003366">4.25</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6.12" sdnum="1033;"><font face="Tahoma" color="#003366">6.12</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/min</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/min</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Output (Fick)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CO_fick</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.25" sdnum="1033;"><font face="Tahoma" color="#003366">4.25</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6.12" sdnum="1033;"><font face="Tahoma" color="#003366">6.12</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/min</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/min</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdfc203.htm">VO2/Ca-vO2</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Output (Physiologic)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CO_phys</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.25" sdnum="1033;"><font face="Tahoma" color="#003366">4.25</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6.12" sdnum="1033;"><font face="Tahoma" color="#003366">6.12</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L/min</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/min</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdfb015.htm">HR*SV</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Work Index, Left</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LCWI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.4" sdnum="1033;"><font face="Tahoma" color="#003366">3.4</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.2" sdnum="1033;"><font face="Tahoma" color="#003366">4.2</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">kg*m/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmfy128.htm">CI*MAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Work Index, Right</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RCWI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="540" sdnum="1033;"><font face="Tahoma" color="#003366">540</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="660" sdnum="1033;"><font face="Tahoma" color="#003366">660</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmgy187.htm">CI*MPAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Work, Left</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LCW</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5.1" sdnum="1033;"><font face="Tahoma" color="#003366">5.1</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="9.45" sdnum="1033;"><font face="Tahoma" color="#003366">9.45</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">kg*m</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmfw011.htm">CO*MAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiac Work, Right</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RCW</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="810" sdnum="1033;"><font face="Tahoma" color="#003366">810</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1485" sdnum="1033;"><font face="Tahoma" color="#003366">1485</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmgw019.htm">CO*MPAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Central Blood Volume Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CBVI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="744" sdnum="1033;"><font face="Tahoma" color="#003366">744</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="916" sdnum="1033;"><font face="Tahoma" color="#003366">916</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdhv076.htm">MTT*CI*16.7</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Central Venous Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CVP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1" sdnum="1033;"><font face="Tahoma" color="#003366">1</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="7" sdnum="1033;"><font face="Tahoma" color="#003366">7</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Colloid-Oncotic Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">COP</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">P</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="23" sdnum="1033;"><font face="Tahoma" color="#003366">23</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="29" sdnum="1033;"><font face="Tahoma" color="#003366">29</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phglp010.htm">(glob*1.4)+(alb*5.5)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Coronary Perfusion Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CPP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="80" sdnum="1033;"><font face="Tahoma" color="#003366">80</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phgkp233.htm">DP-PCWP</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Diastolic Blood Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">DBP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="90" sdnum="1033;"><font face="Tahoma" color="#003366">90</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ejection Fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">EF</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="55" sdnum="1033;"><font face="Tahoma" color="#003366">55</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="78" sdnum="1033;"><font face="Tahoma" color="#003366">78</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdgf019.htm">SI/EDV</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">End-Diastolic Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">EDV</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="90" sdnum="1033;"><font face="Tahoma" color="#003366">90</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/m2</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">End-Systolic Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">ESV</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12" sdnum="1033;"><font face="Tahoma" color="#003366">12</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="28" sdnum="1033;"><font face="Tahoma" color="#003366">28</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/m2</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Globulin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Glob</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2" sdnum="1033;"><font face="Tahoma" color="#003366">2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.5" sdnum="1033;"><font face="Tahoma" color="#003366">3.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="10" sdnum="1033;"><u><font color="#0563C1">10</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Heart Rate</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">HR</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="90" sdnum="1033;"><font face="Tahoma" color="#003366">90</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">bpm</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdgk106.htm">CO/SV</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Heart Rate (intrinsic)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">HR_i</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="90" sdnum="1033;"><font face="Tahoma" color="#003366">90</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">bpm</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdgs334.htm">118.1-(0.57*age)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Hematocrit</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Hct</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="37" sdnum="1033;"><font face="Tahoma" color="#003366">37</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="52" sdnum="1033;"><font face="Tahoma" color="#003366">52</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cardiology Parameters</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Left Ventricular Ejection Fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LVEF</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="55" sdnum="1033;"><font face="Tahoma" color="#003366">55</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="75" sdnum="1033;"><font face="Tahoma" color="#003366">75</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Maximum Heart Rate</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">HR_m</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="130" sdnum="1033;"><font face="Tahoma" color="#003366">130</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="202" sdnum="1033;"><font face="Tahoma" color="#003366">202</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">bpm</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdgm249.htm">(220-age)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Mean Arterial Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MAP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="70" sdnum="1033;"><font face="Tahoma" color="#003366">70</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="105" sdnum="1033;"><font face="Tahoma" color="#003366">105</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phgdc016.htm">(SP+2DP)/3</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Mean Arterial Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MAP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="70" sdnum="1033;"><font face="Tahoma" color="#003366">70</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="105" sdnum="1033;"><font face="Tahoma" color="#003366">105</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Mean Pulmonary Arterial Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MPAP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="9" sdnum="1033;"><font face="Tahoma" color="#003366">9</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="17" sdnum="1033;"><font face="Tahoma" color="#003366">17</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phgfg217.htm">(PSP+2PDP)/3</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Mean Pulmonary Arterial Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MPAP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="9" sdnum="1033;"><font face="Tahoma" color="#003366">9</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="17" sdnum="1033;"><font face="Tahoma" color="#003366">17</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Mean Transit Time</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">MTT</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="14.6" sdnum="1033;"><font face="Tahoma" color="#003366">14.6</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="16.4" sdnum="1033;"><font face="Tahoma" color="#003366">16.4</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">s</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Oxygen Consumption</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">VO2</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="200" sdnum="1033;"><font face="Tahoma" color="#003366">200</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="280" sdnum="1033;"><font face="Tahoma" color="#003366">280</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/min</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Plasma Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PV</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.6" sdnum="1033;"><font face="Tahoma" color="#003366">1.6</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="4.8" sdnum="1033;"><font face="Tahoma" color="#003366">4.8</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">L</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Pulmonary Artery Diastolic Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PADP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5" sdnum="1033;"><font face="Tahoma" color="#003366">5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="13" sdnum="1033;"><font face="Tahoma" color="#003366">13</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Pulmonary Artery Systolic Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PASP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="15" sdnum="1033;"><font face="Tahoma" color="#003366">15</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="30" sdnum="1033;"><font face="Tahoma" color="#003366">30</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Pulmonary Capillary Wedge Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PCWP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2" sdnum="1033;"><font face="Tahoma" color="#003366">2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12" sdnum="1033;"><font face="Tahoma" color="#003366">12</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Pulmonary Vascular Resistance</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PVR</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="20" sdnum="1033;"><font face="Tahoma" color="#003366">20</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="120" sdnum="1033;"><font face="Tahoma" color="#003366">120</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">dyn*s/cm5</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phkhr013.htm">((MPAP-WP)*79.92)/CO</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Pulmonary Vascular Resistance Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PVRI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="30" sdnum="1033;"><font face="Tahoma" color="#003366">30</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="240" sdnum="1033;"><font face="Tahoma" color="#003366">240</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">dyn*s/ cm5*m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phkhs127.htm">((MPAP-WP)*79.92)/CI</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Pulse Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">PP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="20" sdnum="1033;"><font face="Tahoma" color="#003366">20</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="70" sdnum="1033;"><font face="Tahoma" color="#003366">70</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phggp329.htm">SP-DP</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">QT interval</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">QT</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.34" sdnum="1033;"><font face="Tahoma" color="#003366">0.34</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.42" sdnum="1033;"><font face="Tahoma" color="#003366">0.42</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">s</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ms</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Q-T interval correction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Q-T_c</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.34" sdnum="1033;"><font face="Tahoma" color="#003366">0.34</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.42" sdnum="1033;"><font face="Tahoma" color="#003366">0.42</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">s</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ms</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phnbt709.htm">(QT)/(sqrtRR)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Rate Pressure Product</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RPP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="6000" sdnum="1033;"><font face="Tahoma" color="#003366">6000</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12000" sdnum="1033;"><font face="Tahoma" color="#003366">12000</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg*bpm</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phgjr014.htm">HR*SP</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">RR interval</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RR</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.42" sdnum="1033;"><font face="Tahoma" color="#003366">0.42</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1.2" sdnum="1033;"><font face="Tahoma" color="#003366">1.2</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">s</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1000" sdnum="1033;"><u><font color="#0563C1">1000</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ms</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Stroke Volume</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">SV</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="69" sdnum="1033;"><font face="Tahoma" color="#003366">69</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="87" sdnum="1033;"><font face="Tahoma" color="#003366">87</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/beat</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdhb046.htm">CO/HR</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Stroke Volume Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">SI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="41" sdnum="1033;"><font face="Tahoma" color="#003366">41</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mL/beat/ m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdhd125.htm">CI/HR</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Systemic Vascular Resistance</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">SVR</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="770" sdnum="1033;"><font face="Tahoma" color="#003366">770</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1500" sdnum="1033;"><font face="Tahoma" color="#003366">1500</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">dyn*s/cm5</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phkdr019.htm">((MAP-CVP)*79.92)/CO</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Systemic Vascular Resistance Index</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">SVRI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="1970" sdnum="1033;"><font face="Tahoma" color="#003366">1970</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2390" sdnum="1033;"><font face="Tahoma" color="#003366">2390</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">dyn*s/ cm5*m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phkds224.htm">((MAP-CVP)*79.92)/CI</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Systolic Blood Pressure</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">SBP</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="100" sdnum="1033;"><font face="Tahoma" color="#003366">100</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="140" sdnum="1033;"><font face="Tahoma" color="#003366">140</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmHg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Target Heart Rate</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">HR_t</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="91" sdnum="1033;"><font face="Tahoma" color="#003366">91</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="141" sdnum="1033;"><font face="Tahoma" color="#003366">141</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">bpm</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phdgp117.htm">(220-age)*0.7</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ventricular Stroke Work Index, Left</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LVSWI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="50" sdnum="1033;"><font face="Tahoma" color="#003366">50</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="62" sdnum="1033;"><font face="Tahoma" color="#003366">62</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmhy179.htm">SI*MAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ventricular Stroke Work Index, Right</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RVSWI</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="7.9" sdnum="1033;"><font face="Tahoma" color="#003366">7.9</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="9.7" sdnum="1033;"><font face="Tahoma" color="#003366">9.7</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m/m2</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmky162.htm">SI*MPAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ventricular Stroke Work, Left</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LVSW</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="75" sdnum="1033;"><font face="Tahoma" color="#003366">75</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="139" sdnum="1033;"><font face="Tahoma" color="#003366">139</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmhw016.htm">SV*MAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Ventricular Stroke Work, Right</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">RVSW</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="11.8" sdnum="1033;"><font face="Tahoma" color="#003366">11.8</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="21.8" sdnum="1033;"><font face="Tahoma" color="#003366">21.8</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g*m</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxph/phmkw043.htm">SV*MPAP*0.0144</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="31" align="left" valign=bottom bgcolor="#E6E6E6"><b><font face="Arial" size=1 color="#000000">1&nbsp;CF links connect to Unit Conversion Pages.&nbsp;2&nbsp;Equation links connect to Equation pages.</font></b></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">PARAMETER</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Abbrev</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">spcmn</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal Low</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal High</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">C UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#996633">CF&nbsp;1</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">SI UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#336699">EQUATION&nbsp;2</font></b></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Albumin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Alb</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.5" sdnum="1033;"><font face="Tahoma" color="#003366">3.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5.5" sdnum="1033;"><font face="Tahoma" color="#003366">5.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="10" sdnum="1033;"><u><font color="#0563C1">10</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Body Height</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Ht</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="80" sdnum="1033;"><font face="Tahoma" color="#003366">80</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">in</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="2.54" sdnum="1033;"><u><font color="#0563C1">2.54</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">cm</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Body Weight</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Wt</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="110" sdnum="1033;"><font face="Tahoma" color="#003366">110</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="220" sdnum="1033;"><font face="Tahoma" color="#003366">220</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">lb</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.454" sdnum="1033;"><u><font color="#0563C1">0.454</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">kg</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Calcium</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Ca++</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8.5" sdnum="1033;"><font face="Tahoma" color="#003366">8.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="10.5" sdnum="1033;"><font face="Tahoma" color="#003366">10.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.2495" sdnum="1033;"><u><font color="#0563C1">0.2495</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Calcium - Albumin Correction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CaALb_c</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8.5" sdnum="1033;"><font face="Tahoma" color="#003366">8.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="10.5" sdnum="1033;"><font face="Tahoma" color="#003366">10.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.2495" sdnum="1033;"><u><font color="#0563C1">0.2495</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbkfb705.htm">Ca+(0.8*(4.0-alb))</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Calcium - Globulin Correction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CaGlob_c</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8.5" sdnum="1033;"><font face="Tahoma" color="#003366">8.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="10.5" sdnum="1033;"><font face="Tahoma" color="#003366">10.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.2495" sdnum="1033;"><u><font color="#0563C1">0.2495</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbkfg707.htm">Ca+(0.16*(glob-3.5))</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Calcium - pH Correction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">CapH_c</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8.5" sdnum="1033;"><font face="Tahoma" color="#003366">8.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="10.5" sdnum="1033;"><font face="Tahoma" color="#003366">10.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.2495" sdnum="1033;"><u><font color="#0563C1">0.2495</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbkfp704.htm">Ca+(0.12*((pH-7.4)/0.1))</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Calcium Correction</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Ca++_c</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8.5" sdnum="1033;"><font face="Tahoma" color="#003366">8.5</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="10.5" sdnum="1033;"><font face="Tahoma" color="#003366">10.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.2495" sdnum="1033;"><u><font color="#0563C1">0.2495</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbkdc709.htm">Ca++(1*(4.0-alb))</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Calcium, Protein bound</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Ca++_pb</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="50" sdnum="1033;"><font face="Tahoma" color="#003366">50</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="54" sdnum="1033;"><font face="Tahoma" color="#003366">54</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">%</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.01" sdnum="1033;"><u><font color="#0563C1">0.01</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">fraction</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbkgb253.htm">(alb*8)+(glob*2)+3</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Cholesterol</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Chol</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="140" sdnum="1033;"><font face="Tahoma" color="#003366">140</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="240" sdnum="1033;"><font face="Tahoma" color="#003366">240</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0259" sdnum="1033;"><u><font color="#0563C1">0.0259</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Cholesterol : HDL Ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Chol:HDL</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3" sdnum="1033;"><font face="Tahoma" color="#003366">3</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="5" sdnum="1033;"><font face="Tahoma" color="#003366">5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbhgr049.htm">chol/HDL</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Gender</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Sex</font></b></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">Male</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">Female</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Globulin</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Glob</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="2" sdnum="1033;"><font face="Tahoma" color="#003366">2</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3.5" sdnum="1033;"><font face="Tahoma" color="#003366">3.5</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="10" sdnum="1033;"><u><font color="#0563C1">10</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">g/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">High Density Lipoprotein</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">HDL</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="30" sdnum="1033;"><font face="Tahoma" color="#003366">30</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="85" sdnum="1033;"><font face="Tahoma" color="#003366">85</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0259" sdnum="1033;"><u><font color="#0563C1">0.0259</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Insulin : Glucose ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Ins:Glu</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0.4" sdnum="1033;"><font face="Tahoma" color="#003366">0.4</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbldr312.htm">insulin/glucose</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">LDL : HDL Ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LDL:HDL</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="3" sdnum="1033;"><font face="Tahoma" color="#003366">3</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">ratio</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbhhr154.htm">LDL/HDL</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Low Density Lipoprotein Cholesterol</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">LDL</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="130" sdnum="1033;"><font face="Tahoma" color="#003366">130</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0259" sdnum="1033;"><u><font color="#0563C1">0.0259</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbhdb125.htm">chol-((TG/5)+(HDL))</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Non-HDL Cholesterol</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">NonHDL-C</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="110" sdnum="1033;"><font face="Tahoma" color="#003366">110</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="155" sdnum="1033;"><font face="Tahoma" color="#003366">155</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0259" sdnum="1033;"><u><font color="#0563C1">0.0259</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbhdh366.htm">chol-HDL</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Patient Age</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Age</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="90" sdnum="1033;"><font face="Tahoma" color="#003366">90</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">years</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Triglycerides</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">TG</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="60" sdnum="1033;"><font face="Tahoma" color="#003366">60</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="150" sdnum="1033;"><font face="Tahoma" color="#003366">150</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0113" sdnum="1033;"><u><font color="#0563C1">0.0113</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Very Low Density Lipoprotein Cholesterol</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">VLDL</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12" sdnum="1033;"><font face="Tahoma" color="#003366">12</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="30" sdnum="1033;"><font face="Tahoma" color="#003366">30</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.0259" sdnum="1033;"><u><font color="#0563C1">0.0259</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxpb/pbhdd232.htm">TG/5</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="31" align="left" valign=bottom bgcolor="#E6E6E6"><b><font face="Arial" size=1 color="#000000">1&nbsp;CF links connect to Unit Conversion Pages.&nbsp;2&nbsp;Equation links connect to Equation pages.</font></b></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="29" align="left" valign=bottom bgcolor="#EEEEEE"><font face="Times New Roman" color="#000000"><br></font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><b><font face="Tahoma" size=1 color="#336699">Links to Equations&nbsp;<img src="arrow.png" width=9 height=9 hspace=44 vspace=10>
+		</font></b></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="29" align="left" valign=bottom bgcolor="#EEEEEE"><b><font face="Tahoma" size=1 color="#336699">Links to Conversion&nbsp;<img src="arrow.png" width=9 height=9 hspace=123 vspace=10>
+		</font></b></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">PARAMETER</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Abbrev</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">spcmn</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal Low</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#003366">Normal High</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">C UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#996633">CF&nbsp;1</font></b></td>
+		<td align="left" valign=bottom bgcolor="#AFD0E0"><b><font face="Tahoma" size=1 color="#003366">SI UNITS</font></b></td>
+		<td align="left" valign=bottom bgcolor="#9FC0D0"><b><font face="Tahoma" size=1 color="#336699">EQUATION&nbsp;2</font></b></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#EEEEDD"><font face="Tahoma" size=1 color="#003366">Acetone</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">Acetone</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mg/dL</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="0.1722" sdnum="1033;"><u><font color="#0563C1">0.1722</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><font face="Tahoma" size=1 color="#996633">(Osm Gap*5.81)</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Hydrogen ion (Acid Base Equation)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">H+&nbsp;ion</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">B</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="36" sdnum="1033;"><font face="Tahoma" color="#003366">36</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="44" sdnum="1033;"><font face="Tahoma" color="#003366">44</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">nEq</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">nmol</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxps/psfjh295.htm">(24*PaCO2)/HCO3</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Acid Deficit</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">H_def</font></b></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="0" sdnum="1033;"><font face="Tahoma" color="#003366">0</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mEq</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxps/psffc127.htm">Wt*0.5(HCO3m-HCO3d)</a></font></u></td>
+		<td align="left" valign=bottom><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Anion Gap (Serum)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">AG</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">S</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8" sdnum="1033;"><font face="Tahoma" color="#003366">8</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="16" sdnum="1033;"><font face="Tahoma" color="#003366">16</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mEq/L</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxps/psfdb034.htm">Na-(Cl+HCO3)</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Urine Anion Gap</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">UAG</font></b></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><font face="Tahoma" color="#003366">U</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="8" sdnum="1033;"><font face="Tahoma" color="#003366">8</font></td>
+		<td align="right" valign=bottom bgcolor="#F6F6F6" sdval="12" sdnum="1033;"><font face="Tahoma" color="#003366">12</font></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mEq/L</font></td>
+		<td align="right" valign=bottom bgcolor="#E6E6E6" sdval="1" sdnum="1033;"><u><font color="#0563C1">1</font></u></td>
+		<td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" color="#003366">mmol/L</font></td>
+		<td align="left" valign=bottom bgcolor="#EEEEEE"><u><font color="#0563C1"><a href="https://www.scymed.com/en/smnxps/psfdg033.htm">(Na+K)-Cl</a></font></u></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" valign=bottom bgcolor="#D3D9DF"><font face="Tahoma" size=1 color="#003366">Anion Gap 4 (Serum)</font></td>
+		<td align="left" valign=bottom bgcolor="#F6F6F6"><b><font face="Tahoma" size=1 color="#003366">AG4_S</font></b></td>
+		<td align="left" valign=bottom 
