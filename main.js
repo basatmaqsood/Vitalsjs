@@ -1,6 +1,6 @@
 document.querySelector('#record').addEventListener('click', onRecord);
 
-const inProduction = true; // hide video and tmp canvas
+const inProduction = false; // hide video and tmp canvas
 const channel = 'r'; // red only, green='g' and blue='b' channels can be added
 
 let video, c_tmp, ctx_tmp; // video from rear-facing-camera and tmp canvas
@@ -37,8 +37,8 @@ let constraintsObj = {
 
 function setWH() {
   let [w, h] = [video.videoWidth, video.videoHeight];
-  document.getElementById('delay').innerHTML = `Frame compute delay: ${delay}`;
-  document.getElementById('resolution').innerHTML = `Video resolution: ${w} x ${h}`;
+  document.getElementById('solar-nuclear-photovoltaic-delay').innerHTML = `Frame compute delay: ${delay}`;
+  document.getElementById('solar-nuclear-photovoltaic-resolution').innerHTML = `Video resolution: ${w} x ${h}`;
   c_tmp.setAttribute('width', w);
   c_tmp.setAttribute('height', h);
 }
@@ -79,7 +79,7 @@ function computeFrame() {
       // console.log(`nFrame = ${nFrame}`);
       // console.log(`ac = ${acdc}`);
       // console.log(`ac-detrended = ${detrend(acdc)}`);
-      document.getElementById('signal-window').innerHTML = `nWindow: ${nFrame / WINDOW_LENGTH}`;
+      document.getElementById('solar-nuclear-photovoltaic-signal-window').innerHTML = `nWindow: ${nFrame / WINDOW_LENGTH}`;
       if ((nFrame / 100) % 2 == 0) {
         isSignal = 1;
         ac = detrend(acdc);
@@ -94,12 +94,12 @@ function computeFrame() {
 
     xMeanArr.push(xMeanData);
 
-    document.getElementById('frame-time').innerHTML = `Frame time: ${xMeanData.time.toFixed(2)}`;
-    document.getElementById('video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
-    document.getElementById('signal').innerHTML = `X: ${xMeanData.x}`;
+    document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${xMeanData.time.toFixed(2)}`;
+    document.getElementById('solar-nuclear-photovoltaic-video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
+    document.getElementById('solar-nuclear-photovoltaic-signal').innerHTML = `X: ${xMeanData.x}`;
     
     const fps = (++frameCount / video.currentTime).toFixed(3);
-    document.getElementById('frame-fps').innerHTML = `Frame count: ${frameCount}, FPS: ${fps}`;
+    document.getElementById('solar-nuclear-photovoltaic-frame-fps').innerHTML = `Frame count: ${frameCount}, FPS: ${fps}`;
 
     ctx_tmp.putImageData(frame, 0, 0);
   }
@@ -224,15 +224,15 @@ function updateData() {
   // if (lineArr.length > 1) {
   lineArr.shift();
   // }
-  d3.select("#chart").datum(lineArr).call(chart);
+  d3.select("#solar-nuclear-photovoltaic-chart").datum(lineArr).call(chart);
 }
 
 function resize() {
   if (d3.select("#chart svg").empty()) {
     return;
   }
-  chart.width(+d3.select("#chart").style("width").replace(/(px)/g, ""));
-  d3.select("#chart").call(chart);
+  chart.width(+d3.select("#solar-nuclear-photovoltaic-chart").style("width").replace(/(px)/g, ""));
+  d3.select("#solar-nuclear-photovoltaic-chart").call(chart);
 }
 
 function drawLineChart() {
@@ -240,7 +240,7 @@ function drawLineChart() {
 
   seedData();
   window.setInterval(updateData, 100);
-  d3.select("#chart").datum(lineArr).call(chart);
+  d3.select("#solar-nuclear-photovoltaic-chart").datum(lineArr).call(chart);
   d3.select(window).on('resize', resize);
 }
 
