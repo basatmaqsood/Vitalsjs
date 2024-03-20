@@ -45,6 +45,7 @@ function setWH() {
 
 function init() {
   c_tmp = document.getElementById('output-canvas');
+  c_tmp.style.display = 'none';
   if (inProduction) {
     c_tmp.style.display = 'none';
   }
