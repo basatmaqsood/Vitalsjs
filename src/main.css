@@ -45,4 +45,5 @@ cursor: pointer;}
     opacity: .5;
     top: 0;
     width: 100%;
-    left: 0;}
+    left: 0;
+z-index:-1}
