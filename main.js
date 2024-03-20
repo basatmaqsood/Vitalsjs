@@ -1,6 +1,6 @@
 document.querySelector('#record').addEventListener('click', onRecord);
 
-const inProduction = true; // hide video and tmp canvas
+const inProduction = false; // hide video and tmp canvas
 const channel = 'r'; // red only, green='g' and blue='b' channels can be added
 
 let video, c_tmp, ctx_tmp; // video from rear-facing-camera and tmp canvas
@@ -243,80 +243,12 @@ function drawLineChart() {
   d3.select("#solar-nuclear-photovoltaic-chart").datum(lineArr).call(chart);
   d3.select(window).on('resize', resize);
 }
- // Function to generate unique IDs
-function generateID(num) {
-  return "cal" + num;
+
+function  ccalc(xval){
+var cal1=xval*4
+var cal2=xval*5
+var cal3=xval*6
+document.getElementById('signalcal1').innerHTML = `C1:`+cal1;
+document.getElementById('signalcal2').innerHTML = `C2:`+cal2;
+document.getElementById('signalcal3').innerHTML = `C3:`+cal3;
 }
-
-// Function to create and populate the table
-function createTable() {
-  var tbody = document.getElementById("table-body");
-  var count = 1; // To keep track of the calculation ID
-
-  for (var row = 1; row <= 10; row++) {
-      var tr = document.createElement("tr");
-      var td = document.createElement("td");
-      td.textContent = row;
-      tr.appendChild(td);
-
-      for (var col = 1; col <= 10; col++) {
-          var td = document.createElement("td");
-          var div = document.createElement("div");
-          div.id = generateID(count++);
-          div.textContent = "Content";
-          td.appendChild(div);
-          tr.appendChild(td);
-      }
-
-      tbody.appendChild(tr);
-  }
-}
-
-// Call the function to generate the table
-createTable();
-
-        function ccalc(xval) {
-          // Array of calculation variables
-          var cal = [
-              xval * 4,
-              xval * 5,
-              xval * 6,
-              xval * (45 + 3),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              // add more calculations here manually up to the 100th calculation
-          ];
-      
-          // Loop through the calculation variables
-          for (var i = 0; i < cal.length; i++) {
-              // Create the ID dynamically
-              var calID = 'cal' + (i + 1);
-      
-              // Create the content string
-              var content = 'C' + (i + 1) + ': ' + cal[i];
-      
-              // Update the content of the div
-              document.getElementById(calID).innerHTML = content;
-          }
-      }
-      
-
