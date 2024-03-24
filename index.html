@@ -28,8 +28,8 @@
     </style>
     
     <header>
-        <h2>BIO-METRIC  SECURITY</h2>
-        
+        <h2>BIOLOGICAL METRIC SECURITY<img src="img/437-4379298_8-bit-heart-green-tata-bt21-pixel-art.png"></h2>
+        <img src="img/playstore.png">
     </header>
   
     <main>
@@ -42,21 +42,142 @@
         <div>
             <canvas id="output-canvas"></canvas>
         </div>
-        <div id="chart"></div>
-        <p id="resolution"></p>
-        <p id="delay"></p>
-        <p id="frame-fps"></p>
-        <p id="frame-time"></p>
-        <p id="video-time"></p>
-        <p id="signal"></p>
-        <p id="signal-window"></p>
-        <p id="signalcal1"></p>
-        <p id="signalcal2"></p>
-        <p id="signalcal3"></p>
+        <div id="solar-nuclear-photovoltaic-chart"></div>
+        <p id="solar-nuclear-photovoltaic-resolution"></p>
+        <p id="solar-nuclear-photovoltaic-delay"></p>
+        <p id="solar-nuclear-photovoltaic-frame-fps"></p>
+        <p id="solar-nuclear-photovoltaic-frame-time"></p>
+        <p id="solar-nuclear-photovoltaic-video-time"></p>
+        <p id="solar-nuclear-photovoltaic-signal"></p>
+        <p id="solar-nuclear-photovoltaic-signal-window"></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Column 1</th>
+              <th>Column 2</th>
+              <th>Column 3</th>
+              <th>Column 4</th>
+              <th>Column 5</th>
+              <th>Column 6</th>
+              <th>Column 7</th>
+              <th>Column 8</th>
+              <th>Column 9</th>
+              <th>Column 10</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+    
       </main>
+   
+   <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SPECTRUM</div></div>
+  
+   <div id="container"></div>
+   <script src="src/real-time-line-chart.js"></script>
+   <script src="src/main.js"></script>
+    <script id="rendered-js" type="module">
+        /**
+         * for documentation and more demos,
+         * visit https://audiomotion.dev
+         */
+        
+        // load module from Skypack CDN
+        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+        
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true,
+          showBgColor:true,
+          overlay:true,
+          bgAlpha:0 }
+          );
+        
+        
+        
+        // display module version
+        //document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+        
+        // toggle microphone on/off
+        const micButton = document.getElementById('openaudio');
+        
+        micButton.addEventListener('click', () => {
+          if (navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
+              then(stream => {
+                // create stream using audioMotion audio context
+                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
+                audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
+                audioMotion.volume = 0;
+                
+              }).
+              catch(err => {
+                alert('Microphone access denied by user');
+              });
+            } else
+            {
+              alert('User mediaDevices not available');
+            }
+
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(function(stream) {
+    // Creating an audio context
+    var audioContext = new AudioContext();
+    // Creating a media stream source node
+    var source = audioContext.createMediaStreamSource(stream);
+    // Creating a script processor node to analyze audio data
+    var scriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+    
+    // Connect the source to the scriptNode
+    source.connect(scriptNode);
+    // Connect the scriptNode to the destination (audio output)
+    scriptNode.connect(audioContext.destination);
+    
+    // Define a function to process audio data
+    scriptNode.onaudioprocess = function(audioProcessingEvent) {
+      // Get the input buffer (contains audio data)
+      var inputBuffer = audioProcessingEvent.inputBuffer;
+      // Get the data from the first channel
+      var inputData = inputBuffer.getChannelData(0);
+      
+      // Calculate the volume level
+      var volume = 0;
+      for (var i = 0; i < inputData.length; i++) {
+        volume += Math.abs(inputData[i]);
+      }
+      volume /= inputData.length;
+      
+      // Output the volume (you can do whatever you want with it)
+      console.log("Volume:", volume);
+    };
+  })
+  .catch(function(err) {
+    console.error('Error accessing microphone:', err);
+  });
+          });
+            // disconnect all input audio sources
+          //  audioMotion.disconnectInput();
+        
+        
+        //# sourceURL=pen.js
+
+        // Requesting access to the user's microphone
+
+
+            </script>
+<!--
     <script src="./src/real-time-line-chart.js"></script>
     <script src="./src/main.js"></script>
-   <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SPECTRUM</div></div>
+   <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SOUND</div></div>
   
    <div id="container"></div>
     <script id="rendered-js" type="module">
@@ -88,11 +209,8 @@
           if (navigator.mediaDevices) {
               navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
               then(stream => {
-                // create stream using audioMotion audio context
                 const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
-                // connect microphone stream to analyzer
                 audioMotion.connectInput(micStream);
-                // mute output to prevent feedback loops from the speakers
                 audioMotion.volume = 0;
               }).
               catch(err => {
@@ -108,7 +226,7 @@
         
         
         //# sourceURL=pen.js
-            </script>
 
- 
+  
+            </script>-->
 </body></html>
