@@ -279,7 +279,7 @@ createTable();
         function ccalc(xval) {
           // Array of calculation variables
           var cal = [
-              xval *  \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} * i\hbar\frac{\partial}{\partial t}\Psi(\vector x,t) = -\frac{\hbar}{2m}\nabla^2\Psi(vector x,t) + V(\vector x) \Psi(\vex x,t) *\hat f(\xi) = \int_{-\ infty}^\infty f(x)e^{-2\pi I \xi x}\mathrm{d}x,
+              xval * 4,
               xval * 5,
               xval * 6,
               xval * (45 + 3),
