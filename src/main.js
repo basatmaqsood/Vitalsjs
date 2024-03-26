@@ -16,13 +16,13 @@ let acWindow = 0.008;
 
 let nFrame = 0;
 const WINDOW_LENGTH = 300; // 300 frames = 5s @ 60 FPS
-let acdc = Array(WINDOW_LENGTH).fill(0.5);
-let ac = Array(WINDOW_LENGTH).fill(0.5);
+let acdc = Array(WINDOW_LENGTH).fill(0.9);
+let ac = Array(WINDOW_LENGTH).fill(0.9);
 
 // draw the signal data as it comes
 let lineArr = [];
-const MAX_LENGTH = 100;
-const DURATION = 100;
+const MAX_LENGTH = 300;
+const DURATION = 300;
 let chart = realTimeLineChart();
 
 let constraintsObj = {
