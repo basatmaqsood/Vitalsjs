@@ -16,13 +16,13 @@ let acWindow = 0.008;
 
 let nFrame = 0;
 const WINDOW_LENGTH = 300; // 300 frames = 5s @ 60 FPS
-let acdc = Array(WINDOW_LENGTH).fill(0.9);
-let ac = Array(WINDOW_LENGTH).fill(0.9);
+let acdc = Array(WINDOW_LENGTH).fill(0.5);
+let ac = Array(WINDOW_LENGTH).fill(0.5);
 
 // draw the signal data as it comes
 let lineArr = [];
-const MAX_LENGTH = 300;
-const DURATION = 300;
+const MAX_LENGTH = 100;
+const DURATION = 100;
 let chart = realTimeLineChart();
 
 let constraintsObj = {
@@ -272,52 +272,178 @@ function createTable() {
       tbody.appendChild(tr);
   }
 }
+// Function to create bars
+function createBars(data) {
+  var chartContainer = document.getElementById('chart-container');
+  chartContainer.innerHTML = ''; // Clear previous bars
 
-// Call the function to generate the table
-createTable();
+  // Loop through data and create bars
+  data.forEach(function(value) {
+      var bar = document.createElement('div');
+      bar.classList.add('bar');
+      bar.style.height = value + 'px';
+      chartContainer.appendChild(bar);
+  });
+}
 
-        function ccalc(xval) {
-          // Array of calculation variables
-          var cal = [
-              xval * 4,
-              xval * 5,
-              xval * 6,
-              xval * (45 + 3),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 3) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              xval * ((45 * 8) / 2),
-              // add more calculations here manually up to the 100th calculation
-          ];
-      
-          // Loop through the calculation variables
-          for (var i = 0; i < cal.length; i++) {
-              // Create the ID dynamically
-              var calID = 'cal' + (i + 1);
-      
-              // Create the content string
-              var content = 'C' + (i + 1) + ': ' + cal[i];
-      
-              // Update the content of the div
-              document.getElementById(calID).innerHTML = content;
-          }
+navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(function(stream) {
+    var audioContext = new AudioContext();
+    var analyser = audioContext.createAnalyser();
+    var microphone = audioContext.createMediaStreamSource(stream);
+    
+    microphone.connect(analyser);
+    
+    // Set up FFT
+    analyser.fftSize = 2048;
+    var bufferLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+    
+    function update() {
+      // Get the decibel level
+      analyser.getByteFrequencyData(dataArray);
+      var sum = 0;
+      for (var i = 0; i < bufferLength; i++) {
+        sum += dataArray[i];
       }
+      var average = sum / bufferLength;
+      var decibels = 20 * Math.log10(average / 255);
       
+      console.log(decibels);
+      
+      requestAnimationFrame(update);
+    }
+    
+    //update();
+  })
+  .catch(function(err) {
+    console.error('Error accessing microphone:', err);
+  });
+
+
+// Function to create bars
+function createBars(data) {
+  var chartContainer = document.getElementById('chart-container');
+  chartContainer.innerHTML = ''; 
+
+  // Loop through data and create bars
+  data.forEach(function(value) {
+      var bar = document.createElement('div');
+      bar.classList.add('bar');
+      bar.style.height = value + 'px';
+      chartContainer.appendChild(bar);
+  });
+}
+
+// Function to calculate values and update the chart
+function ccalc(xval) {
+  var cal = [
+    xval * 4,
+    xval * 5,
+    xval * 6,
+    xval * (45 + 3),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * 4,
+    xval * 5,
+    xval * 6,
+    xval * (45 + 3),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 3) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+    xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 3) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 3) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2),
+      xval * ((45 * 8) / 2)
+  ];
+
+  createBars(cal); // Update the chart with new calculation values
+}
+
+// Example usage
+ccalc(5); // Example call with xval = 5
 
