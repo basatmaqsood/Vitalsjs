@@ -197,24 +197,7 @@ function onRecord() {
     .catch(error => console.log(error));
 
   
-       if (navigator.mediaDevices) {
-              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
-              then(stream => {
-                // create stream using audioMotion audio context
-                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
-                // connect microphone stream to analyzer
-                audioMotion.connectInput(micStream);
-                // mute output to prevent feedback loops from the speakers
-                audioMotion.volume = 0;
-                
-              }).
-              catch(err => {
-                alert('Microphone access denied by user');
-              });
-            } else
-            {
-              alert('User mediaDevices not available');
-            }
+ 
 }
 
 function pauseVideo() {
