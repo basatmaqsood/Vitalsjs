@@ -1,4 +1,4 @@
-document.querySelector('#record').addEventListener('click', onRecord);
+document.querySelector('#startCharts').addEventListener('click', onRecord);
 
 const inProduction = false; // hide video and tmp canvas
 const channel = 'r'; // red only, green='g' and blue='b' channels can be added
@@ -151,6 +151,7 @@ function detrend(y) {
 }
 
 function onRecord() {
+  $('#charts').show()
   this.disabled = true;
   navigator.mediaDevices.getUserMedia(constraintsObj)
     .then(function(mediaStreamObj) {
