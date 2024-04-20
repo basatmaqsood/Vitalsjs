@@ -439,7 +439,7 @@ function ccalc(xval) {
 ccalc(5); // Example call with xval = 5
 
 
-navigator.mediaDevices.getUserMedia({ audio: true })
+/*navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
     var audioContext = new AudioContext();
     var analyser = audioContext.createAnalyser();
@@ -467,8 +467,43 @@ navigator.mediaDevices.getUserMedia({ audio: true })
   })
   .catch(function(err) {
     console.error('Error accessing microphone:', err);
+  });*/
+            navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(function(stream) {
+    // Creating an audio context
+    var audioContext = new AudioContext();
+    // Creating a media stream source node
+    var source = audioContext.createMediaStreamSource(stream);
+    // Creating a script processor node to analyze audio data
+    var scriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+    
+    // Connect the source to the scriptNode
+    source.connect(scriptNode);
+    // Connect the scriptNode to the destination (audio output)
+    scriptNode.connect(audioContext.destination);
+    
+    // Define a function to process audio data
+    scriptNode.onaudioprocess = function(audioProcessingEvent) {
+      // Get the input buffer (contains audio data)
+      var inputBuffer = audioProcessingEvent.inputBuffer;
+      // Get the data from the first channel
+      var inputData = inputBuffer.getChannelData(0);
+      
+      // Calculate the volume level
+      var volume = 0;
+      for (var i = 0; i < inputData.length; i++) {
+        volume += Math.abs(inputData[i]);
+      }
+      volume /= inputData.length;
+      fval=volume;
+      // Output the volume (you can do whatever you want with it)
+      console.log("Volume:", volume);
+    };
+  })
+  .catch(function(err) {
+    console.error('Error accessing microphone:', err);
   });
-
+      
     
   
 
