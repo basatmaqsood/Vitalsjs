@@ -13,11 +13,11 @@ let initTime;
 let isSignal = 0;
 let acFrame = 0.008; // start with dummy flat signal
 let acWindow = 0.008;
-
 let nFrame = 0;
 const WINDOW_LENGTH = 300; // 300 frames = 5s @ 60 FPS
 let acdc = Array(WINDOW_LENGTH).fill(0.5);
 let ac = Array(WINDOW_LENGTH).fill(0.5);
+var fval=0;
 
 // draw the signal data as it comes
 let lineArr = [];
@@ -52,7 +52,7 @@ function init() {
   ctx_tmp = c_tmp.getContext('2d');
 }
 
-function computeFrame() {
+function computeFrame(soundfreq) { //console.log(soundfreq)
   if (nFrame > DURATION) {
     ctx_tmp.drawImage(video,
       0, 0, video.videoWidth, video.videoHeight);
@@ -151,8 +151,8 @@ function detrend(y) {
 }
 
 function onRecord() {
-  $('#charts').show()
   this.disabled = true;
+  $('#charts').show()
   navigator.mediaDevices.getUserMedia(constraintsObj)
     .then(function(mediaStreamObj) {
 
@@ -222,7 +222,7 @@ function updateData() {
     signal: isSignal
   };
   lineArr.push(lineData);
-
+//console.log(lineData)
   // if (lineArr.length > 1) {
   lineArr.shift();
   // }
@@ -275,6 +275,7 @@ function createTable() {
 }
 // Function to create bars
 function createBars(data) {
+
   var chartContainer = document.getElementById('chart-container');
   chartContainer.innerHTML = ''; // Clear previous bars
 
@@ -290,161 +291,177 @@ function createBars(data) {
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
     var audioContext = new AudioContext();
-    var analyser = audioContext.createAnalyser();
+    analyser = audioContext.createAnalyser();
     var microphone = audioContext.createMediaStreamSource(stream);
     
     microphone.connect(analyser);
     
-    // Set up FFT
-    analyser.fftSize = 2048;
+    analyser.fftSize = 32768; 
     var bufferLength = analyser.frequencyBinCount;
-    var dataArray = new Uint8Array(bufferLength);
-    
-    function update() {
-      // Get the decibel level
-      analyser.getByteFrequencyData(dataArray);
-      var sum = 0;
-      for (var i = 0; i < bufferLength; i++) {
-        sum += dataArray[i];
-      }
-      var average = sum / bufferLength;
-      var decibels = 20 * Math.log10(average / 255);
-      
-      console.log(decibels);
-      
-      requestAnimationFrame(update);
-    }
-    
-    //update();
+    dataArray = new Uint8Array(bufferLength); // Initialize dataArray here
   })
   .catch(function(err) {
     console.error('Error accessing microphone:', err);
   });
 
 
-// Function to create bars
-function createBars(data) {
-  var chartContainer = document.getElementById('chart-container');
-  chartContainer.innerHTML = ''; 
 
-  // Loop through data and create bars
-  data.forEach(function(value) {
-      var bar = document.createElement('div');
-      bar.classList.add('bar');
-      bar.style.height = value + 'px';
-      chartContainer.appendChild(bar);
-  });
+  function createBars(cal) {
+
+    var chartContainer = document.getElementById('chart-container');
+    chartContainer.innerHTML = ''; 
+  
+    // Loop through data and create bars
+    cal.forEach(function(value) {
+        var bar = document.createElement('div');
+        bar.classList.add('bar');
+        bar.style.height = value + 'px';
+        chartContainer.appendChild(bar);
+    });
 }
+
+
 
 // Function to calculate values and update the chart
 function ccalc(xval) {
   var cal = [
-    xval * 4,
-    xval * 5,
-    xval * 6,
-    xval * (45 + 3),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * 4,
-    xval * 5,
-    xval * 6,
-    xval * (45 + 3),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 3) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-    xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 3) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 3) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2),
-      xval * ((45 * 8) / 2)
+    xval * 4 + fval,
+    xval * 5 + fval,
+    xval * 6 + fval,
+    xval * (45 + 3) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * 4 + fval,
+    xval * 5 + fval,
+    xval * 6 + fval,
+    xval * (45 + 3) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 3) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+    xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 3) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 3) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval,
+      xval * ((45 * 8) / 2) + fval
   ];
-
+//  updatemicdata(cal)
   createBars(cal); // Update the chart with new calculation values
 }
 
 // Example usage
 ccalc(5); // Example call with xval = 5
+
+
+navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(function(stream) {
+    var audioContext = new AudioContext();
+    var analyser = audioContext.createAnalyser();
+    var microphone = audioContext.createMediaStreamSource(stream);
+    
+    microphone.connect(analyser);
+    
+    // Set up FFT with a suitable fftSize for 16k resolution
+    analyser.fftSize = 32768; // 16k resolution with a sample size of 32k (32768)
+    var bufferLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+    
+    function update() {
+      // Get the frequency data
+      analyser.getByteFrequencyData(dataArray);
+      
+      // Calculate the average value
+      var sum = dataArray.reduce(function(a, b) { return a + b; }, 0);
+      fval = sum / bufferLength;
+      
+      requestAnimationFrame(update);
+    }
+    
+   update();
+  })
+  .catch(function(err) {
+    console.error('Error accessing microphone:', err);
+  });
 
