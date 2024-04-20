@@ -153,6 +153,7 @@ function detrend(y) {
 function onRecord() {
   this.disabled = true;
   $('#charts').show()
+  $('#wrapper').hide()
   navigator.mediaDevices.getUserMedia(constraintsObj)
     .then(function(mediaStreamObj) {
 
