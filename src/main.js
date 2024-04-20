@@ -1,3 +1,18 @@
+    // load module from Skypack CDN
+        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+        
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true,
+          showBgColor:true,
+          overlay:true,
+          bgAlpha:0 }
+          );
+
 document.querySelector('#startCharts').addEventListener('click', onRecord);
 
 const inProduction = false; // hide video and tmp canvas
@@ -196,20 +211,7 @@ function onRecord() {
     })
     .catch(error => console.log(error));
 
-      // load module from Skypack CDN
-        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
-        
-        // instantiate analyzer
-        const audioMotion = new AudioMotionAnalyzer(
-        document.getElementById('container'),
-        {
-          gradient: 'rainbow',
-          height: window.innerHeight - 300,
-          showScaleY: true,
-          showBgColor:true,
-          overlay:true,
-          bgAlpha:0 }
-          );
+  
        if (navigator.mediaDevices) {
               navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
               then(stream => {
