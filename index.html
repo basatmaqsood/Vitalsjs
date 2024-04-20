@@ -518,7 +518,43 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
          * for documentation and more demos,
          * visit https://audiomotion.dev
          */
+          import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
         
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true,
+          showBgColor:true,
+          overlay:true,
+          bgAlpha:0 }
+          );
+        
+
+        const micButton = document.getElementById('startCharts');
+        
+        micButton.addEventListener('click', () => {
+          if (navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
+              then(stream => {
+                // create stream using audioMotion audio context
+                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
+                audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
+                audioMotion.volume = 0;
+                
+              }).
+              catch(err => {
+                alert('Microphone access denied by user');
+              });
+            } else
+            {
+              alert('User mediaDevices not available');
+            }
+ });      
   
         
 
