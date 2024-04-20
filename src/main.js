@@ -439,7 +439,7 @@ function ccalc(xval) {
 ccalc(5); // Example call with xval = 5
 
 
-/*navigator.mediaDevices.getUserMedia({ audio: true })
+navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
     var audioContext = new AudioContext();
     var analyser = audioContext.createAnalyser();
@@ -467,8 +467,8 @@ ccalc(5); // Example call with xval = 5
   })
   .catch(function(err) {
     console.error('Error accessing microphone:', err);
-  });*/
-            navigator.mediaDevices.getUserMedia({ audio: true })
+  });
+    /*        navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
     // Creating an audio context
     var audioContext = new AudioContext();
@@ -503,7 +503,7 @@ ccalc(5); // Example call with xval = 5
   .catch(function(err) {
     console.error('Error accessing microphone:', err);
   });
-      
+     */ 
     
   
 
