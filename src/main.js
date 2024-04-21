@@ -329,7 +329,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 // Function to calculate values and update the chart
 function ccalc(xval) {
   var cal = [
-    xval * 29.92*(((1)-(6.87535*17.5*10^-6))^5.2561) * fval,
+    xval * 29.92*(((1)-(6.87535*17.5*10^-6))^5.2561) + fval,
     xval * 5 + fval,
     xval * 6 + fval,
     xval * (45 + 3) + fval,
