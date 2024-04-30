@@ -1,6 +1,6 @@
 document.querySelector('#startCharts').addEventListener('click', onRecord);
 
-
+/*
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -10,7 +10,7 @@ async function getCities(db) {
   const citySnapshot = await getDocs(citiesCol);
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
-}
+}*/
 
 const inProduction = false; // hide video and tmp canvas
 const channel = 'r'; // red only, green='g' and blue='b' channels can be added
