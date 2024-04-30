@@ -292,19 +292,7 @@ function createTable() {
   }
 }
 // Function to create bars
-/*function createBars(data) {
 
-  var chartContainer = document.getElementById('chart-container');
-  chartContainer.innerHTML = ''; // Clear previous bars
-
-  // Loop through data and create bars
-  data.forEach(function(value) {
-      var bar = document.createElement('div');
-      bar.classList.add('bar');
-      bar.style.height = value + 'px';
-      chartContainer.appendChild(bar);
-  });
-}*/
 
 function createBars(cal) {
     var chartCanvas = document.getElementById('chart-canvas');
