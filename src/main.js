@@ -290,7 +290,7 @@ function createTable() {
   }
 }
 // Function to create bars
-function createBars(data) {
+/*function createBars(data) {
 
   var chartContainer = document.getElementById('chart-container');
   chartContainer.innerHTML = ''; // Clear previous bars
@@ -302,7 +302,38 @@ function createBars(data) {
       bar.style.height = value + 'px';
       chartContainer.appendChild(bar);
   });
+}*/
+
+function createBars(cal) {
+    var chartCanvas = document.getElementById('chart-canvas');
+    var ctx = chartCanvas.getContext('2d');
+    
+    // Clear previous drawing
+    ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+    
+    var barWidth = chartCanvas.width / cal.length;
+    var maxBarHeight = Math.max(...cal); // Find the maximum bar height for scaling
+    
+    // Loop through data and create bars
+    cal.forEach(function(value, index) {
+        var barHeight = (value / maxBarHeight) * chartCanvas.height;
+        var x = index * barWidth;
+        var y = chartCanvas.height - barHeight;
+        
+        // Set fill style based on bar height
+        if (barHeight > 50) {
+            ctx.fillStyle = 'red';
+        } else if (barHeight > 30) {
+            ctx.fillStyle = 'yellow';
+        } else {
+            ctx.fillStyle = 'green';
+        }
+        
+        // Draw bar
+        ctx.fillRect(x, y, barWidth, barHeight);
+    });
 }
+
 
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
