@@ -341,7 +341,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     console.error('Error accessing microphone:', err);
   });
 
-
+/*
 
   function createBars(cal) {
 
@@ -356,7 +356,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
         chartContainer.appendChild(bar);
     });
 }
-
+*/
 
 
 // Function to calculate values and update the chart
