@@ -297,20 +297,24 @@ function createTable() {
 function createBars(cal) {
     var chartCanvas = document.getElementById('chart-canvas');
     var ctx = chartCanvas.getContext('2d');
-     ctx.imageSmoothingEnabled = false;
+    
+    // Disable anti-aliasing
+    ctx.imageSmoothingEnabled = false;
     ctx.webkitImageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
     ctx.msImageSmoothingEnabled = false;
+    
     // Clear previous drawing
     ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
     
-    var barWidth = chartCanvas.width / cal.length;
+    var barWidth = (chartCanvas.width - (cal.length - 1) * 5) / cal.length; // Adjusted bar width with gap
     var maxBarHeight = Math.max(...cal); // Find the maximum bar height for scaling
+    var minHeight = 20; // Minimum height for the bars
     
     // Loop through data and create bars
     cal.forEach(function(value, index) {
-        var barHeight = (value / maxBarHeight) * chartCanvas.height;
-        var x = index * barWidth;
+        var barHeight = Math.max((value / maxBarHeight) * chartCanvas.height, minHeight);
+        var x = index * (barWidth + 5); // Adding 5 pixels for the gap between bars
         var y = chartCanvas.height - barHeight;
         
         // Set fill style based on bar height
