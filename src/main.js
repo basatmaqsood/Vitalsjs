@@ -297,7 +297,10 @@ function createTable() {
 function createBars(cal) {
     var chartCanvas = document.getElementById('chart-canvas');
     var ctx = chartCanvas.getContext('2d');
-    
+     ctx.imageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
     // Clear previous drawing
     ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
     
