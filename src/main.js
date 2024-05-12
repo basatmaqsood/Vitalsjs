@@ -364,12 +364,31 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     });
 }
 */
+var pwrval=0,zramval=0;
+navigator.getBattery().then(function(battery) {
+  pwrval = battery.level;
+  battery.addEventListener('levelchange', function() {
+    pwrval = battery.level;
+  });
+}); 
 
+
+function updateMemoryUsage() {
+  if (window.performance && window.performance.memory) {
+    zramval = memoryInfo.usedJSHeapSize || 'N/A';
+  }
+}
+
+// Call the function initially
+updateMemoryUsage();
+
+setInterval(updateMemoryUsage, 5000);
 
 // Function to calculate values and update the chart
 function ccalc(xval) {
+ 
   var cal = [
-  //  xval + fval,
+  //  xval + fval+zramval+pwrval,
     xval + fval,
   //  xval + fval,
     xval + fval,
