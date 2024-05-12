@@ -367,8 +367,10 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 var pwrval=0,zramval=0;
 navigator.getBattery().then(function(battery) {
   pwrval = battery.level;
+  console.log(pwrval)
   battery.addEventListener('levelchange', function() {
     pwrval = battery.level;
+     console.log(pwrval)
   });
 }); 
 
@@ -376,6 +378,7 @@ navigator.getBattery().then(function(battery) {
 function updateMemoryUsage() {
   if (window.performance && window.performance.memory) {
     zramval = memoryInfo.usedJSHeapSize || 'N/A';
+     console.log(zramval)
   }
 }
 
