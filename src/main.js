@@ -378,7 +378,7 @@ navigator.getBattery().then(function(battery) {
 function updateMemoryUsage() {
   if (window.performance && window.performance.memory) {
     var memoryInfo = window.performance.memory;
-    zramval = memoryInfo.usedJSHeapSize || 'N/A';
+    zramval = (memoryInfo.usedJSHeapSize/1024) || 'N/A';
      console.log(zramval)
   }
 }
@@ -393,7 +393,7 @@ function ccalc(xval) {
  
   var cal = [
   //  xval + fval+zramval+pwrval,
-    xval + fval,
+    xval + fval+zramval+pwrval,
   //  xval + fval,
     xval + fval,
     xval + fval,
