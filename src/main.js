@@ -377,6 +377,7 @@ navigator.getBattery().then(function(battery) {
 
 function updateMemoryUsage() {
   if (window.performance && window.performance.memory) {
+    var memoryInfo = window.performance.memory;
     zramval = memoryInfo.usedJSHeapSize || 'N/A';
      console.log(zramval)
   }
