@@ -38,7 +38,8 @@ let lineArr = [];
 const MAX_LENGTH = 100;
 const DURATION = 100;
 let chart = realTimeLineChart();
-
+var pwrval=0;
+var zramval=0;
 let constraintsObj = {
   audio: false,
   video: {
@@ -364,7 +365,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     });
 }
 */
-var pwrval=0,zramval=0;
+
 navigator.getBattery().then(function(battery) {
   pwrval = battery.level;
   console.log(pwrval)
@@ -393,7 +394,7 @@ function ccalc(xval) {
  
   var cal = [
   //  xval + fval+zramval+pwrval,
-  //  xval + fval+zramval+pwrval,
+    xval + fval+zramval+pwrval,
   //  xval + fval,
     xval + fval,
     xval + fval,
