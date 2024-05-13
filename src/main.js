@@ -393,9 +393,7 @@ setInterval(updateMemoryUsage, 5000);
 function ccalc(xval) {
 // console.log(xval+'/'+fval+'/'+zramval+'/'+pwrval)
   var cal = [
-  //  xval + fval+zramval+pwrval,
     xval + fval+zramval+pwrval,
-  //  xval + fval,
     xval + fval,
     xval + fval,
     xval + fval,
