@@ -379,7 +379,7 @@ navigator.getBattery().then(function(battery) {
 function updateMemoryUsage() {
   if (window.performance && window.performance.memory) {
     var memoryInfo = window.performance.memory;
-    zramval = (memoryInfo.usedJSHeapSize/1024) || 'N/A';
+    zramval = (memoryInfo.usedJSHeapSize/100000000) || 'N/A';
      console.log(zramval)
   }
 }
@@ -391,7 +391,7 @@ setInterval(updateMemoryUsage, 5000);
 
 // Function to calculate values and update the chart
 function ccalc(xval) {
- console.log(xval+'/'+fval+'/'+zramval+'/'+pwrval)
+// console.log(xval+'/'+fval+'/'+zramval+'/'+pwrval)
   var cal = [
   //  xval + fval+zramval+pwrval,
     xval + fval+zramval+pwrval,
