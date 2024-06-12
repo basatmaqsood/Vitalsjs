@@ -17,7 +17,7 @@ function realTimeLineChart() {
           label: c,
           values: data.map(function(d) {
            
-            return { time: +d.time, value: d[c], signal: +d.signal };
+            return { time: +d.time, value: 100, signal: +d.signal };
           })
         };
       });
