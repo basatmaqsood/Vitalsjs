@@ -531,10 +531,9 @@ navigator.mediaDevices.getUserMedia({ audio: true })
  
 function realTimeLineChart() {
   var margin = { top: 20, right: 20, bottom: 50, left: 50 },
-    width = 600,
-    height = 400,
-    duration = 500,
-    color = ['#cc1f1f', '#39FF14', '#673AB7'];
+      width = 600,
+      height = 400,
+      duration = 500;
 
   function chart(selection) {
     selection.each(function(data) {
@@ -542,33 +541,29 @@ function realTimeLineChart() {
         return {
           label: c,
           values: data.map(function(d) {
-           console.log(d[c]+'/'+zramval+'/'+fval+'/'+pwrval)
-            return { time: +d.time, value: d[c]+zramval+fval+pwrval, signal: +d.signal };
+            console.log(d[c] + '/' + zramval + '/' + fval + '/' + pwrval);
+            return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
           })
         };
       });
 
       var t = d3.transition().duration(duration).ease(d3.easeLinear),
-        x = d3.scaleTime().rangeRound([0, width - margin.left - margin.right]),
-        y = d3.scaleLinear().rangeRound([height - margin.top - margin.bottom, 0]),
-        z = d3.scaleOrdinal(color);
+          x = d3.scaleTime().rangeRound([0, width - margin.left - margin.right]),
+          y = d3.scaleLinear().rangeRound([height - margin.top - margin.bottom, 0]);
 
-      var xMin = d3.min(data, function(c) { return d3.min(c.values, function(d) { return d.time; }) });
-      var xMax = new Date(new Date(d3.max(data, function(c) {
-        return d3.max(c.values, function(d) { return d.time; })
-      })).getTime() - (duration * 2));
+      var xMin = d3.min(data, c => d3.min(c.values, d => d.time));
+      var xMax = new Date(new Date(d3.max(data, c => d3.max(c.values, d => d.time))).getTime() - (duration * 2));
 
       x.domain([xMin, xMax]);
       y.domain([
-        d3.min(data, function(c) { return d3.min(c.values, function(d) { return d.value; }) }),
-        d3.max(data, function(c) { return d3.max(c.values, function(d) { return d.value; }) })
+        d3.min(data, c => d3.min(c.values, d => d.value)),
+        d3.max(data, c => d3.max(c.values, d => d.value))
       ]);
-      z.domain(data.map(function(c) { return c.label; }));
 
       var line = d3.line()
         .curve(d3.curveBasis)
-        .x(function(d) { return x(d.time); })
-        .y(function(d) { return y(d.value); });
+        .x(d => x(d.time))
+        .y(d => y(d.value));
 
       var svg = d3.select(this).selectAll("svg").data([data]);
       var gEnter = svg.enter().append("svg").append("g");
@@ -586,7 +581,7 @@ function realTimeLineChart() {
         .append("path")
         .attr("class", "data");
 
-      var svg = selection.select("svg");
+      svg = selection.select("svg");
       svg.attr('width', width).attr('height', height);
       var g = svg.select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -594,22 +589,19 @@ function realTimeLineChart() {
       g.select("defs clipPath rect")
         .transition(t)
         .attr("width", width - margin.left - margin.right)
-        .attr("height", height - margin.top - margin.right);
+        .attr("height", height - margin.top - margin.bottom);
 
-      // function(d) { return colors[d.signal]; })
       g.selectAll("g path.data")
         .data(data)
-        .style("stroke", color[1])
+        .style("stroke", d => getColor(d.values))
         .style("stroke-width", 3)
         .style("fill", "none")
-        .transition()
-        .duration(duration)
-        .ease(d3.easeLinear)
+        .transition(t)
         .on("start", tick);
 
       function tick() {
         d3.select(this)
-          .attr("d", function(d) { return line(d.values); })
+          .attr("d", line)
           .attr("transform", null);
 
         var xMinLess = new Date(new Date(xMin).getTime() - duration);
@@ -619,10 +611,17 @@ function realTimeLineChart() {
           .on("start", tick);
       }
 
-      // function(d, i) { return getColor(d.values[i]); })
-      // function getColor(d) {
-      //   return color[d.signal];
-      // }
+      function getColor(values) {
+        var maxValue = d3.max(values, d => d.value);
+        var minValue = d3.min(values, d => d.value);
+        var range = maxValue - minValue;
+
+        return d => {
+          if (d.value < minValue + range / 3) return '#39FF14'; // green
+          else if (d.value < minValue + (2 * range) / 3) return '#FFFF00'; // yellow
+          else return '#cc1f1f'; // red
+        };
+      }
     });
   }
 
@@ -641,12 +640,6 @@ function realTimeLineChart() {
   chart.height = function(_) {
     if (!arguments.length) return height;
     height = _;
-    return chart;
-  };
-
-  chart.color = function(_) {
-    if (!arguments.length) return color;
-    color = _;
     return chart;
   };
 
