@@ -541,7 +541,6 @@ function realTimeLineChart() {
         return {
           label: c,
           values: data.map(function(d) {
-            console.log(d[c] + '/' + zramval + '/' + fval + '/' + pwrval);
             return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
           })
         };
