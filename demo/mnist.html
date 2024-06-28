@@ -607,57 +607,101 @@ var change_net = function() {
 <body>
   <div id="wrap">
   <h2 style="text-align: center;"><a href="http://cs.stanford.edu/people/karpathy/convnetjs/">ConvNetJS</a> MNIST demo</h2>
-  <h1>Description</h1>
-  <p>
-    This demo trains a Convolutional Neural Network on the <a href="http://yann.lecun.com/exdb/mnist/">MNIST digits dataset</a> in your browser, with nothing but Javascript. The dataset is fairly easy and one should expect to get somewhere around 99% accuracy within few minutes. I used <a href="mnist_parse.zip">this python script</a> to parse the <a href="http://deeplearning.net/tutorial/gettingstarted.html">original files</a> into batches of images that can be easily loaded into page DOM with img tags.
-  </p>
-  <p>
-    This network takes a 28x28 MNIST image and crops a random 24x24 window before training on it (this technique is called data augmentation and improves generalization). Similarly to do prediction, 4 random crops are sampled and the probabilities across all crops are averaged to produce final predictions. The network runs at about 5ms for both forward and backward pass on my reasonably decent Ubuntu+Chrome machine.
-  </p>
-  <p>
-    By default, in this demo we're using Adadelta which is one of per-parameter adaptive step size methods, so we don't have to worry about changing learning rates or momentum over time. However, I still included the text fields for changing these if you'd like to play around with SGD+Momentum trainer.
-  </p>
-  <p>Report questions/bugs/suggestions to <a href="https://twitter.com/karpathy">@karpathy</a>.</p>
-  <h1>Training Stats</h1>
-  <div class="divsec" style="270px;">
-    <div class="secpart">
-      <input id="buttontp" type="submit" value="pause" onclick="toggle_pause();" style="width: 100px; height:30px; background-color: #FCC;"/>
-      <div id="trainstats"></div>
 
-      <div id="controls">
-        Learning rate: <input name="lri" type="text" maxlength="20" id="lr_input"/>
-        <input id="buttonlr" type="submit" value="change" onclick="change_lr();"/>
-        <br />
+ <script type="text/javascript" src="js/jqxcore.js"></script>
+    <script type="text/javascript" src="js/jqxdraw.js"></script>
+    <script type="text/javascript" src="js/jqxknob.js"></script>
+    <script type="text/javascript" src="js/jqxnumberinput.js"></script>
+<style type="text/css">
+        #container {
+            position: relative;
+        }
+        .inputField {
+            left: 110px;
+            top: 323px;
+            position: absolute;
+            background: transparent;
+            border: none;
+        }
+        text.jqx-knob-label {
+            font-size: 20px;
+        }
+        .inputField .jqx-input-content {
+            background: transparent;
+            font-size: 20px;
+            color: grey;
 
-        Momentum: <input name="momi" type="text" maxlength="20" id="momentum_input"/>
-        <input id="buttonmom" type="submit" value="change" onclick="change_momentum();"/>
-        <br />
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#container').jqxKnob({
+                value: 60,
+                min: 0,
+                max: 100,
+                startAngle: 120,
+                endAngle: 420,
+                snapToStep: true,
+                rotation: 'clockwise',
+                style: { stroke: '#dfe3e9', strokeWidth: 3, fill: { color: '#fefefe', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] } },
+                marks: {
+                    colorRemaining: { color: 'grey', border: 'grey' },
+                    colorProgress: { color: '#00a4e1', border: '#00a4e1' },
+                    type: 'line',
+                    offset: '71%',
+                    thickness: 3,
+                    size: '6%',
+                    majorSize: '9%',
+                    majorInterval: 10,
+                    minorInterval: 2
+                },
+                labels: {
+                    offset: '88%',
+                    step: 10,
+                    visible: true
+                },
+                progressBar: {
+                    style: { fill: '#00a4e1', stroke: 'grey' },
+                    size: '9%',
+                    offset: '60%',
+                    background: { fill: 'grey', stroke: 'grey' }
+                },
+                pointer: { type: 'arrow', style: { fill: '#00a4e1', stroke: 'grey' }, size: '59%', offset: '49%', thickness: 20 }
+            });
+            var input = $('<div class="inputField">');
+            $('#container').append(input);
+            var inputOptions = {
+                width: 180,
+                height: '40px',
+                decimal: 60, // starting value same as widget
+                min: 0,  // same as widget
+                max: 100, // same as widget
+                textAlign: 'center',
+                decimalDigits: 1,
+                inputMode: 'simple'
 
-        Batch size: <input name="bsi" type="text" maxlength="20" id="batch_size_input"/>
-        <input id="buttonbs" type="submit" value="change" onclick="change_batch_size();"/>
-        <br />
+            };
+            $(input).jqxNumberInput(inputOptions);
+            $(input).on('mousedown', function(event){
+                event.stopPropagation();
+            });
+            $(input).on('keyup', function () {
+                var val = $(this).val();
+                $('#container').val(val);
+            });
+            $(input).on('change', function () {
+                var val = $(this).val();
+                $('#container').val(val);
+            });
 
-        Weight decay: <input name="wdi" type="text" maxlength="20" id="decay_input"/>
-        <input id="buttonwd" type="submit" value="change" onclick="change_decay();"/>
-      </div>
-
-      <input id="buttondj" type="submit" value="save network snapshot as JSON" onclick="dump_json();"/><br />
-      <input id="buttonlfj" type="submit" value="init network from JSON snapshot" onclick="load_from_json();"/><br />
-      <textarea id="dumpjson"></textarea>
-    </div>
-    <div class="secpart">
-      
-      <div>
-        Loss:<br />
-        <canvas id="lossgraph">
-        </canvas>
-        <br />
-        <input id="buttoncg" type="submit" value="clear graph" onclick="clear_graph();"/>
-      </div>
-    </div>
-    <div style="clear:both;"></div>
-  </div>
-
+            $('#container').on('change', function (event) {
+                if (event.args.changeSource == 'propertyChange' || event.args.changeSource == 'val') { return; }
+                $(input).val(event.args.value);
+            })
+        });
+    </script>
+<div id='container' style="width: 400px; height: 400px;"></div>
+    
   <h1>Instantiate a Network and Trainer</h1>
   <div>
     <textarea id="newnet" style="width:100%; height:200px;"></textarea><br />
