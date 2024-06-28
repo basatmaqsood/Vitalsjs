@@ -702,6 +702,46 @@ var change_net = function() {
     </script>
 <div id='container' style="width: 400px; height: 400px;"></div>
     
+ <h1>Training Stats</h1>
+  <div class="divsec" style="270px;">
+    <div class="secpart">
+      <input id="buttontp" type="submit" value="pause" onclick="toggle_pause();" style="width: 100px; height:30px; background-color: #FCC;"/>
+      <div id="trainstats"></div>
+
+      <div id="controls">
+        Learning rate: <input name="lri" type="text" maxlength="20" id="lr_input"/>
+        <input id="buttonlr" type="submit" value="change" onclick="change_lr();"/>
+        <br />
+
+        Momentum: <input name="momi" type="text" maxlength="20" id="momentum_input"/>
+        <input id="buttonmom" type="submit" value="change" onclick="change_momentum();"/>
+        <br />
+
+        Batch size: <input name="bsi" type="text" maxlength="20" id="batch_size_input"/>
+        <input id="buttonbs" type="submit" value="change" onclick="change_batch_size();"/>
+        <br />
+
+        Weight decay: <input name="wdi" type="text" maxlength="20" id="decay_input"/>
+        <input id="buttonwd" type="submit" value="change" onclick="change_decay();"/>
+      </div>
+
+      <input id="buttondj" type="submit" value="save network snapshot as JSON" onclick="dump_json();"/><br />
+      <input id="buttonlfj" type="submit" value="init network from JSON snapshot" onclick="load_from_json();"/><br />
+      <textarea id="dumpjson"></textarea>
+    </div>
+    <div class="secpart">
+      
+      <div>
+        Loss:<br />
+        <canvas id="lossgraph">
+        </canvas>
+        <br />
+        <input id="buttoncg" type="submit" value="clear graph" onclick="clear_graph();"/>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+
   <h1>Instantiate a Network and Trainer</h1>
   <div>
     <textarea id="newnet" style="width:100%; height:200px;"></textarea><br />
