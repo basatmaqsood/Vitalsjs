@@ -635,70 +635,43 @@ var change_net = function() {
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#container').jqxKnob({
+    $('#container').jqxKnob({
                 value: 60,
                 min: 0,
                 max: 100,
                 startAngle: 120,
-                endAngle: 420,
+                endAngle: 480,
                 snapToStep: true,
                 rotation: 'clockwise',
-                style: { stroke: '#dfe3e9', strokeWidth: 3, fill: { color: '#fefefe', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] } },
-                marks: {
-                    colorRemaining: { color: 'grey', border: 'grey' },
-                    colorProgress: { color: '#00a4e1', border: '#00a4e1' },
-                    type: 'line',
-                    offset: '71%',
-                    thickness: 3,
-                    size: '6%',
-                    majorSize: '9%',
-                    majorInterval: 10,
-                    minorInterval: 2
-                },
                 labels: {
                     offset: '88%',
                     step: 10,
                     visible: true
                 },
-                progressBar: {
-                    style: { fill: '#00a4e1', stroke: 'grey' },
-                    size: '9%',
-                    offset: '60%',
-                    background: { fill: 'grey', stroke: 'grey' }
+                marks: {
+                    colorRemaining: { color: '#373636', border: '#373636' },
+                    colorProgress: { color: '#373636', border: '#373636' },
+                    type: 'line',
+                    offset: '71%',
+                    thickness: 1,
+                    size: '6%',
+                    majorSize: '9%',
+                    majorInterval: 10,
+                    minorInterval: 2
                 },
-                pointer: { type: 'arrow', style: { fill: '#00a4e1', stroke: 'grey' }, size: '59%', offset: '49%', thickness: 20 }
+                progressBar: {
+                    size: '70%',
+                    offset: '0%',
+                    background: {
+                        stroke: '#373636', strokeWidth: 1, fill: { color: '#a7a7a7', gradientType: "linear", gradientStops: [[0, 1], [50, 0.5], [100, 1]] }
+                    }
+                },
+                pointer: {
+                    type: 'circle', style: { fill: { color: '#a4a3a3', gradientType: "linear", gradientStops: [[0, 0.5], [50, 0.6], [100, 1]] }, stroke: '#333' },
+                    size: '10%', offset: '50%'
+                }
             });
-            var input = $('<div class="inputField">');
-            $('#container').append(input);
-            var inputOptions = {
-                width: 180,
-                height: '40px',
-                decimal: 60, // starting value same as widget
-                min: 0,  // same as widget
-                max: 100, // same as widget
-                textAlign: 'center',
-                decimalDigits: 1,
-                inputMode: 'simple'
-
-            };
-            $(input).jqxNumberInput(inputOptions);
-            $(input).on('mousedown', function(event){
-                event.stopPropagation();
-            });
-            $(input).on('keyup', function () {
-                var val = $(this).val();
-                $('#container').val(val);
-            });
-            $(input).on('change', function () {
-                var val = $(this).val();
-                $('#container').val(val);
-            });
-
-            $('#container').on('change', function (event) {
-                if (event.args.changeSource == 'propertyChange' || event.args.changeSource == 'val') { return; }
-                $(input).val(event.args.value);
-            })
-        });
+        })
     </script>
 <div id='container' style="width: 400px; height: 400px;"></div>
     
