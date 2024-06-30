@@ -21,6 +21,90 @@
 
  </head>
  <body onload="start();">
+  <script type="text/javascript" src="js/jqxcore.js"></script>
+    <script type="text/javascript" src="js/jqxdraw.js"></script>
+    <script type="text/javascript" src="js/jqxknob.js"></script>
+    <script type="text/javascript" src="js/jqxnumberinput.js"></script>
+<style type="text/css">
+        .container {
+            position: relative;
+        }
+        .inputField {
+            left: 110px;
+            top: 323px;
+            position: absolute;
+            background: transparent;
+            border: none;
+        }
+        text.jqx-knob-label {
+            font-size: 20px;
+        }
+        .inputField .jqx-input-content {
+            background: transparent;
+            font-size: 20px;
+            color: grey;
+
+        }
+  .knobs{display: flex;
+    justify-content: space-around;}
+  .knobs>div{display:flex}
+      text.jqx-knob-label{display:none;}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+    $('.container').jqxKnob({
+                height: 190,
+                width: 190,
+                value: 60,
+                min: 0,
+                max: 100,
+                startAngle: 120,
+                endAngle: 480,
+                snapToStep: true,
+                rotation: 'clockwise',
+                labels: {
+                    offset: '88%',
+                    step: 10,
+                    visible: true
+                },
+                marks: {
+                    colorRemaining: { color: '#373636', border: '#373636' },
+                    colorProgress: { color: '#373636', border: '#373636' },
+                    type: 'line',
+                    offset: '71%',
+                    thickness: 1,
+                    size: '6%',
+                    majorSize: '9%',
+                    majorInterval: 10,
+                    minorInterval: 2
+                },
+                progressBar: {
+                    size: '70%',
+                    offset: '0%',
+                    background: {
+                        stroke: '#373636', strokeWidth: 1, fill: { color: '#a7a7a7', gradientType: "linear", gradientStops: [[0, 1], [50, 0.5], [100, 1]] }
+                    }
+                },
+                pointer: {
+                    type: 'circle', style: { fill: { color: '#a4a3a3', gradientType: "linear", gradientStops: [[0, 0.5], [50, 0.6], [100, 1]] }, stroke: '#333' },
+                    size: '10%', offset: '50%'
+                }
+            });
+  })
+    </script>
+<div class="knobs">
+  <div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+ </div>
+  <div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' style="width: 300px; height: 300px;"></div>
+  </div>
+ </div>
+    
    <div id="wrap">
    <h2><a href="http://cs.stanford.edu/people/karpathy/convnetjs/">ConvNetJS</a> Deep Q Learning Demo</h2>
    <h1>Description</h1>
