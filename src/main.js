@@ -537,16 +537,16 @@ function realTimeLineChart() {
     duration = 500,
     color = ['#cc1f1f', '#39FF14', '#673AB7'];
 
-  function chart(selection) {
-    selection.each(function(data) {
-      data = ['x'].map(function(c) {
-        return {
-          label: c,
-          values: data.map(function(d) {
-         return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
-          })
-        };
-      });
+    function chart(selection) {
+      selection.each(function(data) {
+        data = ['x'].map(function(c) {
+          return {
+            label: c,
+            values: data.map(function(d) {
+           return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
+            })
+          };
+        });
 
       var t = d3.transition().duration(duration).ease(d3.easeLinear),
         x = d3.scaleTime().rangeRound([0, width - margin.left - margin.right]),
