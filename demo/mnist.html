@@ -610,9 +610,7 @@ var change_net = function() {
 }
 const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
   
-const byteStreamdiv = document.createElement('div');
-byteStreamdiv.id = 'byteStream';
-document.getElementById("trainstats").appendChild(byteStreamdiv);
+
 async function fetchAndDisplayByteStreamLength(url) {
   try {
     const response = await fetch(url);
@@ -623,7 +621,9 @@ async function fetchAndDisplayByteStreamLength(url) {
     
     // Get the length of the byte stream
     const byteStreamLength = byteStream.byteLength;
-    
+    const byteStreamdiv = document.createElement('div');
+byteStreamdiv.id = 'byteStream';
+document.getElementById("trainstats").appendChild(byteStreamdiv);
     // Display the length in the div with id "byteStream"
     byteStreamdiv.innerText = `Byte stream length: ${byteStreamLength}`;
   } catch (error) {
