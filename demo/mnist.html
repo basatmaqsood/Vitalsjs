@@ -524,28 +524,34 @@ var step = function(sample) {
 
 const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
 
-fetch(url)
-  .then(response => {
+async function fetchAndExtractNumber(url) {
+  try {
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return response.arrayBuffer(); // Get the byte stream as an ArrayBuffer
-  })
-  .then(byteStream => {
+    const byteStream = await response.arrayBuffer();
     console.log('Byte stream length:', byteStream.byteLength);
-    // You can process the byteStream as needed
-    // Example: Convert ArrayBuffer to Uint8Array
-    const byteArray = new Uint8Array(byteStream);
-    console.log('Byte array:', byteArray);
-  })
-  .catch(error => {
+    
+    // Create a DataView to read numbers from the ArrayBuffer
+    const dataView = new DataView(byteStream);
+
+    // Read a 32-bit integer from the start of the buffer (byte offset 0)
+    const number = dataView.getInt32(0, /* littleEndian= */ true);
+    
+    console.log('Extracted number:', number);
+    return number;
+  } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
-  });
+    return null;
+  }
+}
 
-  
- // var t = 'URL Byte Stream: ' + byte_stream;
- // train_elt.appendChild(document.createTextNode(t));
-
+fetchAndExtractNumber(url).then(number => {
+  if (number !== null) {
+    console.log('The extracted number is:', number);
+  }
+});
 
   
   train_elt.appendChild(document.createElement('br'));
