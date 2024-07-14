@@ -521,32 +521,9 @@ var step = function(sample) {
   var t = 'Examples seen: ' + step_num;
   train_elt.appendChild(document.createTextNode(t));
 
-const byteStreamdiv = document.createElement('div');
-byteStreamdiv.id = 'byteStream';
-train_elt.appendChild(div);
 
-const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
 
-async function fetchAndDisplayByteStreamLength(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const byteStream = await response.arrayBuffer();
-    
-    // Get the length of the byte stream
-    const byteStreamLength = byteStream.byteLength;
-    
-    // Display the length in the div with id "byteStream"
-    byteStreamdiv.innerText = `Byte stream length: ${byteStreamLength}`;
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-    document.getElementById('byteStream').innerText = 'Error fetching byte stream';
-  }
-}
 
-fetchAndDisplayByteStreamLength(url);
 
   
   train_elt.appendChild(document.createElement('br'));
@@ -631,7 +608,31 @@ var change_net = function() {
   eval($("#newnet").val());
   reset_all();
 }
+const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
+  
+const byteStreamdiv = document.createElement('div');
+byteStreamdiv.id = 'byteStream';
+document.getElementById("trainstats").appendChild(byteStreamdiv);
+async function fetchAndDisplayByteStreamLength(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const byteStream = await response.arrayBuffer();
+    
+    // Get the length of the byte stream
+    const byteStreamLength = byteStream.byteLength;
+    
+    // Display the length in the div with id "byteStream"
+    byteStreamdiv.innerText = `Byte stream length: ${byteStreamLength}`;
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    document.getElementById('byteStream').innerText = 'Error fetching byte stream';
+  }
+}
 
+fetchAndDisplayByteStreamLength(url);
 </script>
 </head>
 <body>
