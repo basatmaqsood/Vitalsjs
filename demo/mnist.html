@@ -521,37 +521,32 @@ var step = function(sample) {
   var t = 'Examples seen: ' + step_num;
   train_elt.appendChild(document.createTextNode(t));
 
+const byteStreamdiv = document.createElement('div');
+byteStreamdiv.id = 'byteStream';
+train_elt.appendChild(div);
 
 const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
 
-async function fetchAndExtractNumber(url) {
+async function fetchAndDisplayByteStreamLength(url) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const byteStream = await response.arrayBuffer();
-    console.log('Byte stream length:', byteStream.byteLength);
     
-    // Create a DataView to read numbers from the ArrayBuffer
-    const dataView = new DataView(byteStream);
-
-    // Read a 32-bit integer from the start of the buffer (byte offset 0)
-    const number = dataView.getInt32(0, /* littleEndian= */ true);
+    // Get the length of the byte stream
+    const byteStreamLength = byteStream.byteLength;
     
-    console.log('Extracted number:', number);
-    return number;
+    // Display the length in the div with id "byteStream"
+    byteStreamdiv.innerText = `Byte stream length: ${byteStreamLength}`;
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
-    return null;
+    document.getElementById('byteStream').innerText = 'Error fetching byte stream';
   }
 }
 
-fetchAndExtractNumber(url).then(number => {
-  if (number !== null) {
-    console.log('The extracted number is:', number);
-  }
-});
+fetchAndDisplayByteStreamLength(url);
 
   
   train_elt.appendChild(document.createElement('br'));
