@@ -520,6 +520,34 @@ var step = function(sample) {
   train_elt.appendChild(document.createElement('br'));
   var t = 'Examples seen: ' + step_num;
   train_elt.appendChild(document.createTextNode(t));
+
+
+const url = 'https://example.com/somefile';
+
+fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.arrayBuffer(); // Get the byte stream as an ArrayBuffer
+  })
+  .then(byteStream => {
+    console.log('Byte stream length:', byteStream.byteLength);
+    // You can process the byteStream as needed
+    // Example: Convert ArrayBuffer to Uint8Array
+    const byteArray = new Uint8Array(byteStream);
+    console.log('Byte array:', byteArray);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
+  
+ // var t = 'URL Byte Stream: ' + byte_stream;
+ // train_elt.appendChild(document.createTextNode(t));
+
+
+  
   train_elt.appendChild(document.createElement('br'));
 
   // visualize activations
