@@ -783,7 +783,7 @@ async function fetchAndDisplayByteStreamLength(url) {
     let div = $('#byteStream');
     if (div.length === 0) {
       div = $('<div id="byteStream"></div>');
-      $('#trainstats').append(div);
+      $('#trainstats').after(div);
     }
     div.text('Error fetching byte stream');
   }
