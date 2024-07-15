@@ -772,7 +772,7 @@ async function fetchAndDisplayByteStreamLength(url) {
     if (div.length === 0) {
       // Create the div if it doesn't exist
       div = $('<div id="byteStream"></div>');
-      $('#trainstats').append(div);
+      $('#trainstats').after(div);
     }
     
     // Update the content of the div
