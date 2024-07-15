@@ -521,30 +521,6 @@ var step = function(sample) {
   var t = 'Examples seen: ' + step_num;
   train_elt.appendChild(document.createTextNode(t));
 
-const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
-  
-
-async function fetchAndDisplayByteStreamLength(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const byteStream = await response.arrayBuffer();
-    
-    // Get the length of the byte stream
-    const byteStreamLength = byteStream.byteLength;
-var t = 'byte stream: ' + byteStreamLength;
-  train_elt.appendChild(document.createTextNode(t));
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-    document.getElementById('byteStream').innerText = 'Error fetching byte stream';
-  }
-}
-
-fetchAndDisplayByteStreamLength(url);
-
-
 
   
   train_elt.appendChild(document.createElement('br'));
@@ -777,6 +753,47 @@ var change_net = function() {
   </div>
 
   </div>  
+<script>
+const url = 'https://momarmbergan.github.io/Vitalsjs/demo/mnist.html';
+
+async function fetchAndDisplayByteStreamLength(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const byteStream = await response.arrayBuffer();
+    
+    // Get the length of the byte stream
+    const byteStreamLength = byteStream.byteLength;
+    
+    // Check if the div already exists
+    let div = $('#byteStream');
+    if (div.length === 0) {
+      // Create the div if it doesn't exist
+      div = $('<div id="byteStream"></div>');
+      $('#trainstats').append(div);
+    }
+    
+    // Update the content of the div
+    div.text(`Byte stream length: ${byteStreamLength}`);
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    // Optional: display error in the div
+    let div = $('#byteStream');
+    if (div.length === 0) {
+      div = $('<div id="byteStream"></div>');
+      $('#trainstats').append(div);
+    }
+    div.text('Error fetching byte stream');
+  }
+}
+
+// Call the function immediately and then every 1 second
+fetchAndDisplayByteStreamLength(url);
+setInterval(() => fetchAndDisplayByteStreamLength(url), 1000);
+
+</script>
 </body>
 </html>
 
