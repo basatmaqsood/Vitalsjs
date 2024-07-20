@@ -55,7 +55,7 @@ function setWH() {
   document.getElementById('solar-nuclear-photovoltaic-delay').innerHTML = `Frame compute delay: ${delay}`;
   document.getElementById('solar-nuclear-photovoltaic-resolution').innerHTML = `Video resolution: ${w} x ${h}`;
   c_tmp.setAttribute('width', w);
-  c_tmp.setAttribute('height', h);
+  c_tmp.setAttribute('height', h); 
 }
 
 function init() {
