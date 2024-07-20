@@ -82,7 +82,7 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
     }
     // invert to plot the PPG signal
     xMean = 1 - rgbRed / (count * 255);
-    ccalc(xMean)
+    //ccalc(xMean)
     let xMeanData = {
       time: (new Date() - initTime) / 1000,
       x: xMean
@@ -496,7 +496,7 @@ function ccalc(xval) {
 }
 
 // Example usage
-ccalc(5); // Example call with xval = 5
+//ccalc(5); // Example call with xval = 5
 
 
 navigator.mediaDevices.getUserMedia({ audio: true })
