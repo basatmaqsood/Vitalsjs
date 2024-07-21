@@ -535,7 +535,7 @@ function realTimeLineChart() {
     width = 600,
     height = 400,
     duration = 500,
-    color = ['#cc1f1f', '#FFFF00', '#39FF14']; // Red, Yellow, Green
+    color = ['#cc1f1f','#FFFF00','#39FF14','#185dd0']; // Red, Yellow, Green ,Blue
 
   function chart(selection) {
     selection.each(function(data) {
@@ -616,11 +616,13 @@ function realTimeLineChart() {
         // Set the color based on the current value
         console.log(currentValue)
         if (currentValue <= 2) {
-          path.style("stroke", color[2]); // Red
+          path.style("stroke", color[3]); //green
+        } else if (currentValue <= 20) {
+          path.style("stroke", color[2]); // yellow
         } else if (currentValue <= 40) {
-          path.style("stroke", color[1]); // Yellow
+          path.style("stroke", color[1]); // yellow
         } else {
-          path.style("stroke", color[0]); // Green
+          path.style("stroke", color[0]); // red
         }
 
         var xMinLess = new Date(new Date(xMin).getTime() - duration);
