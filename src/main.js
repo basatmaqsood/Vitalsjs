@@ -535,18 +535,18 @@ function realTimeLineChart() {
     width = 600,
     height = 400,
     duration = 500,
-    color = ['#cc1f1f', '#39FF14', '#673AB7'];
+    color = ['#cc1f1f', '#FFFF00', '#39FF14']; // Red, Yellow, Green
 
-    function chart(selection) {
-      selection.each(function(data) {
-        data = ['x'].map(function(c) {
-          return {
-            label: c,
-            values: data.map(function(d) {
-           return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
-            })
-          };
-        });
+  function chart(selection) {
+    selection.each(function(data) {
+      data = ['x'].map(function(c) {
+        return {
+          label: c,
+          values: data.map(function(d) {
+            return { time: +d.time, value: d[c] + zramval + fval + pwrval, signal: +d.signal };
+          })
+        };
+      });
 
       var t = d3.transition().duration(duration).ease(d3.easeLinear),
         x = d3.scaleTime().rangeRound([0, width - margin.left - margin.right]),
@@ -596,10 +596,8 @@ function realTimeLineChart() {
         .attr("width", width - margin.left - margin.right)
         .attr("height", height - margin.top - margin.right);
 
-      // function(d) { return colors[d.signal]; })
       g.selectAll("g path.data")
         .data(data)
-        .style("stroke", color[1])
         .style("stroke-width", 3)
         .style("fill", "none")
         .transition()
@@ -608,9 +606,21 @@ function realTimeLineChart() {
         .on("start", tick);
 
       function tick() {
-        d3.select(this)
+        var path = d3.select(this)
           .attr("d", function(d) { return line(d.values); })
           .attr("transform", null);
+
+        // Get the current value (height) of the line
+        var currentValue = path.data()[0].values.slice(-1)[0].value;
+
+        // Set the color based on the current value
+        if (currentValue <= 20) {
+          path.style("stroke", color[0]); // Red
+        } else if (currentValue <= 40) {
+          path.style("stroke", color[1]); // Yellow
+        } else {
+          path.style("stroke", color[2]); // Green
+        }
 
         var xMinLess = new Date(new Date(xMin).getTime() - duration);
         d3.active(this)
@@ -618,11 +628,6 @@ function realTimeLineChart() {
           .transition()
           .on("start", tick);
       }
-
-      // function(d, i) { return getColor(d.values[i]); })
-      // function getColor(d) {
-      //   return color[d.signal];
-      // }
     });
   }
 
