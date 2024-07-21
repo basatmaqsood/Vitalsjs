@@ -11,7 +11,7 @@ async function getCities(db) {
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
 }*/
-
+ 
 
 
 const inProduction = false; // hide video and tmp canvas
@@ -500,7 +500,7 @@ function ccalc(xval) {
 
 
 navigator.mediaDevices.getUserMedia({ audio: true })
-  .then(function(stream) {
+  .then(function(stream) {  
     var audioContext = new AudioContext();
     var analyser = audioContext.createAnalyser();
     var microphone = audioContext.createMediaStreamSource(stream);
