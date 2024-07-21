@@ -246,7 +246,7 @@ function updateData() {
   lineArr.shift();
   // }
   d3.select("#solar-nuclear-photovoltaic-chart").datum(lineArr).call(chart);
-}
+} 
 
 function resize() {
   if (d3.select("#chart svg").empty()) {
