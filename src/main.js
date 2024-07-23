@@ -617,9 +617,9 @@ function realTimeLineChart() {
         console.log(currentValue)
         if (currentValue <= 2) {
           path.style("stroke", color[3]); //green
-        } else if (currentValue <= 20) {
+        } else if (currentValue <= 10) {
           path.style("stroke", color[2]); // yellow
-        } else if (currentValue <= 40) {
+        } else if (currentValue <= 30) {
           path.style("stroke", color[1]); // yellow
         } else {
           path.style("stroke", color[0]); // red
