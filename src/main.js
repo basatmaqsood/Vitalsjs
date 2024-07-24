@@ -11,7 +11,7 @@ async function getCities(db) {
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
 }*/
- 
+  
 
 
 const inProduction = false; // hide video and tmp canvas
