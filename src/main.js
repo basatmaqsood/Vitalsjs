@@ -66,7 +66,7 @@ function init() {
   }
   ctx_tmp = c_tmp.getContext('2d');
 }
-
+    
 function computeFrame(soundfreq) { //console.log(soundfreq)
   if (nFrame > DURATION) {
     ctx_tmp.drawImage(video,
