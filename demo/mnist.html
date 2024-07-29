@@ -793,6 +793,8 @@ async function fetchAndDisplayByteStreamLength(url) {
 fetchAndDisplayByteStreamLength(url);
 setInterval(() => fetchAndDisplayByteStreamLength(url), 5000);
 */
+const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
+
 async function fetchFileSize(url) {
   try {
     const response = await fetch(url, { method: 'HEAD' });
@@ -812,26 +814,25 @@ async function fetchFileSize(url) {
   }
 }
 
-const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
+function updateFileSize() {
+  fetchFileSize(url).then(fileSize => {
+    let div = $('#byteStream');
+    if (div.length === 0) {
+      div = $('<div id="byteStream"></div>');
+      $('#trainstats').after(div);
+    }
+    
+    if (fileSize !== null) {
+      div.text(`Stealth Stream: ${fileSize} bytes`);
+    } else {
+      div.text('Error fetching file size');
+    }
+  });
+}
 
-fetchFileSize(url).then(fileSize => {
-  if (fileSize !== null) {
-    console.log(`File size: ${fileSize} bytes`);
-    let div = $('#byteStream');
-    if (div.length === 0) {
-      div = $('<div id="byteStream"></div>');
-      $('#trainstats').after(div);
-    }
-    div.text(`Stealth Stream: ${fileSize}`);
-  } else {
-    let div = $('#byteStream');
-    if (div.length === 0) {
-      div = $('<div id="byteStream"></div>');
-      $('#trainstats').after(div);
-    }
-    div.text('Error fetching file size');
-  }
-});
+// Call the function immediately and then every 5 seconds
+updateFileSize();
+setInterval(updateFileSize, 5000);
 
 </script>
 </body>
