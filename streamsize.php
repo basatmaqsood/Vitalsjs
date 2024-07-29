@@ -1,5 +1,5 @@
 <?php
-$url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
+$url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt'; 
 
 function fetchByteStreamLength($url) {
     $ch = curl_init();
