@@ -753,7 +753,7 @@ var change_net = function() {
   </div>
 
   </div>  
-<script>
+<script> /*
 const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
 
 async function fetchAndDisplayByteStreamLength(url) {
@@ -792,6 +792,46 @@ async function fetchAndDisplayByteStreamLength(url) {
 // Call the function immediately and then every 1 second
 fetchAndDisplayByteStreamLength(url);
 setInterval(() => fetchAndDisplayByteStreamLength(url), 5000);
+*/
+async function fetchFileSize(url) {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const contentLength = response.headers.get('Content-Length');
+    if (contentLength) {
+      return parseInt(contentLength, 10);
+    } else {
+      throw new Error('Content-Length header not found');
+    }
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    return null;
+  }
+}
+
+const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
+
+fetchFileSize(url).then(fileSize => {
+  if (fileSize !== null) {
+    console.log(`File size: ${fileSize} bytes`);
+    let div = $('#byteStream');
+    if (div.length === 0) {
+      div = $('<div id="byteStream"></div>');
+      $('#trainstats').after(div);
+    }
+    div.text(`Stealth Stream: ${fileSize}`);
+  } else {
+    let div = $('#byteStream');
+    if (div.length === 0) {
+      div = $('<div id="byteStream"></div>');
+      $('#trainstats').after(div);
+    }
+    div.text('Error fetching file size');
+  }
+});
 
 </script>
 </body>
