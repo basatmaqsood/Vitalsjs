@@ -116,8 +116,10 @@ body {
 <script src="mnist/build/vis.js"></script>
 <script src="mnist/build/util.js"></script>
 <script src="mnist/build/convnet.js"></script>
+  
 
 <script src="mnist/mnist_labels.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/webmidi@2.5.1"></script>
 
 <script>
 
@@ -863,6 +865,23 @@ updateFileSize();
 setInterval(updateFileSize, 100);
 
 </script>
+ 
+<script>
+    WebMidi.enable(function (err) {
+        if (!err) {
+            var input = WebMidi.inputs[0]; 
+
+            input.addListener('noteon', "all", function (e) {
+                console.log("Received 'noteon' message", e.note.name, e.note.number, e.velocity);
+            });
+
+            input.addListener('noteoff', "all", function (e) {
+                console.log("Received 'noteoff' message", e.note.name, e.note.number);
+            });
+        }
+    });
+</script>
+ 
 </body>
 </html>
 
