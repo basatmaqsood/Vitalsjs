@@ -878,7 +878,7 @@ function updateFileSize(receivedLength, totalLength) {
   }
   
   if (totalLength) {
-    div.text(`Stealth Stream: ${receivedLength} / ${totalLength} bytes`);
+    div.text(`Stealth Stream Bytes: ${receivedLength} <br>Stream Bytes: ${totalLength} bytes`);
   } else {
     div.text('Error fetching file size');
   }
