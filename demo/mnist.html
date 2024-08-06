@@ -824,45 +824,79 @@ fetchAndDisplayByteStreamLength(url);
 setInterval(() => fetchAndDisplayByteStreamLength(url), 5000);
 */
 const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
+let isFetching = false;
 
-async function fetchFileSize(url) {
+async function fetchByteStream(url) {
   try {
-    const response = await fetch(url, { method: 'HEAD' });
+    isFetching = true;
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+
+    const reader = response.body.getReader();
+    const contentLength = +response.headers.get('Content-Length');
     
-    const contentLength = response.headers.get('Content-Length');
-    if (contentLength) {
-      return parseInt(contentLength, 10);
-    } else {
-      throw new Error('Content-Length header not found');
+    let receivedLength = 0;
+    let chunks = [];
+
+    while(true) {
+      const {done, value} = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      chunks.push(value);
+      receivedLength += value.length;
+
+      updateFileSize(receivedLength, contentLength);
     }
+
+    let byteArray = new Uint8Array(receivedLength);
+    let position = 0;
+    for(let chunk of chunks) {
+      byteArray.set(chunk, position);
+      position += chunk.length;
+    }
+
+    isFetching = false;
+    return byteArray;
+
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
+    isFetching = false;
     return null;
   }
 }
 
-function updateFileSize() {
-  fetchFileSize(url).then(fileSize => {
-    let div = $('#byteStream');
-    if (div.length === 0) {
-      div = $('<div id="byteStream"></div>');
-      $('#trainstats').after(div);
-    }
-    
-    if (fileSize !== null) {
-      div.text(`Stealth Stream: ${fileSize} bytes`);
-    } else {
-      div.text('Error fetching file size');
-    }
-  });
+function updateFileSize(receivedLength, totalLength) {
+  let div = $('#byteStream');
+  if (div.length === 0) {
+    div = $('<div id="byteStream"></div>');
+    $('#trainstats').after(div);
+  }
+  
+  if (totalLength) {
+    div.text(`Stealth Stream: ${receivedLength} / ${totalLength} bytes`);
+  } else {
+    div.text('Error fetching file size');
+  }
 }
 
-// Call the function immediately and then every 5 seconds
-updateFileSize();
-setInterval(updateFileSize, 100);
+// Fetch the byte stream buffer every 5 seconds, ensuring no overlap
+setInterval(() => {
+  if (!isFetching) {
+    fetchByteStream(url).then(byteArray => {
+      if (byteArray) {
+        console.log('Byte stream buffer:', byteArray);
+        // Process byteArray as needed
+      } else {
+        console.log('Failed to fetch byte stream buffer');
+      }
+    });
+  }
+}, 500);
 
 </script>
  
