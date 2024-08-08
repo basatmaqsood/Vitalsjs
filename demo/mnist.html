@@ -691,12 +691,12 @@ var change_net = function() {
   <div>
  <div>
    <b>Neurons</b>
- <div class='container' style="width: 300px; height: 300px;"></div>
+ <div class='container' id="knob1" style="width: 300px; height: 300px;"></div>
  </div>
 
  <div>
 <b>Learning Rate</b>
-<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' id="knob2" style="width: 300px; height: 300px;"></div>
   </div>  
  </div>
 
@@ -705,22 +705,22 @@ var change_net = function() {
     
   <div>  
  <b>Momentum</b>   
-<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' id="knob3" style="width: 300px; height: 300px;"></div>
   </div>
 
   <div>  
 <b>Batch Size</b>     
-<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' id="knob4" style="width: 300px; height: 300px;"></div>
   </div>
 
   <div>  
   <b>Weight Decay</b>   
-<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' id="knob5" style="width: 300px; height: 300px;"></div>
   </div>
   
 <div>  
 <b>Spectrum</b>   
-<div class='container' style="width: 300px; height: 300px;"></div>
+<div class='container' id="knob6" style="width: 300px; height: 300px;"></div>
 </div>
     
   </div>
@@ -902,47 +902,47 @@ setInterval(() => {
  
 <script>
 WebMidi.enable(function (err) {
-  if (err) {
-    console.log("WebMIDI could not be enabled.", err);
-    return;
-  }
-  
-  const inputs = WebMidi.inputs;
-  if (inputs.length > 0) {
-    const input = inputs[0]; // Select the first MIDI input device
+   if (err) {
+       console.log("WebMIDI could not be enabled.", err);
+       return;
+   }
 
-    // Map each knob to a different MIDI channel
-    input.addListener('controlchange', "all", function (e) {
-      handleControlChange(e);
-    });
-  } else {
-    console.log("No MIDI input devices found.");
-  }
+   const inputs = WebMidi.inputs;
+   if (inputs.length > 0) {
+       const input = inputs[0]; // Select the first MIDI input device
+
+       input.addListener('controlchange', "all", function (e) {
+           handleControlChange(e);
+       });
+   } else {
+       console.log("No MIDI input devices found.");
+   }
 });
-function handleControlChange(event) {
-  const channel = event.channel;   // Get the MIDI channel
-  const value = event.value;       // Get the control value
 
-  switch (channel) {
-    case 1:
-      document.getElementById('knob1').value = value;
-      break;
-    case 2:
-      document.getElementById('knob2').value = value;
-      break;
-    case 3:
-      document.getElementById('knob3').value = value;
-      break;
-    case 4:
-      document.getElementById('knob4').value = value;
-      break;
-    case 5:
-      document.getElementById('knob5').value = value;
-      break;
-    case 6:
-      document.getElementById('knob6').value = value;
-      break;
-  }
+function handleControlChange(event) {
+   const channel = event.channel;
+   const value = event.value;
+
+   switch (channel) {
+       case 1:
+           $("#knob1").val(value).jqxKnob('val', value);
+           break;
+       case 2:
+           $("#knob2").val(value).jqxKnob('val', value);
+           break;
+       case 3:
+           $("#knob3").val(value).jqxKnob('val', value);
+           break;
+       case 4:
+           $("#knob4").val(value).jqxKnob('val', value);
+           break;
+       case 5:
+           $("#knob5").val(value).jqxKnob('val', value);
+           break;
+       case 6:
+           $("#knob6").val(value).jqxKnob('val', value);
+           break;
+   }
 }
 
 </script>
