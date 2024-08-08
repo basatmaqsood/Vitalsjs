@@ -886,7 +886,7 @@ function updateFileSize(receivedLength, totalLength) {
 
 // Fetch the byte stream buffer every 5 seconds, ensuring no overlap
 setInterval(() => {
-  if (!isFetching) {
+  if (isFetching) {
     fetchByteStream(url).then(byteArray => {
       if (byteArray) {
         console.log('Byte stream buffer:', byteArray);
@@ -901,19 +901,50 @@ setInterval(() => {
 </script>
  
 <script>
-    WebMidi.enable(function (err) {
-        if (!err) {
-            var input = WebMidi.inputs[0]; 
+WebMidi.enable(function (err) {
+  if (err) {
+    console.log("WebMIDI could not be enabled.", err);
+    return;
+  }
+  
+  const inputs = WebMidi.inputs;
+  if (inputs.length > 0) {
+    const input = inputs[0]; // Select the first MIDI input device
 
-            input.addListener('noteon', "all", function (e) {
-                console.log("Received 'noteon' message", e.note.name, e.note.number, e.velocity);
-            });
-
-            input.addListener('noteoff', "all", function (e) {
-                console.log("Received 'noteoff' message", e.note.name, e.note.number);
-            });
-        }
+    // Map each knob to a different MIDI channel
+    input.addListener('controlchange', "all", function (e) {
+      handleControlChange(e);
     });
+  } else {
+    console.log("No MIDI input devices found.");
+  }
+});
+function handleControlChange(event) {
+  const channel = event.channel;   // Get the MIDI channel
+  const value = event.value;       // Get the control value
+
+  switch (channel) {
+    case 1:
+      document.getElementById('knob1').value = value;
+      break;
+    case 2:
+      document.getElementById('knob2').value = value;
+      break;
+    case 3:
+      document.getElementById('knob3').value = value;
+      break;
+    case 4:
+      document.getElementById('knob4').value = value;
+      break;
+    case 5:
+      document.getElementById('knob5').value = value;
+      break;
+    case 6:
+      document.getElementById('knob6').value = value;
+      break;
+  }
+}
+
 </script>
  
 </body>
