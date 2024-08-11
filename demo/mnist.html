@@ -826,46 +826,17 @@ setInterval(() => fetchAndDisplayByteStreamLength(url), 5000);
 const url = 'https://momarmbergan.github.io/Vitalsjs/src/base64.txt';
 let isFetching = false;
 
-async function fetchByteStream(url) {
+async function fetchFileSize(url) {
   try {
-    isFetching = true; 
-    const response = await fetch(url);
+    const response = await fetch(url, { method: 'HEAD' });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-
-    const reader = response.body.getReader();
-    const contentLength = +response.headers.get('Content-Length');
     
-    let receivedLength = 0;
-    let chunks = [];
-
-    while(true) {
-      const {done, value} = await reader.read();
-
-      if (done) {
-        break;
-      }
-
-      chunks.push(value);
-      receivedLength += value.length;
-
-      updateFileSize(receivedLength, contentLength);
-    }
-
-    let byteArray = new Uint8Array(receivedLength);
-    let position = 0;
-    for(let chunk of chunks) {
-      byteArray.set(chunk, position);
-      position += chunk.length;
-    }
-
-    isFetching = false;
-    return byteArray;
-
+    const contentLength = +response.headers.get('Content-Length');
+    return contentLength;
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
-    isFetching = false;
     return null;
   }
 }
@@ -884,19 +855,22 @@ function updateFileSize(receivedLength, totalLength) {
   }
 }
 
-// Fetch the byte stream buffer every 5 seconds, ensuring no overlap
+// Fetch the file size and update the UI every 5 seconds, ensuring no overlap
 setInterval(() => {
-  if (isFetching) {
-    fetchByteStream(url).then(byteArray => {
-      if (byteArray) {
-        console.log('Byte stream buffer:', byteArray);
-        // Process byteArray as needed
+  if (!isFetching) {
+    isFetching = true;
+    fetchFileSize(url).then(size => {
+      if (size) {
+        console.log(`File size is ${size} bytes`);
+        updateFileSize(0, size);
       } else {
-        console.log('Failed to fetch byte stream buffer');
+        console.log('Failed to fetch file size');
       }
+      isFetching = false;
     });
   }
-}, 500);
+}, 5000);
+
 
 </script>
  
