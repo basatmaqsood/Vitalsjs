@@ -861,11 +861,11 @@ setInterval(() => {
     isFetching = true;
     fetchFileSize(url).then(size => {
       if (size) {
-        console.log(`File size is ${size} bytes`);
-        updateFileSize(0, size);
+       
+        updateFileSize(size, size);
       } else {
-        console.log('Failed to fetch file size');
-      }
+        
+      } 
       isFetching = false;
     });
   }
