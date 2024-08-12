@@ -390,7 +390,7 @@ var visualize_activations = function(net, elt) {
     var t = 'max gradient: ' + f2t(mma.maxv) + ', min: ' + f2t(mma.minv);
     layer_div.appendChild(document.createTextNode(t));
     layer_div.appendChild(document.createElement('br'));
-
+ 
     // number of parameters
     if(L.layer_type==='conv') {
       var tot_params = L.sx*L.sy*L.in_depth*L.filters.length + L.filters.length;
