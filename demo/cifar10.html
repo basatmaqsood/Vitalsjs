@@ -213,7 +213,64 @@
   </div>
 
   </div>  
+  <script> 
+const url1 ='https://momarmbergan.github.io/Vitalsjs/demo/cifar10.html';
+const url2 ='https://momarmbergan.github.io/Vitalsjs/src/base64.txt'; 
+
+async function fetchFileSize(url) {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const contentLength = response.headers.get('Content-Length');
+    if (contentLength) {
+      return parseInt(contentLength, 10);
+    } else {
+      throw new Error('Content-Length header not found');
+    }
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    return null;
+  }
+}
+
+function updateFileSizes() {
+  Promise.all([fetchFileSize(url1), fetchFileSize(url2)]).then(([fileSize1, fileSize2]) => {
+    let div1 = $('#byteStream1');
+    let div2 = $('#byteStream2');
+
+    if (div1.length === 0) {
+      div1 = $('<div id="byteStream1"></div>');
+      $('#trainstats').after(div1);
+    }
+    if (div2.length === 0) {
+      div2 = $('<div id="byteStream2"></div>');
+      div1.after(div2);
+    }
+    
+    if (fileSize1 !== null) {
+      div1.text(`Stream Bytes: ${fileSize1} bytes`);
+    } else {
+      div1.text('Error fetching file size 1');
+    }
+
+    if (fileSize2 !== null) {
+      div2.text(`Stealth Stream Bytes: ${fileSize2} bytes`);
+    } else {
+      div2.text('Error fetching file size 2');
+    }
+  });
+}
+
+// Call the function immediately and then every 5 seconds
+updateFileSizes();
+setInterval(updateFileSizes, 1000);
+
+</script>
 </body>
+
 </html>
 
 
