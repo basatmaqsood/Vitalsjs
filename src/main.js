@@ -490,7 +490,7 @@ function ccalc(xval) {
       xval + fval,
       xval + fval,
       xval + fval
-  ];
+  ]; 
 //  updatemicdata(cal)
   createBars(cal); // Update the chart with new calculation values
 }
