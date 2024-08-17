@@ -32,7 +32,8 @@ const WINDOW_LENGTH = 300; // 300 frames = 5s @ 60 FPS
 let acdc = Array(WINDOW_LENGTH).fill(0.5);
 let ac = Array(WINDOW_LENGTH).fill(0.5);
 var fval=0;
-
+let isPrinting = false;
+let allValues = [];
 // draw the signal data as it comes
 let lineArr = [];
 const MAX_LENGTH = 100;
@@ -82,7 +83,9 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
     }
     // invert to plot the PPG signal
     xMean = 1 - rgbRed / (count * 255);
-    //ccalc(xMean)
+     if (isPrinting) { 
+    ccalc(xMean) 
+     }
     let xMeanData = {
       time: (new Date() - initTime) / 1000,
       x: xMean
@@ -492,12 +495,58 @@ function ccalc(xval) {
       xval + fval
   ]; 
 //  updatemicdata(cal)
-  createBars(cal); // Update the chart with new calculation values
+
+  if (isPrinting) {
+    // Create an array with the current values and push it to the allValues array
+    allValues.push(cal);
+  }
+ // createBars(cal); // Update the chart with new calculation values
 }
 
 // Example usage
 //ccalc(5); // Example call with xval = 5
 
+
+
+
+
+
+// Function to start collecting values
+function startPrinting() {
+  isPrinting = true;
+}
+
+// Function to stop collecting values and print them
+function stopPrinting() {
+  isPrinting = false;
+  console.log("Stored values:");
+  allValues.forEach((values, index) => {
+    console.log(`Set ${index + 1}:`, values);
+  });
+}
+
+function simulateValueChanges() {
+  let counter = 0;
+  const interval = setInterval(() => {
+    if (counter >= 10) { // Simulate stopping after 10 iterations
+      clearInterval(interval);
+      stopPrinting();
+    } else {
+      const xval = Math.random() * 10;
+      const xval2 = Math.random() * 10;
+      const xval3 = Math.random() * 10;
+      ccalc(xval, xval2, xval3);
+      counter++;
+    }
+  }, 1000); // Change values every second
+}
+
+// Example button event listeners
+document.getElementById("startButton").addEventListener("click", startPrinting);
+document.getElementById("stopButton").addEventListener("click", stopPrinting);
+
+// Uncomment to simulate value changes automatically
+// simulateValueChanges();
 
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {  
