@@ -577,6 +577,79 @@ navigator.mediaDevices.getUserMedia({ audio: true })
   .catch(function(err) {
     console.error('Error accessing microphone:', err);
   });
+
+
+// Your multidimensional array
+const multiArray = [
+    [10, 20, 15, 30, 25, 35, 40],
+    [5, 10, 8, 15, 12, 18, 20],
+    [25, 30, 28, 35, 32, 38, 40]
+];
+
+// Function to transpose the multidimensional array
+function transposeArray(array) {
+    return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
+}
+
+// Transpose the array
+const transposedArray = transposeArray(allValues);
+
+// Generate charts based on the transposed array
+transposedArray.forEach((dataArray, index) => {
+    const canvas = document.createElement('canvas');
+    canvas.id = `chart${index}`;
+    canvas.width = 400;
+    canvas.height = 200;
+    document.getElementById('chartsContainer').appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: multiArray.map((_, i) => `Dataset ${i + 1}`),
+            datasets: [{
+                label: `Chart ${index + 1}`,
+                data: dataArray,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+
+// Function to download all charts as a single PDF
+document.getElementById('stopButton').addEventListener('click', function () {
+    const pdf = new jspdf.jsPDF('landscape');
+    const charts = document.querySelectorAll('canvas');
+
+    // Loop through each chart and add it to the PDF
+    let x = 10, y = 10;
+    charts.forEach((canvas, index) => {
+        html2canvas(canvas).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            pdf.addImage(imgData, 'PNG', x, y, 100, 50);
+            x += 110;
+            if ((index + 1) % 2 === 0) {
+                x = 10;
+                y += 60;
+            }
+            if (index === charts.length - 1) {
+                pdf.save('charts.pdf');
+            }
+        });
+    });
+});
+
+
+
  
 
 function realTimeLineChart() {
