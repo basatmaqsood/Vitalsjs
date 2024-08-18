@@ -588,48 +588,48 @@ function transposeArray(array) {
     return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
 }
 
-// Transpose the array
-const transposedArray = transposeArray(allValues);
+// Function to generate charts based on the transposed array
+function generateChartsAndDownloadPDF() {
+    // Clear the container before generating new charts
+    document.getElementById('chartsContainer').innerHTML = '';
 
-// Generate charts based on the transposed array
-transposedArray.forEach((dataArray, index) => {
-    const canvas = document.createElement('canvas');
-    canvas.id = `chart${index}`;
-    canvas.width = 400;
-    canvas.height = 200;
-    document.getElementById('chartsContainer').appendChild(canvas);
+    // Transpose the array
+    const transposedArray = transposeArray(allValues);
 
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: multiArray.map((_, i) => `Dataset ${i + 1}`),
-            datasets: [{
-                label: `Chart ${index + 1}`,
-                data: dataArray,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: false,
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    const pdf = new jspdf.jsPDF('landscape');
+    let x = 10, y = 10;
+
+    transposedArray.forEach((dataArray, index) => {
+        // Create canvas for each chart
+        const canvas = document.createElement('canvas');
+        canvas.id = `chart${index}`;
+        canvas.width = 400;
+        canvas.height = 200;
+        document.getElementById('chartsContainer').appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: multiArray.map((_, i) => `Dataset ${i + 1}`),
+                datasets: [{
+                    label: `Chart ${index + 1}`,
+                    data: dataArray,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-});
+        });
 
-// Function to download all charts as a single PDF
-document.getElementById('stopButton').addEventListener('click', function () {
-    const pdf = new jspdf.jsPDF('landscape');
-    const charts = document.querySelectorAll('canvas');
-
-    // Loop through each chart and add it to the PDF
-    let x = 10, y = 10;
-    charts.forEach((canvas, index) => {
+        // Convert each chart to image and add it to PDF
         html2canvas(canvas).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             pdf.addImage(imgData, 'PNG', x, y, 100, 50);
@@ -638,12 +638,15 @@ document.getElementById('stopButton').addEventListener('click', function () {
                 x = 10;
                 y += 60;
             }
-            if (index === charts.length - 1) {
+            if (index === transposedArray.length - 1) {
                 pdf.save('charts.pdf');
             }
         });
     });
-});
+}
+
+// Event listener for the download button
+document.getElementById('stopButton').addEventListener('click', generateChartsAndDownloadPDF);
 
 
 
