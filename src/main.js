@@ -540,7 +540,7 @@ function simulateValueChanges() {
     }
   }, 1000); // Change values every second
 }
-
+ 
 // Example button event listeners
 document.getElementById("startButton").addEventListener("click", startPrinting);
 document.getElementById("stopButton").addEventListener("click", stopPrinting);
@@ -663,7 +663,7 @@ function realTimeLineChart() {
         var currentValue = path.data()[0].values.slice(-1)[0].value;
 
         // Set the color based on the current value
-        console.log(currentValue)
+       
         if (currentValue <= 0.25) {
           path.style("stroke", color[3]); //green
         } else if (currentValue <= 0.50) {
