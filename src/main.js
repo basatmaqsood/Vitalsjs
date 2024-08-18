@@ -400,7 +400,7 @@ function ccalc(xval) {
     xval + fval,
     xval + fval,
     xval + fval,
-    xval + fval,
+   /* xval + fval,
     xval + fval,
     xval + fval,
     xval + fval,
@@ -492,7 +492,7 @@ function ccalc(xval) {
       xval + fval,
       xval + fval,
       xval + fval,
-      xval + fval
+      xval + fval*/
   ]; 
 //  updatemicdata(cal)
 
