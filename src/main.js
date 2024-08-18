@@ -519,10 +519,7 @@ function startPrinting() {
 // Function to stop collecting values and print them
 function stopPrinting() {
   isPrinting = false;
-  console.log("Stored values:");
-  allValues.forEach((values, index) => {
-    console.log(`Set ${index + 1}:`, values);
-  });
+  console.log(allValues);
 }
 
 function simulateValueChanges() {
@@ -592,7 +589,7 @@ function transposeArray(array) {
 }
 
 // Transpose the array
-const transposedArray = transposeArray(allValues);
+const transposedArray = transposeArray(multiArray);
 
 // Generate charts based on the transposed array
 transposedArray.forEach((dataArray, index) => {
