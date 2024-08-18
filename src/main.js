@@ -589,7 +589,7 @@ function transposeArray(array) {
 }
 
 // Transpose the array
-const transposedArray = transposeArray(multiArray);
+const transposedArray = transposeArray(allValues);
 
 // Generate charts based on the transposed array
 transposedArray.forEach((dataArray, index) => {
