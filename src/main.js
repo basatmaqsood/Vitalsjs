@@ -517,10 +517,7 @@ function startPrinting() {
 }
 
 // Function to stop collecting values and print them
-function stopPrinting() {
-  isPrinting = false;
-  console.log(allValues);
-}
+
 
 function simulateValueChanges() {
   let counter = 0;
@@ -540,7 +537,7 @@ function simulateValueChanges() {
  
 // Example button event listeners
 document.getElementById("startButton").addEventListener("click", startPrinting);
-document.getElementById("stopButton").addEventListener("click", stopPrinting);
+
 
 // Uncomment to simulate value changes automatically
 // simulateValueChanges();
@@ -590,11 +587,14 @@ function transposeArray(array) {
 
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
+  isPrinting = false;
     // Clear the container before generating new charts
     document.getElementById('chartsContainer').innerHTML = '';
-
+console.log(allValues);
     // Transpose the array
     const transposedArray = transposeArray(allValues);
+  
+console.log(allValues);
 
     const pdf = new jspdf.jsPDF('landscape');
     let x = 10, y = 10;
