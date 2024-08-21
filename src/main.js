@@ -397,10 +397,10 @@ function ccalc(xval) {
   var cal = [
     xval + fval / zramval / pwrval,
     xval + fval / zramval / pwrval,
-    xval + fval,
-    xval + fval,
-    xval + fval,
    /* xval + fval,
+    xval + fval,
+    xval + fval,
+    xval + fval,
     xval + fval,
     xval + fval,
     xval + fval,
@@ -571,7 +571,7 @@ function manualTranspose(array) {
         transposed[col] = [];
         for (let row = 0; row < numRows; row++) {
             transposed[col][row] = array[row][col];
-          console.log(array[row][col])
+         // console.log(array[row][col])
         }
     }
     
@@ -585,9 +585,9 @@ function generateChartsAndDownloadPDF() {
     document.getElementById('chartsContainer').innerHTML = '';
 console.log(allValues);
     // Transpose the array
-    const transposedArray = manualTranspose(allValues);
+//    const transposedArray = manualTranspose(allValues);
   
-console.log(allValues);
+//console.log(allValues);
 
     const pdf = new jspdf.jsPDF('landscape');
     let x = 10, y = 10;
