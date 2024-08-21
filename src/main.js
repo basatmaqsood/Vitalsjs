@@ -519,22 +519,7 @@ function startPrinting() {
 // Function to stop collecting values and print them
 
 
-function simulateValueChanges() {
-  let counter = 0;
-  const interval = setInterval(() => {
-    if (counter >= 10) { // Simulate stopping after 10 iterations
-      clearInterval(interval);
-      stopPrinting();
-    } else {
-      const xval = Math.random() * 10;
-      const xval2 = Math.random() * 10;
-      const xval3 = Math.random() * 10;
-      ccalc(xval, xval2, xval3);
-      counter++;
-    }
-  }, 1000); // Change values every second
-}
- 
+
 // Example button event listeners
 document.getElementById("startButton").addEventListener("click", startPrinting);
 
@@ -573,17 +558,8 @@ navigator.mediaDevices.getUserMedia({ audio: true })
   });
 
 
-// Your multidimensional array
-const multiArray = [
-    [10, 20, 15, 30, 25, 35, 40],
-    [5, 10, 8, 15, 12, 18, 20],
-    [25, 30, 28, 35, 32, 38, 40]
-];
 
-// Function to transpose the multidimensional array
-function transposeArray(array) {
-    return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
-}
+
 function manualTranspose(array) {
     const transposed = [];
     const numRows = array.length;
@@ -593,6 +569,7 @@ function manualTranspose(array) {
         transposed[col] = [];
         for (let row = 0; row < numRows; row++) {
             transposed[col][row] = array[row][col];
+          console.log(array[row][col])
         }
     }
     
