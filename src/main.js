@@ -493,7 +493,7 @@ function ccalc(xval) {
       xval + fval,
       xval + fval,
       xval + fval*/
-  ]; 
+  ];  
 //  updatemicdata(cal)
 
   if (isPrinting) {
@@ -584,6 +584,20 @@ const multiArray = [
 function transposeArray(array) {
     return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
 }
+function manualTranspose(array) {
+    const transposed = [];
+    const numRows = array.length;
+    const numCols = array[0].length;
+    
+    for (let col = 0; col < numCols; col++) {
+        transposed[col] = [];
+        for (let row = 0; row < numRows; row++) {
+            transposed[col][row] = array[row][col];
+        }
+    }
+    
+    return transposed;
+}
 
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
@@ -592,7 +606,7 @@ function generateChartsAndDownloadPDF() {
     document.getElementById('chartsContainer').innerHTML = '';
 console.log(allValues);
     // Transpose the array
-    const transposedArray = transposeArray(allValues);
+    const transposedArray = manualTranspose(allValues);
   
 console.log(allValues);
 
