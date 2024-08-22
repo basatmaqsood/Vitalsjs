@@ -74,7 +74,7 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
       0, 0, video.videoWidth, video.videoHeight);
     let frame = ctx_tmp.getImageData(
       0, 0, video.videoWidth, video.videoHeight);
-
+  
     // process each frame
     const count = frame.data.length / 4;
     let rgbRed = 0;
