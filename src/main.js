@@ -1,5 +1,5 @@
 document.querySelector('#startCharts').addEventListener('click', onRecord);
-//new main.js 
+//new main.js  
 /*
 const app = initializeApp(firebaseConfig); 
 const db = getFirestore(app);
