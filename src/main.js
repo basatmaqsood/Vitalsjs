@@ -10,7 +10,7 @@ async function getCities(db) {
   const citySnapshot = await getDocs(citiesCol);
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
-}*/
+}*/  
    
   
 
