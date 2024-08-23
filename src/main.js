@@ -496,13 +496,8 @@ function ccalc(xval) {
   ];  
 //  updatemicdata(cal)
 
-  if (isPrinting) {
-    // Create an array with the current values and push it to the allValues array
-    for(x=0;x<3;x++){
-      allValues.push([...cal]);
-    }
-  }
- // createBars(cal); // Update the chart with new calculation values
+
+  createBars(cal); // Update the chart with new calculation values
 }
 
 // Example usage
