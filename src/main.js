@@ -614,12 +614,7 @@ console.log(allValues);
     });
 }
 
-// Event listener for the download button
-document.getElementById('stopButton').addEventListener('click', generateChartsAndDownloadPDF);
 
-
-
- 
 
 function realTimeLineChart() {
   var margin = { top: 20, right: 20, bottom: 50, left: 50 },
