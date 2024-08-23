@@ -505,25 +505,6 @@ function ccalc(xval) {
 
 
 
-
-
-
-// Function to start collecting values
-function startPrinting() {
-  isPrinting = true;
-}
-
-// Function to stop collecting values and print them
-
-
-
-// Example button event listeners
-document.getElementById("startButton").addEventListener("click", startPrinting);
-
-
-// Uncomment to simulate value changes automatically
-// simulateValueChanges();
-
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {  
     var audioContext = new AudioContext();
