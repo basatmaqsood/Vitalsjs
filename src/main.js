@@ -329,11 +329,11 @@ function createBars(cal) {
         } else {
             ctx.fillStyle = 'green';
         }
-        
+         
         // Draw bar
         ctx.fillRect(x, y, barWidth, barHeight);
     });
-}
+} 
 
 
 navigator.mediaDevices.getUserMedia({ audio: true })
