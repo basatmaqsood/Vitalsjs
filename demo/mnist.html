@@ -896,7 +896,8 @@ function handleControlChange(event) {
         $(document).ready(function() {
             // Function to convert a date object to a byte array using TextEncoder
             function dateToBytes(date) {
-                const dateString = date.toISOString(); // Convert date to ISO string format
+                const dateString = date.toISOString();
+              console.log(dateString)
                 const encoder = new TextEncoder();
                 return encoder.encode(dateString);
             }
