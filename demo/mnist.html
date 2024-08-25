@@ -720,7 +720,11 @@ var change_net = function() {
 
   <div>  
   <b>Date Bytestream</b>   
-<div class='container' id="knob5" style="width: 300px; height: 300px;"></div>
+<div>
+    <p id="previous-date-bytes"></p>
+    <p id="current-date-bytes"></p>
+    <p id="tomorrow-date-bytes"></p>
+</div>
   </div>
   
 <div>  
@@ -889,7 +893,36 @@ function handleControlChange(event) {
            break;
    }
 }
+        $(document).ready(function() {
+            // Function to convert a date object to a byte array using TextEncoder
+            function dateToBytes(date) {
+                const dateString = date.toISOString(); // Convert date to ISO string format
+                const encoder = new TextEncoder();
+                return encoder.encode(dateString);
+            }
+setInterval(function(){
+            // Get the current date and time
+            const now = new Date();
 
+            // Get the previous date and time
+            const previousDate = new Date(now);
+            previousDate.setDate(now.getDate() - 1);
+
+            // Get tomorrow's date and time
+            const tomorrowDate = new Date(now);
+            tomorrowDate.setDate(now.getDate() + 1);
+
+            // Convert dates to byte arrays
+            const previousDateBytes = dateToBytes(previousDate);
+            const currentDateBytes = dateToBytes(now);
+            const tomorrowDateBytes = dateToBytes(tomorrowDate);
+
+            // Display byte arrays on the webpage
+            $('#previous-date-bytes').text('Previous Date streamBytes: ' + previousDateBytes);
+            $('#current-date-bytes').text('Current streamBytes: ' + currentDateBytes);
+            $('#tomorrow-date-bytes').text('Tomorrow\'s streamBytes: ' + tomorrowDateBytes);
+       },1000);   
+        });
 </script>
  
 </body>
