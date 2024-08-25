@@ -900,8 +900,8 @@ function handleControlChange(event) {
                 const dateString = date.toISOString();
               console.log(dateString)
                 const encoder = new TextEncoder();
-                const arr=encoder.encode(dateString);
-               return arr.length
+                return encoder.encode(dateString);
+               //return arr.length
             }
 setInterval(function(){
             // Get the current date and time
