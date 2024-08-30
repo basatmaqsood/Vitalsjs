@@ -394,6 +394,7 @@ setInterval(updateMemoryUsage, 5000);
 
 // Function to calculate values and update the chart
 function ccalc(xval) {
+  console.log(xval)
   var cal = [
     xval + fval / zramval / pwrval,
     xval + fval / zramval / pwrval,
