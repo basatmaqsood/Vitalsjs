@@ -83,6 +83,7 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
     }
     // invert to plot the PPG signal
     xMean = 1 - rgbRed / (count * 255);
+    console.log(isPrinting)
      if (isPrinting) { 
     ccalc(xMean) 
      }
@@ -502,7 +503,7 @@ function ccalc(xval) {
 }
 
 // Example usage
-//ccalc(5); // Example call with xval = 5
+ccalc(5); // Example call with xval = 5
 
 
 
