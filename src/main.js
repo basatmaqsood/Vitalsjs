@@ -555,6 +555,7 @@ function manualTranspose(array) {
     
     return transposed;
 }
+document.querySelector('#export100').addEventListener('click', generateChartsAndDownloadPDF);
 
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
