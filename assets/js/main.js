@@ -72,48 +72,52 @@
 		// Methods.
 			$main._show = function(id, initial) {
 
-				var $article = $main_articles.filter('#' + id);
+    var $article = $main_articles.filter('#' + id);
 
-				// No such article? Bail.
-					if ($article.length == 0)
-						return;
+    // No such article? Bail.
+    if ($article.length == 0)
+        return;
 
-				// Handle lock.
+    // Handle lock.
+    if (locked || (typeof initial != 'undefined' && initial === true)) {
+        // Mark as switching.
+        $body.addClass('is-switching');
 
-					// Already locked? Speed through "show" steps w/o delays.
-						if (locked || (typeof initial != 'undefined' && initial === true)) {
+        // Mark as visible.
+        $body.addClass('is-article-visible');
 
-							// Mark as switching.
-								$body.addClass('is-switching');
+        // Deactivate all articles (just in case one's already active).
+        $main_articles.removeClass('active').hide().find('object').attr('data', '');
 
-							// Mark as visible.
-								$body.addClass('is-article-visible');
+        // Hide header, footer.
+        $header.hide();
+        $footer.hide();
 
-							// Deactivate all articles (just in case one's already active).
-								$main_articles.removeClass('active');
+        // Show main.
+        $main.show();
 
-							// Hide header, footer.
-								$header.hide();
-								$footer.hide();
+        // Load content dynamically for the clicked article.
+        var objectElement = $article.find('object');
+        if (objectElement.length > 0 && objectElement.attr('data') === '') {
+            objectElement.attr('data', objectElement.attr('data-src'));
+        }
 
-							// Show main, article.
-								$main.show();
-								$article.show();
+        // Show article.
+        $article.show();
 
-							// Activate article.
-								$article.addClass('active');
+        // Activate article.
+        $article.addClass('active');
 
-							// Unlock.
-								locked = false;
+        // Unlock.
+        locked = false;
 
-							// Unmark as switching.
-								setTimeout(function() {
-									$body.removeClass('is-switching');
-								}, (initial ? 1000 : 0));
+        // Unmark as switching.
+        setTimeout(function() {
+            $body.removeClass('is-switching');
+        }, (initial ? 1000 : 0));
 
-							return;
-
-						}
+        return;
+    }
 
 					// Lock.
 						locked = true;
