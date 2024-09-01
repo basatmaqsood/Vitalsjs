@@ -98,6 +98,7 @@
 
         // Load content dynamically for the clicked article.
         var objectElement = $article.find('object');
+console.log(objectElement.html())
         if (objectElement.length > 0 && objectElement.attr('data') === '') {
             objectElement.attr('data', objectElement.attr('data-src'));
         }
