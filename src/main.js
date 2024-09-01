@@ -559,7 +559,7 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
-  isPrinting = false;
+  isPrinting = true;
     // Clear the container before generating new charts
     document.getElementById('chartsContainer').innerHTML = '';
 console.log(allValues);
