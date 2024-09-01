@@ -86,8 +86,7 @@ console.log(3333)
         // Mark as visible.
         $body.addClass('is-article-visible');
 
-        // Deactivate all articles (just in case one's already active).
-        $main_articles.removeClass('active').hide().find('object').attr('data', '');
+      
 
         // Hide header, footer.
         $header.hide();
@@ -96,12 +95,7 @@ console.log(3333)
         // Show main.
         $main.show();
 
-        // Load content dynamically for the clicked article.
-        var objectElement = $article.find('object');
-console.log(objectElement.html())
-        if (objectElement.length > 0 && objectElement.attr('data') === '') {
-            objectElement.attr('data', objectElement.attr('data-src'));
-        }
+
 
         // Show article.
         $article.show();
@@ -136,10 +130,16 @@ console.log(objectElement.html())
 
 								// Hide current article.
 									$currentArticle.hide();
-
+  // Deactivate all articles (just in case one's already active).
+        $main_articles.removeClass('active').hide().find('object').attr('data', '');
 								// Show article.
 									$article.show();
-
+        // Load content dynamically for the clicked article.
+        var objectElement = $article.find('object');
+console.log(objectElement.html())
+        if (objectElement.length > 0 && objectElement.attr('data') === '') {
+            objectElement.attr('data', objectElement.attr('data-src'));
+        }
 								// Activate article.
 									setTimeout(function() {
 
