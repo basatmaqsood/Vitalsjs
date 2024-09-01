@@ -318,6 +318,7 @@ function createBars(cal) {
     
     // Loop through data and create bars
     cal.forEach(function(value, index) {
+   console.log(value+'/'+index)
         var barHeight = Math.max((value / maxBarHeight) * chartCanvas.height, minHeight);
         var x = index * (barWidth + 5); // Adding 5 pixels for the gap between bars
         var y = chartCanvas.height - barHeight;
