@@ -73,11 +73,11 @@
 			$main._show = function(id, initial) {
 
     var $article = $main_articles.filter('#' + id);
-console.log($article)
+
     // No such article? Bail.
     if ($article.length == 0)
         return;
-
+console.log(3333)
     // Handle lock.
     if (locked || (typeof initial != 'undefined' && initial === true)) {
         // Mark as switching.
