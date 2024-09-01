@@ -77,7 +77,6 @@
     // No such article? Bail.
     if ($article.length == 0)
         return;
-console.log(3333)
     // Handle lock.
     if (locked || (typeof initial != 'undefined' && initial === true)) {
         // Mark as switching.
@@ -257,7 +256,7 @@ console.log(objectElement.html())
 
 				// Deactivate article.
 					$article.removeClass('active');
-
+$main_articles.removeClass('active').hide().find('object').attr('data', '');
 				// Hide article.
 					setTimeout(function() {
 
