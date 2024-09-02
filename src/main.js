@@ -49,7 +49,7 @@ let constraintsObj = {
     frameRate: { ideal: 60 },
     facingMode: 'environment' // rear-facing-camera
   }
-};
+}; 
 
 function setWH() {
   let [w, h] = [video.videoWidth, video.videoHeight];
