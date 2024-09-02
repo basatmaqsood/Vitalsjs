@@ -704,7 +704,7 @@ function realTimeLineChart() {
         var currentValue = path.data()[0].values.slice(-1)[0].value;
 
         // Set the color based on the current value
-       
+       console.log(currentValue)
         if (currentValue <= 0.20) {
           path.style("stroke", color[3]); //blue
         } else if (currentValue <= 0.50) {
