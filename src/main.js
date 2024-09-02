@@ -709,7 +709,7 @@ function realTimeLineChart() {
           path.style("stroke", color[3]); //blue
         } else if (currentValue <= 5) {
           path.style("stroke", color[2]); // green
-        } else if (currentValue <= 7) {
+        } else if (currentValue <= 8) {
           path.style("stroke", color[1]); // yellow
         } else {
           path.style("stroke", color[0]); // red
