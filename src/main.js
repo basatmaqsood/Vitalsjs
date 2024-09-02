@@ -12,7 +12,7 @@ async function getCities(db) {
   return cityList;
 }*/  
    
-   
+    
     
 const inProduction = false; // hide video and tmp canvas
 const channel = 'r'; // red only, green='g' and blue='b' channels can be added
