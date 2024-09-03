@@ -565,6 +565,7 @@ function generateChartsAndDownloadPDF() {
             const element = document.getElementById('chart-canvas');
             html2pdf().from(element).save();
     isPrinting=false;
+    element.innerHTML=''
         }, 1000); 
 }
 
