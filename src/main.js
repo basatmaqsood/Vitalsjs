@@ -563,7 +563,7 @@ function generateChartsAndDownloadPDF() {
   isPrinting = true;
     // Clear the container before generating new charts
     document.getElementById('chartsContainer').innerHTML = '';
-  
+  const { jsPDF } = window.jspdf;
     const pdf = new jspdf.jsPDF('landscape');
     let x = 10, y = 10;
     const content = document.getElementById('chart-canvas');
