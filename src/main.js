@@ -561,13 +561,17 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
-  setTimeout(function() {
-            const element = document.getElementById('chart-canvas');
-            html2pdf().from(element).save();
-    isPrinting=false;
-    const ctx = element.getContext('2d'); 
-    ctx.clearRect(0, 0, element.width, element.height);
-        }, 1000); 
+setTimeout(function() {
+    const element = document.getElementById('chart-canvas');
+    
+    // Save the PDF and then clear the canvas
+    html2pdf().from(element).save().then(function() {
+        // Clear the canvas after the PDF is saved
+        const ctx = element.getContext('2d');
+        ctx.clearRect(0, 0, element.width, element.height);
+    });
+}, 1000);
+
 }
 
 
