@@ -563,7 +563,6 @@ function generateChartsAndDownloadPDF() {
   isPrinting = true;
     // Clear the container before generating new charts
     document.getElementById('chartsContainer').innerHTML = '';
-console.log(allValues);
     // Transpose the array
 //    const transposedArray = manualTranspose(allValues);
   
@@ -704,7 +703,6 @@ function realTimeLineChart() {
         var currentValue = path.data()[0].values.slice(-1)[0].value;
 
         // Set the color based on the current value
-       console.log(currentValue)
         if (currentValue <= 2) {
           path.style("stroke", color[3]); //blue
         } else if (currentValue <= 5) {
