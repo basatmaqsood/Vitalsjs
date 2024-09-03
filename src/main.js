@@ -563,58 +563,20 @@ function generateChartsAndDownloadPDF() {
   isPrinting = true;
     // Clear the container before generating new charts
     document.getElementById('chartsContainer').innerHTML = '';
-    // Transpose the array
-//    const transposedArray = manualTranspose(allValues);
   
-//console.log(allValues);
-
     const pdf = new jspdf.jsPDF('landscape');
     let x = 10, y = 10;
+    const content = document.getElementById('chart-canvas');
+    const canvas = await html2canvas(content);
+    const imgData = canvas.toDataURL('image/png');
 
-    transposedArray.forEach((dataArray, index) => {
-        // Create canvas for each chart
-        const canvas = document.createElement('canvas');
-        canvas.id = `chart${index}`;
-        canvas.width = 400;
-        canvas.height = 200;
-        document.getElementById('chartsContainer').appendChild(canvas);
+          
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('download.pdf');
 
-        const ctx = canvas.getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: multiArray.map((_, i) => `Dataset ${i + 1}`),
-                datasets: [{
-                    label: `Chart ${index + 1}`,
-                    data: dataArray,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Convert each chart to image and add it to PDF
-        html2canvas(canvas).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', x, y, 100, 50);
-            x += 110;
-            if ((index + 1) % 2 === 0) {
-                x = 10;
-                y += 60;
-            }
-            if (index === transposedArray.length - 1) {
-                pdf.save('charts.pdf');
-            }
-        });
-    });
 }
 
 
