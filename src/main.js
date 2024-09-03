@@ -400,7 +400,7 @@ function ccalc(xval) {
   var cal = [
     xval + fval / zramval / pwrval,
     xval + fval / zramval / pwrval,
-   /* xval + fval,
+    xval + fval,
     xval + fval,
     xval + fval,
     xval + fval,
@@ -495,7 +495,7 @@ function ccalc(xval) {
       xval + fval,
       xval + fval,
       xval + fval,
-      xval + fval*/
+      xval + fval
   ];  
 //  updatemicdata(cal)
 
