@@ -563,12 +563,11 @@ function generateChartsAndDownloadPDF() {
   isPrinting = true;
 setTimeout(function() {
     const element = document.getElementById('chart-canvas');
-    
+    element.style.display = 'block';
     // Save the PDF and then clear the canvas
     html2pdf().from(element).save().then(function() {
         // Clear the canvas after the PDF is saved
-        const ctx = element.getContext('2d');
-        ctx.clearRect(0, 0, element.width, element.height);
+        element.style.display = 'none';
     });
 }, 1000);
 
