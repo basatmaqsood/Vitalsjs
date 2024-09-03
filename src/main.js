@@ -83,7 +83,7 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
     }
     // invert to plot the PPG signal
     xMean = 1 - rgbRed / (count * 255);
-    console.log(isPrinting)
+    
      if (isPrinting) { 
     ccalc(xMean) 
      }
@@ -318,7 +318,7 @@ function createBars(cal) {
     
     // Loop through data and create bars
     cal.forEach(function(value, index) {
-   console.log(value+'/'+index)
+
         var barHeight = Math.max((value / maxBarHeight) * chartCanvas.height, minHeight);
         var x = index * (barWidth + 5); // Adding 5 pixels for the gap between bars
         var y = chartCanvas.height - barHeight;
@@ -373,10 +373,10 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 
 navigator.getBattery().then(function(battery) {
   pwrval = battery.level;
-  console.log(pwrval)
+ 
   battery.addEventListener('levelchange', function() {
     pwrval = battery.level;
-     console.log(pwrval)
+
   });
 }); 
 
@@ -385,7 +385,7 @@ function updateMemoryUsage() {
   if (window.performance && window.performance.memory) {
     var memoryInfo = window.performance.memory;
     zramval = (memoryInfo.usedJSHeapSize/100000000) || 'N/A';
-     console.log(zramval)
+
   }
 }
 
@@ -396,7 +396,7 @@ setInterval(updateMemoryUsage, 5000);
 
 // Function to calculate values and update the chart
 function ccalc(xval) {
-  console.log(xval)
+
   var cal = [
     xval + fval / zramval / pwrval,
     xval + fval / zramval / pwrval,
@@ -564,6 +564,7 @@ function generateChartsAndDownloadPDF() {
   setTimeout(function() {
             const element = document.getElementById('chart-canvas');
             html2pdf().from(element).save();
+    isPrinting=false;
         }, 1000); 
 }
 
