@@ -566,7 +566,7 @@ function generateChartsAndDownloadPDF() {
             html2pdf().from(element).save();
     isPrinting=false;
     const ctx = element.getContext('2d'); 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, element.width, element.height);
         }, 1000); 
 }
 
