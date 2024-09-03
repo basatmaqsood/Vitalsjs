@@ -561,22 +561,10 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
-    // Clear the container before generating new charts
-    document.getElementById('chartsContainer').innerHTML = '';
-  const { jsPDF } = window.jspdf;
-    const pdf = new jspdf.jsPDF('landscape');
-    let x = 10, y = 10;
-    const content = document.getElementById('chart-canvas');
-    const canvas = await html2canvas(content);
-    const imgData = canvas.toDataURL('image/png');
-
-          
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('download.pdf');
-
+  setTimeout(function() {
+            const element = document.getElementById('chart-canvas');
+            html2pdf().from(element).save();
+        }, 1000); 
 }
 
 
