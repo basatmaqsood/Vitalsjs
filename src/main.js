@@ -738,7 +738,7 @@ function realTimeLineChart() {
     if (!arguments.length) return height;
     height = _;
     return chart;
-  }; 
+  };  
 
   chart.color = function(_) {
     if (!arguments.length) return color;
