@@ -125,7 +125,7 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
   }
   nFrame += 1;
   setTimeout(computeFrame, delay); // continue with delay
-}
+} 
 
 function windowMean(y) {
   const n = y.length;
