@@ -299,7 +299,7 @@ function createTable() {
 // Function to create bars
 
 
-function createBars(cal) {
+/*function createBars(cal) {
     var chartCanvas = document.getElementById('chart-canvas');
     var ctx = chartCanvas.getContext('2d');
     
@@ -335,9 +335,64 @@ function createBars(cal) {
         // Draw bar
         ctx.fillRect(x, y, barWidth, barHeight);
     });
-} 
+} */
 
 
+function createBars(data) {
+
+          const getRandomColor = () => {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+
+        // Select the SVG using the class name
+        const svg = d3.select("#chart-canvas"),
+              margin = {top: 20, right: 30, bottom: 30, left: 40},
+              width = window.innerWidth - margin.left - margin.right,
+              height = 300;
+
+        const x = d3.scaleBand()
+                    .domain(d3.range(data.length))
+                    .range([margin.left, width - margin.right])
+                    .padding(0.1);
+
+        const y = d3.scaleLinear()
+                    .domain([0, d3.max(data)])  // domain is based on data values
+                    .range([height - margin.bottom, margin.top]);  // range is fixed to chart height
+
+        // Append bars with random colors
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", (d, i) => x(i))
+            .attr("y", d => y(d))
+            .attr("width", x.bandwidth())
+            .attr("height", d => height - margin.bottom - y(d))  // height scales to fit within the fixed chart height
+            .attr("fill", () => getRandomColor());  // Assign random color to each bar
+
+        // Append rotated text labels (rotate from the middle of the label)
+        svg.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", (d, i) => x(i) + x.bandwidth() / 2)  // Center the text horizontally
+            .attr("y", d => y(d) - 5)  // Position the text slightly above the bar
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "black")
+            .attr("transform", (d, i) => {
+                const xPosition = x(i) + x.bandwidth() / 2;
+                const yPosition = y(d) - 9;
+                return `rotate(270, ${xPosition}, ${yPosition})`;  // Rotate around the label's center
+            })
+            .text(d => d);
+  
+}
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
     var audioContext = new AudioContext();
