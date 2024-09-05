@@ -622,7 +622,7 @@ setTimeout(function() {
     // Save the PDF and then clear the canvas
     html2pdf().from(element).save().then(function() {
         // Clear the canvas after the PDF is saved
-        element.style.display = 'none';
+      //  element.style.display = 'none';
     });
 }, 1000);
 
