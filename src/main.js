@@ -559,7 +559,7 @@ function ccalc(xval) {
 }
 
 // Example usage
-ccalc(5); // Example call with xval = 5
+
 
 
 
