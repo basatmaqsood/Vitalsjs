@@ -627,7 +627,7 @@ setTimeout(function() {
         filename:     'chart.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },  // Higher scale improves quality
-        jsPDF:        { unit: 'pt', format: 'a4', orientation: 'landscape' }  // Landscape mode
+        jsPDF:        { unit: 'pt',format: [595.28, 500], orientation: 'landscape' }  // Landscape mode
     };
     
     // Save the PDF with the defined options
