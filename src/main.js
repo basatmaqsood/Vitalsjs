@@ -623,13 +623,13 @@ setTimeout(function() {
     
     // Define options for html2pdf
     const opt = {
-        margin:        [20, 20, 20, 20],         // Remove margins
+        margin:        [200, 20, 20, 20],         // Remove margins
         filename:     'chart.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },  // Higher scale improves quality
         jsPDF:        {
             unit: 'pt',
-            format: [595.28, 841.89],  // A4 size in landscape
+            format: [595.28, 1241.89],  // A4 size in landscape
             orientation: 'landscape'
         }
     };
