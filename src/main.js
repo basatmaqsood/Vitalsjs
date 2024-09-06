@@ -385,6 +385,7 @@ function createBars(data) {
             .attr("text-anchor", "middle")
             .attr("font-size", "12px")
             .attr("fill", "black")
+            .attr("font-size", "8px") 
             .attr("transform", (d, i) => {
                 const xPosition = x(i) + x.bandwidth() / 2;
                 const yPosition = y(d) - 9;
