@@ -383,11 +383,11 @@ function createBars(data) {
             .attr("x", (d, i) => x(i) + x.bandwidth() / 2)  // Center the text horizontally
             .attr("y", d => y(d) - 5)  // Position the text slightly above the bar
             .attr("text-anchor", "middle")
-            .attr("font-size", "12px")
+            .attr("font-size", "8px")
             .attr("fill", "black")
             .attr("font-size", "5px") 
             .attr("transform", (d, i) => {
-                const xPosition = x(i) + 12+ x.bandwidth() / 2;
+                const xPosition = x(i) + x.bandwidth() / 2;
                 const yPosition = y(d) - 20;
                 return `rotate(270, ${xPosition}, ${yPosition})`;  // Rotate around the label's center
             })
