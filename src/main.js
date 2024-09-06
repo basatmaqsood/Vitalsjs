@@ -387,7 +387,7 @@ function createBars(data) {
             .attr("fill", "black")
             .attr("font-size", "5px") 
             .attr("transform", (d, i) => {
-                const xPosition = x(i) + x.bandwidth() / 2 -10;
+                const xPosition = x(i) + x.bandwidth() / 2 -12;
                 const yPosition = y(d) - 20;
                 return `rotate(270, ${xPosition}, ${yPosition})`;  // Rotate around the label's center
             })
