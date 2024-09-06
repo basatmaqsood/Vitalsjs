@@ -385,7 +385,7 @@ function createBars(data) {
             .attr("text-anchor", "middle")
             .attr("font-size", "12px")
             .attr("fill", "black")
-            .attr("font-size", "8px") 
+            .attr("font-size", "5px") 
             .attr("transform", (d, i) => {
                 const xPosition = x(i) + x.bandwidth() / 2;
                 const yPosition = y(d) - 9;
@@ -620,12 +620,23 @@ function generateChartsAndDownloadPDF() {
 setTimeout(function() {
     const element = document.getElementById('chart-canvas');
     element.style.display = 'block';
-    // Save the PDF and then clear the canvas
-    html2pdf().from(element).save().then(function() {
-        // Clear the canvas after the PDF is saved
-      //  element.style.display = 'none';
+    
+    // Define options for html2pdf
+    const opt = {
+        margin:       0,         // Remove margins
+        filename:     'chart.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },  // Higher scale improves quality
+        jsPDF:        { unit: 'pt', format: 'a4', orientation: 'landscape' }  // Landscape mode
+    };
+    
+    // Save the PDF with the defined options
+    html2pdf().set(opt).from(element).save().then(function() {
+        // Optional: hide element after saving the PDF
+        // element.style.display = 'none';
     });
 }, 1000);
+
 
 }
 
