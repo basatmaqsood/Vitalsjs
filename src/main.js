@@ -623,23 +623,27 @@ setTimeout(function() {
     
     // Define options for html2pdf
     const opt = {
-        margin:        [200, 20, 20, 20],         // Remove margins
+        margin:       [40, 20, 20, 20],  // Add more margin at the top (40pt) to avoid cropping
         filename:     'chart.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },  // Higher scale improves quality
+        html2canvas:  {
+            scale: 2,  // Increase scale for better quality
+            useCORS: true,  // Handle cross-origin images
+        },
         jsPDF:        {
             unit: 'pt',
-            format: [595.28, 1241.89],  // A4 size in landscape
+            format: [700, 600],  // Increase width to 700pt, height to 600pt
             orientation: 'landscape'
         }
     };
-    
+
     // Save the PDF with the defined options
     html2pdf().set(opt).from(element).save().then(function() {
         // Optional: hide element after saving the PDF
         // element.style.display = 'none';
     });
 }, 1000);
+
 
 
 }
