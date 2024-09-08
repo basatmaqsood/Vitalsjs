@@ -621,19 +621,23 @@ setTimeout(function() {
     const element = document.getElementById('chart-canvas');
     element.style.display = 'block';
     
+    // Get the width and height of the SVG element
+    const svgWidth = element.clientWidth;
+    const svgHeight = element.clientHeight;
+
     // Define options for html2pdf
     const opt = {
-        margin:       [40, 20, 20, 20],  // Add more margin at the top (40pt) to avoid cropping
-        filename:     'chart.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  {
-            scale: 2,  // Increase scale for better quality
-            useCORS: true,  // Handle cross-origin images
+        margin: 0,  // Remove margins
+        filename: 'chart.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 1,  // Set the scale to 1 to avoid resizing bars
+            useCORS: true,
         },
-        jsPDF:        {
+        jsPDF: {
             unit: 'pt',
-            format: [700, 600],  // Increase width to 700pt, height to 600pt
-            orientation: 'landscape'
+            format: [svgWidth, svgHeight],  // Match the PDF size to the SVG dimensions
+            orientation: 'landscape'  // Set landscape mode
         }
     };
 
@@ -643,6 +647,7 @@ setTimeout(function() {
         // element.style.display = 'none';
     });
 }, 1000);
+
 
 
 
