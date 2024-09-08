@@ -631,7 +631,7 @@ setTimeout(function() {
         filename: 'chart.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-            scale: 1,  // Set the scale to 1 to avoid resizing bars
+            scale: 0.5,  // Set the scale to 1 to avoid resizing bars
             useCORS: true,
         },
         jsPDF: {
