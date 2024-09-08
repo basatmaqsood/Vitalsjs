@@ -351,7 +351,7 @@ function createBars(data) {
 
         // Select the SVG using the class name
         const svg = d3.select("#chart-canvas"),
-              margin = 0,
+              margin = {top: 40, right: 40, bottom: 40, left: 40},
               width = window.innerWidth - margin.left - margin.right,
               height = 700;
 
