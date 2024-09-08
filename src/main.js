@@ -3,7 +3,7 @@ document.querySelector('#startCharts').addEventListener('click', onRecord);
 /*
 const app = initializeApp(firebaseConfig); 
 const db = getFirestore(app);
-
+ 
 // Get a list of cities from your database
 async function getCities(db) {
   const citiesCol = collection(db, 'cities');  
