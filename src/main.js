@@ -622,8 +622,8 @@ setTimeout(function() {
     element.style.display = 'block';
     
     // Get the width and height of the SVG element
-    const svgWidth = element.clientWidth;
-    const svgHeight = element.clientHeight;
+    const svgWidth = 1500;//element.clientWidth;
+    const svgHeight = 1000;//element.clientHeight;
 
     // Define options for html2pdf
     const opt = {
