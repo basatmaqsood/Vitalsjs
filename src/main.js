@@ -626,20 +626,13 @@ setTimeout(function() {
     const svgHeight = element.clientHeight;
 
     // Define options for html2pdf
-    const opt = {
-        margin: 0,  // Remove margins
-        filename: 'chart.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-            scale: 1,  // Set the scale to 1 to avoid resizing bars
-            useCORS: true,
-        },
-        jsPDF: {
-            unit: 'pt',
-            format: [svgWidth, svgHeight],  // Match the PDF size to the SVG dimensions
-            orientation: 'landscape'  // Set landscape mode
-        }
-    };
+var opt = {
+  margin:       1,
+  filename:     'myfile.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 2 },
+  jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+};
 
     // Save the PDF with the defined options
     html2pdf().set(opt).from(element).save().then(function() {
