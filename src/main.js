@@ -618,7 +618,7 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
 setTimeout(function() {
-    const element = document.getElementById('chart-canvas');
+    const element = document.getElementById('chart100d');
     element.style.display = 'block';
     
     // Get the width and height of the SVG element
