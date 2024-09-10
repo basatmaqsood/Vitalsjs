@@ -622,8 +622,8 @@ setTimeout(function() {
     element.style.display = 'block';
     
     // Get the width and height of the SVG element
-    const svgWidth = 1500;//element.clientWidth;
-    const svgHeight = 1000;//element.clientHeight;
+    const svgWidth = element.clientWidth;
+    const svgHeight = element.clientHeight;
 
     // Define options for html2pdf
     const opt = {
@@ -631,7 +631,7 @@ setTimeout(function() {
         filename: 'chart.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-            scale: 0.5,  // Set the scale to 1 to avoid resizing bars
+            scale: 1,  // Set the scale to 1 to avoid resizing bars
             useCORS: true,
         },
         jsPDF: {
