@@ -618,7 +618,7 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
-setTimeout(function() {
+/*setTimeout(function() {
     const element = document.getElementById('chart100d');
     element.style.display = 'block';
     
@@ -640,7 +640,7 @@ var opt = {
         // Optional: hide element after saving the PDF
         // element.style.display = 'none';
     });
-}, 1000);
+}, 1000);*/
 
 
 
