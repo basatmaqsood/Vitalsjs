@@ -114,7 +114,22 @@ function computeFrame(soundfreq) { //console.log(soundfreq)
 
     xMeanArr.push(xMeanData);
 
-    document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${xMeanData.time.toFixed(2)}`;
+
+   let now = new Date();
+let currentDateTime = now.toLocaleString('en-GB', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false
+});
+
+console.log(currentDateTime);
+
+   
+    document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${currentDateTime}`;
     document.getElementById('solar-nuclear-photovoltaic-video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
     document.getElementById('solar-nuclear-photovoltaic-signal').innerHTML = `X: ${xMeanData.x}`;
     
