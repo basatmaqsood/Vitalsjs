@@ -638,17 +638,16 @@ document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
 var n=pwrval
 var i= xval
-var asciiarray=[
+    var asciiarray = [
         'sum_(i=1)^n i^3=((n(n+1))/2)^2',
         'sum_(i=1)^n i^2=((n(n+1))/2)^2',
         'sum_(i=1)^n i^4=((n(n+1))/2)^2',
         'sum_(i=1)^n i^5=((n(n+1))/2)^2',
         'sum_(i=1)^n i^2=((n(n+1))/2)^2'
- ]
+    ];
   var $contentDiv = $('#asciicontent');
-        // Use jQuery to append each equation
         $.each(asciiarray, function(index, equation) {
-            var p = $('<p></p>').html(`Equation ${index + 1}: 
+                    var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
             $contentDiv.append(p);
         });
 
@@ -656,7 +655,7 @@ var asciiarray=[
         MathJax.typesetPromise().then(function () {
             asciiPDF();  
         });
-}
+} 
    function asciiPDF() {
    var element = $('#asciicontent')[0]; 
         html2pdf().from(element).save().then(function () {
