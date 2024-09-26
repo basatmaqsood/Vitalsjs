@@ -674,7 +674,7 @@ var asciiarray = [
         });
 } 
    function asciiPDF() {
-   var element = $('#asciicontent')[0]; 
+   var element = $('#asciicontent'); 
         html2pdf().from(element).save().then(function () {
             // Optionally clear the content after generating the PDF
           //  $('#asciicontent').empty();
