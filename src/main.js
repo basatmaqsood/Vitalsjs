@@ -660,7 +660,7 @@ var i= xMean
    var element = $('#asciicontent')[0]; 
         html2pdf().from(element).save().then(function () {
             // Optionally clear the content after generating the PDF
-            $('#asciicontent').empty();
+          //  $('#asciicontent').empty();
         });
     }
 
