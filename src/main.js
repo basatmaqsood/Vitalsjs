@@ -637,7 +637,7 @@ function generateChartsAndDownloadPDF() {
 document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
 var n=pwrval
-var i= xval
+var i= xMean
     var asciiarray = [
         'sum_(i=1)^n i^3=((n(n+1))/2)^2',
         'sum_(i=1)^n i^2=((n(n+1))/2)^2',
