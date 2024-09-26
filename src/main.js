@@ -126,7 +126,7 @@ let currentDateTime = now.toLocaleString('en-GB', {
   hour12: false
 });
 
-console.log(currentDateTime);
+
 
    
     document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${currentDateTime}`;
