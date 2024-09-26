@@ -662,6 +662,7 @@ var asciiarray = [
 ];
 
  asciiarray = asciiarray.map(convertToLaTeX);
+ console.log(asciiarray)
   var $contentDiv = $('#asciicontent')[0];
         $.each(asciiarray, function(index, equation) {
                     var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
