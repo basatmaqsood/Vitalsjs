@@ -633,35 +633,37 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
-/*setTimeout(function() {
-    const element = document.getElementById('chart100d');
-    element.style.display = 'block';
-    
-    // Get the width and height of the SVG element
-    const svgWidth = element.clientWidth;
-    const svgHeight = element.clientHeight;
-
-    // Define options for html2pdf
-var opt = {
-  margin:       1,
-  filename:     'myfile.pdf',
-  image:        { type: 'jpeg', quality: 0.98 },
-  html2canvas:  { scale: 2 },
-  jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-};
-
-    // Save the PDF with the defined options
-    html2pdf().set(opt).from(element).save().then(function() {
-        // Optional: hide element after saving the PDF
-        // element.style.display = 'none';
-    });
-}, 1000);*/
-
-
-
-
 }
+document.querySelector('#showascii').addEventListener('click', showascii);
+function showascii(){
+var n=pwrval
+var i= xval
+var asciiarray=[
+ sum_(i=1)^n i^3=((n(n+1))/2)^2,
+ sum_(i=1)^n i^2=((n(n+1))/2)^2,
+ sum_(i=1)^n i^4=((n(n+1))/2)^2,
+ sum_(i=1)^n i^5=((n(n+1))/2)^2,
+ sum_(i=1)^n i^2=((n(n+1))/2)^2
+ ]
+  var $contentDiv = $('#asciicontent');
+        // Use jQuery to append each equation
+        $.each(asciiarray, function(index, equation) {
+            var p = $('<p></p>').html(`Equation ${index + 1}: 
+            $contentDiv.append(p);
+        });
 
+        // Render MathJax in the hidden div
+        MathJax.typesetPromise().then(function () {
+            asciiPDF();  
+        });
+}
+   function asciiPDF() {
+   var element = $('#asciicontent')[0]; 
+        html2pdf().from(element).save().then(function () {
+            // Optionally clear the content after generating the PDF
+            $('#asciicontent').empty();
+        });
+    }
 
 
 function realTimeLineChart() {
