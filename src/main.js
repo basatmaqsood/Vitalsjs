@@ -638,13 +638,30 @@ document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
 var n=pwrval
 var i= xMean
-    var asciiarray = [
-        'sum_(i=1)^n i^3=((n(n+1))/2)^2',
-        'sum_(i=1)^n i^2=((n(n+1))/2)^2',
-        'sum_(i=1)^n i^4=((n(n+1))/2)^2',
-        'sum_(i=1)^n i^5=((n(n+1))/2)^2',
-        'sum_(i=1)^n i^2=((n(n+1))/2)^2'
-    ];
+function convertToLaTeX(asciiEquation) {
+    // Convert summation notation
+    asciiEquation = asciiEquation.replace(/sum_\((.*?)\)\^(.*?) /g, '\\sum_{$1}^{$2} ');
+    
+    // Convert fractions and parentheses
+    asciiEquation = asciiEquation.replace(/\(\((.*?)\)\/(.*?)\)/g, '\\left( \\frac{$1}{$2} \\right)');
+    
+    // Convert exponents
+    asciiEquation = asciiEquation.replace(/\^(.)/g, '^{$1}');
+    
+    // Return the converted LaTeX equation
+    return asciiEquation;
+}
+
+// Test conversion
+var asciiarray = [
+    'sum_(i=1)^n i^3=((n(n+1))/2)^2',
+    'sum_(i=1)^n i^2=((n(n+1))/2)^2',
+    'sum_(i=1)^n i^4=((n(n+1))/2)^2',
+    'sum_(i=1)^n i^5=((n(n+1))/2)^2',
+    'sum_(i=1)^n i^2=((n(n+1))/2)^2'
+];
+
+ asciiarray = asciiarray.map(convertToLaTeX);
   var $contentDiv = $('#asciicontent');
         $.each(asciiarray, function(index, equation) {
                     var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
