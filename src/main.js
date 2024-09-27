@@ -663,11 +663,13 @@ var asciiarray = [
 
 var asciiarray2 = asciiarray.map(convertToLaTeX);
  console.log(asciiarray)
-  var $contentDiv = $('#asciicontent')[0];
-        $.each(asciiarray2, function(index, equation) {
-                    var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
-            $contentDiv.append(p);
-        });
+    var $contentDiv = $('#asciicontent');  // Use jQuery object, not raw DOM element
+
+    // Append each equation as a paragraph
+    $.each(asciiarray2, function(index, equation) {
+        var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
+        $contentDiv.append(p);  // Use jQuery's append method
+    });
 
         // Render MathJax in the hidden div
         MathJax.typesetPromise().then(function () {
