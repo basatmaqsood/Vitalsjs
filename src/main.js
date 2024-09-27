@@ -671,18 +671,15 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
         $contentDiv.append(p);  // Use jQuery's append method
     });
 
-        // Render MathJax in the hidden div
-        MathJax.typesetPromise().then(function () {
-            asciiPDF();  
-        });
-} 
-   function asciiPDF() {
-   var element = $('#asciicontent'); 
+      MathJax.typesetPromise().then(function () {
+        // Generate PDF after MathJax renders the LaTeX
+        var element = $('#asciicontent')[0];  // Get the DOM element from jQuery
         html2pdf().from(element).save().then(function () {
-            // Optionally clear the content after generating the PDF
-          //  $('#asciicontent').empty();
+            console.log("PDF generated");
         });
-    }
+    });
+} 
+
 
 
 function realTimeLineChart() {
