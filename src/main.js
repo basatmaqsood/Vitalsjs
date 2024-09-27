@@ -671,11 +671,22 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
         $contentDiv.append(p);  // Use jQuery's append method
     });
 
-      MathJax.typesetPromise().then(function () {
+    MathJax.typesetPromise().then(function () {
         // Generate PDF after MathJax renders the LaTeX
         var element = $('#asciicontent')[0];  // Get the DOM element from jQuery
-        html2pdf().from(element).save().then(function () {
-            console.log("PDF generated");
+
+        // Configure margins for the PDF
+        var opt = {
+            margin:       10,      // 10 units (could be in mm, inches, or px depending on configuration)
+            filename:     'equations.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Create PDF with configured margins
+        html2pdf().set(opt).from(element).save().then(function () {
+            console.log("PDF generated with margin");
         });
     });
 } 
