@@ -661,10 +661,10 @@ var asciiarray = [
     'sum_(i=1)^n i^2=((n(n+1))/2)^2'
 ];
 
- asciiarray = asciiarray.map(convertToLaTeX);
+var asciiarray2 = asciiarray.map(convertToLaTeX);
  console.log(asciiarray)
   var $contentDiv = $('#asciicontent')[0];
-        $.each(asciiarray, function(index, equation) {
+        $.each(asciiarray2, function(index, equation) {
                     var p = $('<p></p>').html(`Equation ${index + 1}: \\(${equation}\\)`);
             $contentDiv.append(p);
         });
