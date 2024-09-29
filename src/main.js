@@ -654,11 +654,11 @@ function convertToLaTeX(asciiEquation) {
 
 // Test conversion
 var asciiarray = [
-    'sum_(i=1)^n i^3=((n(n+1))/2)^2',
-    'sum_(i=1)^n i^2=((n(n+1))/2)^2',
-    'sum_(i=1)^n i^4=((n(n+1))/2)^2',
-    'sum_(i=1)^n i^5=((n(n+1))/2)^2',
-    'sum_(i=1)^n i^2=((n(n+1))/2)^2'
+    `sum_(${i}=1)^${n} ${i}^3=(((${n}(${n}+1))/2))^2`,
+    `sum_(${i}=1)^${n} ${i}^2=(((${n}(${n}+1))/2))^2`,
+    `sum_(${i}=1)^${n} ${i}^4=(((${n}(${n}+1))/2))^2`,
+    `sum_(${i}=1)^${n} ${i}^5=(((${n}(${n}+1))/2))^2`,
+    `sum_(${i}=1)^${n} ${i}^2=(((${n}(${n}+1))/2))^2`
 ];
 
 var asciiarray2 = asciiarray.map(convertToLaTeX);
