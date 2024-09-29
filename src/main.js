@@ -687,6 +687,7 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
         // Create PDF with configured margins
         html2pdf().set(opt).from(element).save().then(function () {
             console.log("PDF generated with margin");
+         $('#asciicontent').empty()
         });
     });
 } 
