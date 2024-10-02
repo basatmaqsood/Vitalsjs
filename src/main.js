@@ -314,43 +314,6 @@ function createTable() {
 // Function to create bars
 
 
-/*function createBars(cal) {
-    var chartCanvas = document.getElementById('chart-canvas');
-    var ctx = chartCanvas.getContext('2d');
-    
-    // Disable anti-aliasing
-    ctx.imageSmoothingEnabled = false;
-    ctx.webkitImageSmoothingEnabled = false;
-    ctx.mozImageSmoothingEnabled = false;
-    ctx.msImageSmoothingEnabled = false;
-    
-    // Clear previous drawing
-    ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
-    
-    var barWidth = (chartCanvas.width - (cal.length - 1) * 5) / cal.length; // Adjusted bar width with gap
-    var maxBarHeight = Math.max(...cal); // Find the maximum bar height for scaling
-    var minHeight = 20; // Minimum height for the bars
-    
-    // Loop through data and create bars
-    cal.forEach(function(value, index) {
-
-        var barHeight = Math.max((value / maxBarHeight) * chartCanvas.height, minHeight);
-        var x = index * (barWidth + 5); // Adding 5 pixels for the gap between bars
-        var y = chartCanvas.height - barHeight;
-        
-        // Set fill style based on bar height
-        if (barHeight > 50) {
-            ctx.fillStyle = 'red';
-        } else if (barHeight > 30) {
-            ctx.fillStyle = 'yellow';
-        } else {
-            ctx.fillStyle = 'green';
-        }
-         
-        // Draw bar
-        ctx.fillRect(x, y, barWidth, barHeight);
-    });
-} */
 
 
 function createBars(data) {
@@ -392,7 +355,7 @@ function createBars(data) {
 
         // Append rotated text labels (rotate from the middle of the label)
         svg.selectAll("text")
-            .data(data)
+            .data(data) 
             .enter()
             .append("text")
             .attr("x", (d, i) => x(i) + x.bandwidth() / 2)  // Center the text horizontally
@@ -426,22 +389,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     console.error('Error accessing microphone:', err);
   });
 
-/*
 
-  function createBars(cal) {
-
-    var chartContainer = document.getElementById('chart-container');
-    chartContainer.innerHTML = ''; 
-  
-    // Loop through data and create bars
-    cal.forEach(function(value) {
-        var bar = document.createElement('div');
-        bar.classList.add('bar');
-        bar.style.height = value + 'px';
-        chartContainer.appendChild(bar);
-    });
-}
-*/
 
 navigator.getBattery().then(function(battery) {
   pwrval = battery.level;
@@ -674,6 +622,7 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
     });
 
     MathJax.typesetPromise().then(function () {
+
         // Generate PDF after MathJax renders the LaTeX
         var element = $('#asciicontent')[0];  // Get the DOM element from jQuery
 
