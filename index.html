@@ -134,6 +134,36 @@
     margin-bottom: 5px;}
 mjx-line{height: 7px !important;}	
 	#asciicontent{color:#000;background:#fff}
+
+	#slideshow-container {
+    position: relative;
+    max-width: 600px; /* Adjust as needed */
+}
+
+#slideshow-container img {
+    width: 100%;
+    display: none; /* Hide all images initially */
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 18px;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
 </style>
 <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" />
@@ -433,6 +463,39 @@ mjx-line{height: 7px !important;}
             closeBtn.style.color = '#37a000';
             // Add any other styles or actions you need for each close button
         });
+
+$(document).ready(function() {
+    var totalImages = 30; // Total number of images
+    var currentIndex = 0;
+
+    // Dynamically add images to the slideshow container
+    for (var i = 1; i <= totalImages; i++) {
+        var imgNumber = i.toString().padStart(2, '0'); // Format the number (01, 02, ..., 30)
+        $('#slideshow-container').append('<img src="assets/img/Geometrical ' + imgNumber + '.png" alt="Geometrical ' + imgNumber + '">');
+    }
+
+    var images = $('#slideshow-container img');
+
+    function showImage(index) {
+        images.hide();
+        $(images[index]).show();
+    }
+
+    // Show the first image
+    showImage(currentIndex);
+
+    // Next button
+    $('.next').click(function() {
+        currentIndex = (currentIndex + 1) % totalImages; // Loop back to the first image
+        showImage(currentIndex);
+    });
+
+    // Previous button
+    $('.prev').click(function() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages; // Loop back to the last image
+        showImage(currentIndex);
+    });
+});
 
     </script>
 
