@@ -372,7 +372,38 @@ function createBars(data) {
                 return `rotate(270, ${xPosition}, ${yPosition})`;  // Rotate around the label's center
             })
             .text(d => d);
-  
+  setTimeout(function() {
+  // Your code here
+     this one works.
+can we chan
+
+html2canvas(document.querySelector("#export100"), { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
+        
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
+        
+        const imgWidth = 297; // A4 landscape width in mm
+        const pageHeight = 210; // A4 landscape height in mm
+        const imgHeight = canvas.height * imgWidth / canvas.width; // Maintain aspect ratio
+        
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        // Add the image to the PDF and handle multiple pages
+        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        pdf.save("content_optimized.pdf"); // Save the generated PDF
+    });
+}, 3000);
 }
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
