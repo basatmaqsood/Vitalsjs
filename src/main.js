@@ -372,8 +372,8 @@ function createBars(data) {
                 return `rotate(270, ${xPosition}, ${yPosition})`;  // Rotate around the label's center
             })
             .text(d => d);
-  setTimeout(function() {
-  html2canvas(document.querySelector("#chart100d"), { scale: 2 }).then(canvas => {
+  setTimeout(function() { 
+  html2canvas(document.querySelector("#chart-canvas"), { scale: 2 }).then(canvas => {
         const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
         
         const { jsPDF } = window.jspdf;
