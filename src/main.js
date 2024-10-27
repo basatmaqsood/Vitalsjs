@@ -398,6 +398,7 @@ function createBars(data) {
         }
 
         pdf.save("content_optimized.pdf"); // Save the generated PDF
+   isPrinting=false;
     });
 
 }, 3000);
