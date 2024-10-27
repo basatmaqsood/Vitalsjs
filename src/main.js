@@ -401,7 +401,7 @@ function createBars(data) {
    isPrinting=false;
     });
 
-}, 3000);
+}, 10000);
 }
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
