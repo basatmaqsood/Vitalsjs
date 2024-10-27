@@ -373,7 +373,7 @@ function createBars(data) {
             })
             .text(d => d);
   setTimeout(function() {
- 
+  
 html2canvas(document.querySelector("#chart-canvas"), { scale: 2 }).then(canvas => {
         const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
         
