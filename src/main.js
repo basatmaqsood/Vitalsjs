@@ -585,6 +585,7 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
+ setTimeOut(function(){
    html2canvas(document.querySelector("#chart100d"), { scale: 2 }).then(canvas => {
         const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
         
@@ -612,6 +613,7 @@ function generateChartsAndDownloadPDF() {
         pdf.save("content_optimized.pdf"); // Save the generated PDF
    isPrinting=false;
     });
+ },2000)
 }
 document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
