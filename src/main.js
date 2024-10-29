@@ -586,33 +586,30 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
  setTimeout(function(){
-   html2canvas(document.querySelector("#chart100d"), { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
-        
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
-        
-        const imgWidth = 297; // A4 landscape width in mm
-        const pageHeight = 210; // A4 landscape height in mm
-        const imgHeight = canvas.height * imgWidth / canvas.width; // Maintain aspect ratio
-        
-        let heightLeft = imgHeight;
-        let position = 0;
+html2canvas(document.querySelector("#chart100d"), { scale: 2 }).then(canvas => {
+    const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
+    
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
+    
+    const imgWidth = 297; // A4 landscape width in mm
+    const pageHeight = 210; // A4 landscape height in mm
+    
+    // Calculate image dimensions to fit within the A4 landscape page
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    
+    const ratio = Math.min(imgWidth / canvasWidth, pageHeight / canvasHeight); // Calculate the scaling ratio
+    
+    const imgScaledWidth = canvasWidth * ratio; // Scaled width
+    const imgScaledHeight = canvasHeight * ratio; // Scaled height
 
-        // Add the image to the PDF and handle multiple pages
-        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+    // Add the image, scaled to fit within the page
+    pdf.addImage(imgData, 'JPEG', 0, 0, imgScaledWidth, imgScaledHeight);
 
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
+    pdf.save("content_optimized_single_page.pdf"); // Save the generated PDF
+});
 
-        pdf.save("content_optimized.pdf"); // Save the generated PDF
-   isPrinting=false;
-    });
  },2000)
 }
 document.querySelector('#showascii').addEventListener('click', showascii);
