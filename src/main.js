@@ -373,33 +373,7 @@ function createBars(data) {
             })
             .text(d => d);
   setTimeout(function() { 
-  html2canvas(document.querySelector("#chart-canvas"), { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
-        
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
-        
-        const imgWidth = 297; // A4 landscape width in mm
-        const pageHeight = 210; // A4 landscape height in mm
-        const imgHeight = canvas.height * imgWidth / canvas.width; // Maintain aspect ratio
-        
-        let heightLeft = imgHeight;
-        let position = 0;
 
-        // Add the image to the PDF and handle multiple pages
-        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
-
-        pdf.save("content_optimized.pdf"); // Save the generated PDF
-   isPrinting=false;
-    });
 
 }, 10000);
 }
@@ -611,6 +585,33 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 // Function to generate charts based on the transposed array
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
+   html2canvas(document.querySelector("#chart-canvas"), { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
+        
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
+        
+        const imgWidth = 297; // A4 landscape width in mm
+        const pageHeight = 210; // A4 landscape height in mm
+        const imgHeight = canvas.height * imgWidth / canvas.width; // Maintain aspect ratio
+        
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        // Add the image to the PDF and handle multiple pages
+        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        pdf.save("content_optimized.pdf"); // Save the generated PDF
+   isPrinting=false;
+    });
 }
 document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
