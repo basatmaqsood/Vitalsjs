@@ -586,11 +586,11 @@ document.querySelector('#export100').addEventListener('click', generateChartsAnd
 function generateChartsAndDownloadPDF() {
   isPrinting = true;
  setTimeout(function(){
-html2canvas(document.querySelector("#chart100d"), { scale: 2 }).then(canvas => {
+html2canvas(document.querySelector("#chart100d"), { scale: 3 }).then(canvas => {
     const imgData = canvas.toDataURL('image/jpeg', 0.5); // Convert canvas to JPEG with 50% quality
     
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('l', 'mm', 'a4', true); // 'l' for landscape, 'a4' size, 'true' for compression
+    const pdf = new jsPDF('l', 'mm', 'a4', false); // 'l' for landscape, 'a4' size, 'true' for compression
     
     const imgWidth = 297; // A4 landscape width in mm
     const pageHeight = 210; // A4 landscape height in mm
