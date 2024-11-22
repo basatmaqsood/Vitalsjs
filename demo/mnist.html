@@ -223,9 +223,9 @@ $(window).load(function() {
 var start_fun = function() {
   if(loaded[0] && loaded[20]) { 
     console.log('starting!'); 
-    setInterval(load_and_step, 0); // lets go!
+    setInterval(load_and_step, 2000); // lets go!
   }
-  else { setTimeout(start_fun, 200); } // keep checking
+  else { setTimeout(start_fun, 2000); } // keep checking
 }
 
 var load_data_batch = function(batch_num) {
