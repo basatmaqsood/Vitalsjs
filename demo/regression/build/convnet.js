@@ -1,3 +1,4 @@
+
 var convnetjs = convnetjs || { REVISION: 'ALPHA' };
 (function(global) {
   "use strict";
