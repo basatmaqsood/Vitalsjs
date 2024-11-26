@@ -129,7 +129,7 @@ $(function() {
       // start the regression!
       setInterval(tick, 1);
     }
-    image.src = "imgs/cat.jpg";
+    image.src = "../assets/img/regression.png";
 
     // init put text into textarea
     $("#layerdef").val(t);
