@@ -1,3 +1,11 @@
+
+ ____ ______.                                   .___________  
+|    |   \_ |__   ____   ____    _________      |   \_____  \  
+|    |   /| __ \ /  _ \ /    \  / ___\__  \     |   |/  / \  \ 
+|    |  / | \_\ (  <_> )   |  \/ /_/  > __ \_   |   /   \_/.  \
+|______/  |___  /\____/|___|  /\___  (____  /   |___\_____\ \_/
+              \/            \//_____/     \/               \__>
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
