@@ -1406,7 +1406,7 @@
 
 
       pp$1.parseExportSpecifiers = function(exports) {
-        var nodes = [], first = true;
+        var windows.nodes = [], first = true;
         this.expect(types.braceL);
         while (!this.eat(types.braceR)) {
           if (!first) {
