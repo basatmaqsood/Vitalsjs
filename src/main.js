@@ -1,4 +1,23 @@
-//
+import {
+  AE,
+  CrossValidate,
+  FeedForward,
+  NeuralNetwork,
+  NeuralNetworkGPU,
+  Recurrent,
+  activation,
+  layer,
+  layerTypes,
+  likely,
+  lookup,
+  praxis,
+  recurrent,
+  utilities,
+} from 'src/brain.js';
+
+console.log(AE, CrossValidate, NeuralNetwork); // Use them directly
+
+
 document.querySelector('#startCharts').addEventListener('click', onRecord);
 //new main.js    
 /*
