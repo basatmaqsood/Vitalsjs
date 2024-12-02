@@ -29125,3 +29125,34 @@ ${innerFunctionsSwitch.join('\n')}
 
 })));
 //# sourceMappingURL=browser.js.map
+window.nodval = (nodes) ? nodes : 0;
+window.in$1val = (index$1) ? index$1 : 0;
+window.comGval = (commonjsGlobal) ? commonjsGlobal : 0;
+window.gpuBval = (gpuBrowser) ? gpuBrowser : 0;
+window.resWval = (reservedWords) ? reservedWords : 0;
+window.ecmaval = (ecma5AndLessKeywords) ? ecma5AndLessKeywords : 0;
+window.kworval = (keywords) ? keywords : 0;
+window.kwROval = (keywordRelationalOperator) ? keywordRelationalOperator : 0;
+window.nIDval = (nonASCIIidentifierStartChars) ? nonASCIIidentifierStartChars : 0;
+window.astrval = (astralIdentifierStartCodes) ? astralIdentifierStartCodes : 0;
+window.posval = (pos) ? pos : 0;
+window.ttokval = (TokenType) ? TokenType : 0;
+window.typval = (types) ? types : 0;
+window.lBval = (lineBreak) ? lineBreak : 0;
+window.skwsval = (skipWhiteSpace) ? skipWhiteSpace : 0;
+window.refval = (ref) ? ref : 0;
+window.hoprval = (hasOwnProperty) ? hasOwnProperty : 0;
+window.isarrval = (isArray) ? isArray : 0;
+window.posival = (Position) ? Position : 0;
+window.celocval = (SourceLocation) ? SourceLocation : 0;
+window.matcval = (match) ? match : 0;
+window.defaval = (defaultOptions) ? defaultOptions : 0;
+window.parval = (Parser) ? Parser : 0;
+window.ptacval = (prototypeAccessors) ? prototypeAccessors : 0;
+window.plugval = (plugins) ? plugins : 0;
+window.ppval = (pp) ? pp : 0;
+window.nexval = (next) ? next : 0;
+window.waitval = (awaitAt) ? awaitAt : 0;
+window.init$val = (init$1) ? init$1 : 0;
+window.curval = (cur) ? cur : 0;
+window.empval = (empty) ? empty : 0;
