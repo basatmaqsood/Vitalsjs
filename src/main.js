@@ -1,5 +1,34 @@
-
-console.log(window.nodval); // Use them directly
+console.log(window.nodval);
+console.log(window.in$1val);
+console.log(window.comGval);
+console.log(window.gpuBval);
+console.log(window.resWval);
+console.log(window.ecmaval);
+console.log(window.kworval);
+console.log(window.kwROval);
+console.log(window.nIDval);
+console.log(window.astrval);
+console.log(window.posval);
+console.log(window.ttokval);
+console.log(window.typval);
+console.log(window.lBval);
+console.log(window.skwsval);
+console.log(window.refval);
+console.log(window.hoprval);
+console.log(window.isarrval);
+console.log(window.posival);
+console.log(window.celocval);
+console.log(window.matcval);
+console.log(window.defaval);
+console.log(window.parval);
+console.log(window.ptacval);
+console.log(window.plugval);
+console.log(window.ppval);
+console.log(window.nexval);
+console.log(window.waitval);
+console.log(window.init$val);
+console.log(window.curval);
+console.log(window.empval);
 
 
 document.querySelector('#startCharts').addEventListener('click', onRecord);
