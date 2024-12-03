@@ -1,156 +1,156 @@
 const encoder = new TextEncoder();
 
-let uint8Array = encoder.encode(window.nodval);
+let uint8Array = encoder.encode(window.nodval.length);
 let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var nodval = binaryArray.join(' ');
 console.log('Binary String:', nodval);
 
-uint8Array = encoder.encode(window.in$1val);
+uint8Array = encoder.encode(window.in$1val.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var in$1val = binaryArray.join(' ');
 console.log('Binary String:', in$1val);
 
-uint8Array = encoder.encode(window.comGval);
+uint8Array = encoder.encode(window.comGval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var comGval = binaryArray.join(' ');
 console.log('Binary String:', comGval);
 
-uint8Array = encoder.encode(window.gpuBval);
+uint8Array = encoder.encode(window.gpuBval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var gpuBval = binaryArray.join(' ');
 console.log('Binary String:', gpuBval);
 
-uint8Array = encoder.encode(window.resWval);
+uint8Array = encoder.encode(window.resWval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var resWval = binaryArray.join(' ');
 console.log('Binary String:', resWval);
 
-uint8Array = encoder.encode(window.ecmaval);
+uint8Array = encoder.encode(window.ecmaval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var ecmaval = binaryArray.join(' ');
 console.log('Binary String:', ecmaval);
 
-uint8Array = encoder.encode(window.kworval);
+uint8Array = encoder.encode(window.kworval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var kworval = binaryArray.join(' ');
 console.log('Binary String:', kworval);
 
-uint8Array = encoder.encode(window.kwROval);
+uint8Array = encoder.encode(window.kwROval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var kwROval = binaryArray.join(' ');
 console.log('Binary String:', kwROval);
 
-uint8Array = encoder.encode(window.nIDval);
+uint8Array = encoder.encode(window.nIDval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var nIDval = binaryArray.join(' ');
 console.log('Binary String:', nIDval);
 
-uint8Array = encoder.encode(window.astrval);
+uint8Array = encoder.encode(window.astrval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var astrval = binaryArray.join(' ');
 console.log('Binary String:', astrval);
 
-uint8Array = encoder.encode(window.posval);
+uint8Array = encoder.encode(window.posval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var posval = binaryArray.join(' ');
 console.log('Binary String:', posval);
 
-uint8Array = encoder.encode(window.ttokval);
+uint8Array = encoder.encode(window.ttokval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var ttokval = binaryArray.join(' ');
 console.log('Binary String:', ttokval);
 
-uint8Array = encoder.encode(window.typval);
+uint8Array = encoder.encode(window.typval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var typval = binaryArray.join(' ');
 console.log('Binary String:', typval);
 
-uint8Array = encoder.encode(window.lBval);
+uint8Array = encoder.encode(window.lBval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var lBval = binaryArray.join(' ');
 console.log('Binary String:', lBval);
 
-uint8Array = encoder.encode(window.skwsval);
+uint8Array = encoder.encode(window.skwsval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var skwsval = binaryArray.join(' ');
 console.log('Binary String:', skwsval);
 
-uint8Array = encoder.encode(window.refval);
+uint8Array = encoder.encode(window.refval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var refval = binaryArray.join(' ');
 console.log('Binary String:', refval);
 
-uint8Array = encoder.encode(window.hoprval);
+uint8Array = encoder.encode(window.hoprval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var hoprval = binaryArray.join(' ');
 console.log('Binary String:', hoprval);
 
-uint8Array = encoder.encode(window.isarrval);
+uint8Array = encoder.encode(window.isarrval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var isarrval = binaryArray.join(' ');
 console.log('Binary String:', isarrval);
 
-uint8Array = encoder.encode(window.posival);
+uint8Array = encoder.encode(window.posival.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var posival = binaryArray.join(' ');
 console.log('Binary String:', posival);
 
-uint8Array = encoder.encode(window.celocval);
+uint8Array = encoder.encode(window.celocval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var celocval = binaryArray.join(' ');
 console.log('Binary String:', celocval);
 
-uint8Array = encoder.encode(window.matcval);
+uint8Array = encoder.encode(window.matcval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var matcval = binaryArray.join(' ');
 console.log('Binary String:', matcval);
 
-uint8Array = encoder.encode(window.defaval);
+uint8Array = encoder.encode(window.defaval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var defaval = binaryArray.join(' ');
 console.log('Binary String:', defaval);
 
-uint8Array = encoder.encode(window.parval);
+uint8Array = encoder.encode(window.parval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var parval = binaryArray.join(' ');
 console.log('Binary String:', parval);
 
-uint8Array = encoder.encode(window.ptacval);
+uint8Array = encoder.encode(window.ptacval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var ptacval = binaryArray.join(' ');
 console.log('Binary String:', ptacval);
 
-uint8Array = encoder.encode(window.plugval);
+uint8Array = encoder.encode(window.plugval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var plugval = binaryArray.join(' ');
 console.log('Binary String:', plugval);
 
-uint8Array = encoder.encode(window.ppval);
+uint8Array = encoder.encode(window.ppval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var ppval = binaryArray.join(' ');
 console.log('Binary String:', ppval);
 
-uint8Array = encoder.encode(window.nexval);
+uint8Array = encoder.encode(window.nexval).length;
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var nexval = binaryArray.join(' ');
 console.log('Binary String:', nexval);
 
-uint8Array = encoder.encode(window.waitval);
+uint8Array = encoder.encode(window.waitval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var waitval = binaryArray.join(' ');
 console.log('Binary String:', waitval);
 
-uint8Array = encoder.encode(window.init$val);
+uint8Array = encoder.encode(window.init$val.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var init$val = binaryArray.join(' ');
 console.log('Binary String:', init$val);
 
-uint8Array = encoder.encode(window.curval);
+uint8Array = encoder.encode(window.curval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var curval = binaryArray.join(' ');
 console.log('Binary String:', curval);
 
-uint8Array = encoder.encode(window.empval);
+uint8Array = encoder.encode(window.empval.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var empval = binaryArray.join(' ');
 console.log('Binary String:', empval);
