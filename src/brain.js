@@ -29158,6 +29158,7 @@ ${innerFunctionsSwitch.join('\n')}
 
 })));
 //# sourceMappingURL=browser.js.map
+console.log(nodes)
 window.nodval = nodes.length;
 window.in$1val = index$1.length;
 window.comGval = commonjsGlobal.length;
