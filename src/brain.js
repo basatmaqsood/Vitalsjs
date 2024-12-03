@@ -1,5 +1,5 @@
 var nodes;
-var index$1;
+var index$1; 
 var commonjsGlobal;
 var gpuBrowser;
 var reservedWords;
