@@ -1,4 +1,4 @@
-const encoder = new TextEncoder();
+const encoder = new TextEncoder(); 
 
 let uint8Array = encoder.encode(window.nodval.length);
 let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
