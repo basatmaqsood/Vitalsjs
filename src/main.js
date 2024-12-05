@@ -4,7 +4,7 @@ let uint8Array = encoder.encode(window.nodval.length);
 let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var nodval = binaryArray.join(' ');
 console.log('Binary String:', nodval);
-
+ 
 uint8Array = encoder.encode(window.in$1val.length);
 binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
 var in$1val = binaryArray.join(' ');
