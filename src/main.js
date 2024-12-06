@@ -1,11 +1,8 @@
 const encoder = new TextEncoder();
 
 function convertToBinary(variable, name) {
-    let valueToEncode = variable && typeof variable === "string" ? variable : "";
-    if (valueToEncode.length === 0) {
-        valueToEncode = new Array(64).fill(0).join(''); // 64 bytes if empty
-    }
-    const uint8Array = encoder.encode(valueToEncode); // Encode the string
+    let valueToEncode = variable && typeof variable === "string" ? variable : ""; // Default to empty string
+    const uint8Array = encoder.encode(valueToEncode); // Encode the original value
     const binaryString = Array.from(uint8Array)
         .map(byte => byte.toString(2).padStart(8, '0'))
         .join(' '); // Convert to binary
@@ -45,37 +42,6 @@ var init$val = convertToBinary(window.init$val, 'init$val');
 var curval = convertToBinary(window.curval, 'curval');
 var empval = convertToBinary(window.empval, 'empval');
 
-console.log(nodval);
-console.log(in$1val);
-console.log(comGval);
-console.log(gpuBval);
-console.log(resWval);
-console.log(ecmaval);
-console.log(kworval);
-console.log(kwROval);
-console.log(nIDval);
-console.log(astrval);
-console.log(posval);
-console.log(ttokval);
-console.log(typval);
-console.log(lBval);
-console.log(skwsval);
-console.log(refval);
-console.log(hoprval);
-console.log(isarrval);
-console.log(posival);
-console.log(celocval);
-console.log(matcval);
-console.log(defaval);
-console.log(parval);
-console.log(ptacval);
-console.log(plugval);
-console.log(ppval);
-console.log(nexval);
-console.log(waitval);
-console.log(init$val);
-console.log(curval);
-console.log(empval);
 
 
 document.querySelector('#startCharts').addEventListener('click', onRecord);
