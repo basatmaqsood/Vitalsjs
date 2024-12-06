@@ -791,7 +791,7 @@ function convertToLaTeX(asciiEquation) {
 }
 
 // Test conversion
-var asciiarray = [
+var asciiarray = [ 
     `sum_(${i}=${b})^${n} ${i}^${a}=(((${n}(${n}+1))/2))^2`,
     `sum_(${i}=1)^${n} ${i}^${b}=(((${n}(${n}+1))/2))^2`,
     `sum_(${i}=1)^${n} ${i}^${b}=(((${n}(${n}+1))/${b}))^2`,
