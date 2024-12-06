@@ -1,11 +1,9 @@
 const encoder = new TextEncoder();
 
-function convertToBinary(variable, name) {
-    let valueToEncode = variable && typeof variable === "string" ? variable : ""; // Default to empty string
-    const uint8Array = encoder.encode(valueToEncode); // Encode the original value
-    const binaryString = Array.from(uint8Array)
-        .map(byte => byte.toString(2).padStart(8, '0'))
-        .join(' '); // Convert to binary..
+function convertToBinary(value, name) {
+    let uint8Array = encoder.encode(value || ""); // Encode the value, defaulting to an empty string if undefined
+    let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
+    let binaryString = binaryArray.join(' ');
     console.log(`${name}:`, binaryString);
     return binaryString;
 }
