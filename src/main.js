@@ -1,35 +1,27 @@
 const encoder = new TextEncoder();
 
-function convertToBinary(value, name) {
-    let stringValue;
-
-    // Convert the value to a safe string representation
+// Function to safely calculate the length of a variable
+function getVariableLength(value) {
     if (value === null || value === undefined) {
-        stringValue = ""; // Default to an empty string for null or undefined
+        return 0; // No length for null or undefined
+    } else if (typeof value === "string" || Array.isArray(value)) {
+        return value.length; // Works for strings and arrays
     } else if (typeof value === "object") {
-        try {
-            stringValue = JSON.stringify(value); // Convert objects/arrays to JSON string
-        } catch {
-            stringValue = "[Object]"; // Fallback for unstringifiable objects
-        }
+        return Object.keys(value).length; // Count keys in objects
     } else {
-        stringValue = String(value); // Convert primitives (numbers, booleans, etc.)
+        return String(value).length; // Convert other types (e.g., numbers) to string and get length
     }
-
-    console.log(`${name} length:`, stringValue.length); // Log the string length
-
-    // Perform encoding only if there's something to encode
-    if (stringValue.length === 0) {
-        return ""; // Return empty if there's no meaningful content
-    }
-
-    let uint8Array = encoder.encode(stringValue); // Encode the string
-    let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
-    let binaryString = binaryArray.join(' ');
-    console.log(`${name}:`, binaryString);
-    return binaryString;
 }
 
+// Function to convert a length into binary
+function convertToBinary(value, name) {
+    let length = getVariableLength(value); // Get the variable's length safely
+    console.log(`${name} length:`, length); // Log the length
+
+    let binaryArray = length.toString(2).padStart(8, '0'); // Convert length to binary
+    console.log(`${name} binary length:`, binaryArray);
+    return binaryArray;
+}
 
 var nodval = convertToBinary(window.nodval, 'nodval');
 var in$1val = convertToBinary(window.in$1val, 'in$1val');
