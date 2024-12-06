@@ -1,20 +1,35 @@
 const encoder = new TextEncoder();
 
-function convertToBinary(value, name) {
-    // Convert value to string safely, or default to an empty string
-    let stringValue = (value !== null && value !== undefined) ? String(value) : "";
-    console.log(`${name} length:`, stringValue.length); // Log the length of the string
+function encodeToBinary(value, name) {
+    let stringValue;
 
-    if (stringValue.length === 0) {
-        return ""; // Return empty if there's nothing to encode
+    // Convert the value to a safe string representation
+    if (value === null || value === undefined) {
+        stringValue = ""; // Default to an empty string for null or undefined
+    } else if (typeof value === "object") {
+        try {
+            stringValue = JSON.stringify(value); // Convert objects/arrays to JSON string
+        } catch {
+            stringValue = "[Object]"; // Fallback for unstringifiable objects
+        }
+    } else {
+        stringValue = String(value); // Convert primitives (numbers, booleans, etc.)
     }
 
-    let uint8Array = encoder.encode(stringValue); // Encode the string value
+    console.log(`${name} length:`, stringValue.length); // Log the string length
+
+    // Perform encoding only if there's something to encode
+    if (stringValue.length === 0) {
+        return ""; // Return empty if there's no meaningful content
+    }
+
+    let uint8Array = encoder.encode(stringValue); // Encode the string
     let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
     let binaryString = binaryArray.join(' ');
     console.log(`${name}:`, binaryString);
     return binaryString;
 }
+
 
 var nodval = convertToBinary(window.nodval, 'nodval');
 var in$1val = convertToBinary(window.in$1val, 'in$1val');
