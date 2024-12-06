@@ -1,6 +1,6 @@
 const encoder = new TextEncoder();
 
-function encodeToBinary(value, name) {
+function convertToBinary(value, name) {
     // Convert value to string safely, or default to an empty string
     let stringValue = (value !== null && value !== undefined) ? String(value) : "";
     console.log(`${name} length:`, stringValue.length); // Log the length of the string
