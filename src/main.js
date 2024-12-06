@@ -1,6 +1,6 @@
 const encoder = new TextEncoder();
 
-function encodeToBinary(value, name) {
+function convertToBinary(value, name) {
     let stringValue;
 
     // Convert the value to a safe string representation
