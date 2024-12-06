@@ -16,7 +16,7 @@ function getVariableLength(value) {
 // Function to convert a length into binary
 function convertToBinary(value, name) {
     let length = getVariableLength(value); // Get the variable's length safely
-    console.log(`${name} length:`, length); // Log the length
+    //console.log(`${name} length:`, length); // Log the length
 
     let binaryArray = length.toString(2).padStart(8, '0'); // Convert length to binary
     console.log(`${name} binary length:`, binaryArray);
@@ -689,6 +689,39 @@ function convertToLaTeX(asciiEquation) {
     // Return the converted LaTeX equation
     return asciiEquation;
 }
+
+nodval;
+in$1val;
+comGval;
+gpuBval;
+resWval;
+ecmaval;
+kworval;
+kwROval;
+nIDval;
+astrval;
+posval;
+ttokval;
+typval;
+lBval;
+skwsval;
+refval;
+hoprval;
+isarrval;
+posival;
+celocval;
+matcval;
+defaval;
+parval;
+ptacval;
+plugval;
+ppval;
+nexval;
+waitval;
+init$val;
+curval;
+empval;
+
 
 // Test conversion
 var asciiarray = [ 
