@@ -5,7 +5,7 @@ function convertToBinary(variable, name) {
     const uint8Array = encoder.encode(valueToEncode); // Encode the original value
     const binaryString = Array.from(uint8Array)
         .map(byte => byte.toString(2).padStart(8, '0'))
-        .join(' '); // Convert to binary
+        .join(' '); // Convert to binary..
     console.log(`${name}:`, binaryString);
     return binaryString;
 }
