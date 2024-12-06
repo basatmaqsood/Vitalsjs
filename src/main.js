@@ -1,7 +1,15 @@
 const encoder = new TextEncoder();
 
-function convertToBinary(value, name) {
-    let uint8Array = encoder.encode(value || ""); // Encode the value, defaulting to an empty string if undefined
+function encodeToBinary(value, name) {
+    // Convert value to string safely, or default to an empty string
+    let stringValue = (value !== null && value !== undefined) ? String(value) : "";
+    console.log(`${name} length:`, stringValue.length); // Log the length of the string
+
+    if (stringValue.length === 0) {
+        return ""; // Return empty if there's nothing to encode
+    }
+
+    let uint8Array = encoder.encode(stringValue); // Encode the string value
     let binaryArray = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0'));
     let binaryString = binaryArray.join(' ');
     console.log(`${name}:`, binaryString);
