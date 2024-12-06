@@ -1,159 +1,81 @@
 const encoder = new TextEncoder();
 
-let valueToEncode = window.nodval.length === 0 ? new Array(64).fill(0).join('') : window.nodval;
-let uint8Array = encoder.encode(valueToEncode);
-window.nodval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('nodval:', window.nodval);
+function convertToBinary(variable, name) {
+    let valueToEncode = variable && typeof variable === "string" ? variable : "";
+    if (valueToEncode.length === 0) {
+        valueToEncode = new Array(64).fill(0).join(''); // 64 bytes if empty
+    }
+    const uint8Array = encoder.encode(valueToEncode); // Encode the string
+    const binaryString = Array.from(uint8Array)
+        .map(byte => byte.toString(2).padStart(8, '0'))
+        .join(' '); // Convert to binary
+    console.log(`${name}:`, binaryString);
+    return binaryString;
+}
 
-valueToEncode = window.in$1val.length === 0 ? new Array(64).fill(0).join('') : window.in$1val;
-uint8Array = encoder.encode(valueToEncode);
-window.in$1val = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('in$1val:', window.in$1val);
+var nodval = convertToBinary(window.nodval, 'nodval');
+var in$1val = convertToBinary(window.in$1val, 'in$1val');
+var comGval = convertToBinary(window.comGval, 'comGval');
+var gpuBval = convertToBinary(window.gpuBval, 'gpuBval');
+var resWval = convertToBinary(window.resWval, 'resWval');
+var ecmaval = convertToBinary(window.ecmaval, 'ecmaval');
+var kworval = convertToBinary(window.kworval, 'kworval');
+var kwROval = convertToBinary(window.kwROval, 'kwROval');
+var nIDval = convertToBinary(window.nIDval, 'nIDval');
+var astrval = convertToBinary(window.astrval, 'astrval');
+var posval = convertToBinary(window.posval, 'posval');
+var ttokval = convertToBinary(window.ttokval, 'ttokval');
+var typval = convertToBinary(window.typval, 'typval');
+var lBval = convertToBinary(window.lBval, 'lBval');
+var skwsval = convertToBinary(window.skwsval, 'skwsval');
+var refval = convertToBinary(window.refval, 'refval');
+var hoprval = convertToBinary(window.hoprval, 'hoprval');
+var isarrval = convertToBinary(window.isarrval, 'isarrval');
+var posival = convertToBinary(window.posival, 'posival');
+var celocval = convertToBinary(window.celocval, 'celocval');
+var matcval = convertToBinary(window.matcval, 'matcval');
+var defaval = convertToBinary(window.defaval, 'defaval');
+var parval = convertToBinary(window.parval, 'parval');
+var ptacval = convertToBinary(window.ptacval, 'ptacval');
+var plugval = convertToBinary(window.plugval, 'plugval');
+var ppval = convertToBinary(window.ppval, 'ppval');
+var nexval = convertToBinary(window.nexval, 'nexval');
+var waitval = convertToBinary(window.waitval, 'waitval');
+var init$val = convertToBinary(window.init$val, 'init$val');
+var curval = convertToBinary(window.curval, 'curval');
+var empval = convertToBinary(window.empval, 'empval');
 
-valueToEncode = window.comGval.length === 0 ? new Array(64).fill(0).join('') : window.comGval;
-uint8Array = encoder.encode(valueToEncode);
-window.comGval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('comGval:', window.comGval);
-
-valueToEncode = window.gpuBval.length === 0 ? new Array(64).fill(0).join('') : window.gpuBval;
-uint8Array = encoder.encode(valueToEncode);
-window.gpuBval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('gpuBval:', window.gpuBval);
-
-valueToEncode = window.resWval.length === 0 ? new Array(64).fill(0).join('') : window.resWval;
-uint8Array = encoder.encode(valueToEncode);
-window.resWval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('resWval:', window.resWval);
-
-valueToEncode = window.ecmaval.length === 0 ? new Array(64).fill(0).join('') : window.ecmaval;
-uint8Array = encoder.encode(valueToEncode);
-window.ecmaval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('ecmaval:', window.ecmaval);
-
-valueToEncode = window.kworval.length === 0 ? new Array(64).fill(0).join('') : window.kworval;
-uint8Array = encoder.encode(valueToEncode);
-window.kworval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('kworval:', window.kworval);
-
-valueToEncode = window.kwROval.length === 0 ? new Array(64).fill(0).join('') : window.kwROval;
-uint8Array = encoder.encode(valueToEncode);
-window.kwROval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('kwROval:', window.kwROval);
-
-valueToEncode = window.nIDval.length === 0 ? new Array(64).fill(0).join('') : window.nIDval;
-uint8Array = encoder.encode(valueToEncode);
-window.nIDval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('nIDval:', window.nIDval);
-
-valueToEncode = window.astrval.length === 0 ? new Array(64).fill(0).join('') : window.astrval;
-uint8Array = encoder.encode(valueToEncode);
-window.astrval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('astrval:', window.astrval);
-
-valueToEncode = window.posval.length === 0 ? new Array(64).fill(0).join('') : window.posval;
-uint8Array = encoder.encode(valueToEncode);
-window.posval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('posval:', window.posval);
-
-valueToEncode = window.ttokval.length === 0 ? new Array(64).fill(0).join('') : window.ttokval;
-uint8Array = encoder.encode(valueToEncode);
-window.ttokval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('ttokval:', window.ttokval);
-
-valueToEncode = window.typval.length === 0 ? new Array(64).fill(0).join('') : window.typval;
-uint8Array = encoder.encode(valueToEncode);
-window.typval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('typval:', window.typval);
-
-valueToEncode = window.lBval.length === 0 ? new Array(64).fill(0).join('') : window.lBval;
-uint8Array = encoder.encode(valueToEncode);
-window.lBval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('lBval:', window.lBval);
-
-valueToEncode = window.skwsval.length === 0 ? new Array(64).fill(0).join('') : window.skwsval;
-uint8Array = encoder.encode(valueToEncode);
-window.skwsval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('skwsval:', window.skwsval);
-
-valueToEncode = window.refval.length === 0 ? new Array(64).fill(0).join('') : window.refval;
-uint8Array = encoder.encode(valueToEncode);
-window.refval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('refval:', window.refval);
-
-valueToEncode = window.hoprval.length === 0 ? new Array(64).fill(0).join('') : window.hoprval;
-uint8Array = encoder.encode(valueToEncode);
-window.hoprval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('hoprval:', window.hoprval);
-
-valueToEncode = window.isarrval.length === 0 ? new Array(64).fill(0).join('') : window.isarrval;
-uint8Array = encoder.encode(valueToEncode);
-window.isarrval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('isarrval:', window.isarrval);
-
-valueToEncode = window.posival.length === 0 ? new Array(64).fill(0).join('') : window.posival;
-uint8Array = encoder.encode(valueToEncode);
-window.posival = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('posival:', window.posival);
-
-valueToEncode = window.celocval.length === 0 ? new Array(64).fill(0).join('') : window.celocval;
-uint8Array = encoder.encode(valueToEncode);
-window.celocval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('celocval:', window.celocval);
-
-valueToEncode = window.matcval.length === 0 ? new Array(64).fill(0).join('') : window.matcval;
-uint8Array = encoder.encode(valueToEncode);
-window.matcval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('matcval:', window.matcval);
-
-valueToEncode = window.defaval.length === 0 ? new Array(64).fill(0).join('') : window.defaval;
-uint8Array = encoder.encode(valueToEncode);
-window.defaval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('defaval:', window.defaval);
-
-valueToEncode = window.parval.length === 0 ? new Array(64).fill(0).join('') : window.parval;
-uint8Array = encoder.encode(valueToEncode);
-window.parval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('parval:', window.parval);
-
-valueToEncode = window.ptacval.length === 0 ? new Array(64).fill(0).join('') : window.ptacval;
-uint8Array = encoder.encode(valueToEncode);
-window.ptacval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('ptacval:', window.ptacval);
-
-valueToEncode = window.plugval.length === 0 ? new Array(64).fill(0).join('') : window.plugval;
-uint8Array = encoder.encode(valueToEncode);
-window.plugval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('plugval:', window.plugval);
-
-valueToEncode = window.ppval.length === 0 ? new Array(64).fill(0).join('') : window.ppval;
-uint8Array = encoder.encode(valueToEncode);
-window.ppval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('ppval:', window.ppval);
-
-valueToEncode = window.nexval.length === 0 ? new Array(64).fill(0).join('') : window.nexval;
-uint8Array = encoder.encode(valueToEncode);
-window.nexval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('nexval:', window.nexval);
-
-valueToEncode = window.waitval.length === 0 ? new Array(64).fill(0).join('') : window.waitval;
-uint8Array = encoder.encode(valueToEncode);
-window.waitval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('waitval:', window.waitval);
-
-valueToEncode = window.init$val.length === 0 ? new Array(64).fill(0).join('') : window.init$val;
-uint8Array = encoder.encode(valueToEncode);
-window.init$val = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('init$val:', window.init$val);
-
-valueToEncode = window.curval.length === 0 ? new Array(64).fill(0).join('') : window.curval;
-uint8Array = encoder.encode(valueToEncode);
-window.curval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('curval:', window.curval);
-
-valueToEncode = window.empval.length === 0 ? new Array(64).fill(0).join('') : window.empval;
-uint8Array = encoder.encode(valueToEncode);
-window.empval = Array.from(uint8Array).map(byte => byte.toString(2).padStart(8, '0')).join(' ');
-console.log('empval:', window.empval);
+console.log(nodval);
+console.log(in$1val);
+console.log(comGval);
+console.log(gpuBval);
+console.log(resWval);
+console.log(ecmaval);
+console.log(kworval);
+console.log(kwROval);
+console.log(nIDval);
+console.log(astrval);
+console.log(posval);
+console.log(ttokval);
+console.log(typval);
+console.log(lBval);
+console.log(skwsval);
+console.log(refval);
+console.log(hoprval);
+console.log(isarrval);
+console.log(posival);
+console.log(celocval);
+console.log(matcval);
+console.log(defaval);
+console.log(parval);
+console.log(ptacval);
+console.log(plugval);
+console.log(ppval);
+console.log(nexval);
+console.log(waitval);
+console.log(init$val);
+console.log(curval);
+console.log(empval);
 
 
 document.querySelector('#startCharts').addEventListener('click', onRecord);
