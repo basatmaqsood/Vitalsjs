@@ -830,7 +830,7 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
+ 
         // Create PDF with configured margins
         html2pdf().set(opt).from(element).save().then(function () {
             console.log("PDF generated with margin");
@@ -838,6 +838,10 @@ var asciiarray2 = asciiarray.map(convertToLaTeX);
         });
     });
 } 
+
+
+
+
 
 
 
