@@ -11,7 +11,7 @@ function getVariableLength(value) {
     } else {
         return String(value).length; // Convert other types (e.g., numbers) to string and get length
     }
-}
+} 
 
 // Function to convert a length into binary
 function convertToBinary(value, name) {
