@@ -492,9 +492,129 @@ mjx-line{height: 7px !important;}
         <p>Alb = Albumin (<span class="min_d">3.5</span> + <span class="max_d">5.5</span> /2 g/dL) = <span class="answer_d">4.5</span></p>
     </td>
 </tr>
+<tr>
+    <td>Calcium - Globulin Correction</td>
+    <td>CaGlob_c</td>
+    <td>
+        <p><b>Ca + (0.16 * (glob - 3.5))</b></p>
+        <p>CaGlob_c = Calcium - Globulin Correction (<span class="min_d">8.5</span> + <span class="max_d">10.5</span> /2 mg/dL) = <span class="answer_d">9.5</span></p>
+        <p>Ca++ = Calcium (<span class="min_d">8.5</span> + <span class="max_d">10.5</span> /2 mg/dL) = <span class="answer_d">9.5</span></p>
+        <p>Glob = Globulin (<span class="min_d">2</span> + <span class="max_d">3.5</span> /2 g/dL) = <span class="answer_d">2.75</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Calcium - pH Correction</td>
+    <td>CapH_c</td>
+    <td>
+        <p><b>Ca + (0.12 * ((pH - 7.4) / 0.1))</b></p>
+        <p>CapH_c = Calcium - pH Correction (<span class="min_d">8.5</span> + <span class="max_d">10.5</span> /2 - <span class="min_d">7.36</span> + <span class="max_d">7.44</span> /2 mg/dL) = <span class="answer_d">9.5</span></p>
+        <p>Ca++ = Calcium (<span class="min_d">8.5</span> + <span class="max_d">10.5</span> /2 mg/dL) = <span class="answer_d">9.5</span></p>
+        <p>pH = (<span class="min_d">7.36</span> + <span class="max_d">7.44</span> /2 pH units) = <span class="answer_d">7.4</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Calcium, Protein bound</td>
+    <td>Ca++_pb</td>
+    <td>
+        <p><b>(alb * 8) + (glob * 2) + 3</b></p>
+        <p>Ca++_pb = Calcium, Protein bound (%) = (<span class="min_d">3.5</span> + <span class="max_d">5.5</span> /2 * 8) + (<span class="min_d">2</span> + <span class="max_d">3.5</span> /2 * 2) + 3 = <span class="answer_d">44.5</span></p>
+        <p>Alb = Albumin (<span class="min_d">3.5</span> + <span class="max_d">5.5</span> /2 g/dL) = <span class="answer_d">4.5</span></p>
+        <p>Glob = Globulin (<span class="min_d">2</span> + <span class="max_d">3.5</span> /2 g/dL) = <span class="answer_d">2.75</span></p>
+    </td>
+</tr>
 
 </table>
 	
+<table>
+<tr>
+    <td>Insulin : Glucose ratio</td>
+    <td>Ins:Glu</td>
+    <td>
+        <p><b>insulin / glucose</b></p>
+        <p>Ins:Glu = Insulin : Glucose ratio (<span class="min_d">0</span> + <span class="max_d">0.4</span> /2 ratio) = <span class="answer_d">0.2</span></p>
+        <p>Insulin = (<span class="min_d">6</span> + <span class="max_d">24</span> /2 uU/mL) = <span class="answer_d">15</span></p>
+        <p>gluc = Glucose (<span class="min_d">75</span> + <span class="max_d">115</span> /2 mg/dL) = <span class="answer_d">95</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Glucose (estimated average)</td>
+    <td>eaGluc</td>
+    <td>
+        <p><b>eaGluc = (28.7 * HbA1c) - 46.7</b></p>
+        <p>eaGluc = Glucose (estimated average) (<span class="min_d">75</span> + <span class="max_d">110</span> /2 mg/dL) = <span class="answer_d">92.5</span></p>
+        <p>HbA1c = Hemoglobin A1c (<span class="min_d">4.5</span> + <span class="max_d">6.5</span> /2 %) = <span class="answer_d">5.5</span></p>
+    </td>
+</tr>
+</table>
+<table>
+<tr>
+    <td>Serum:Ascites Albumin Ratio</td>
+    <td>SAAG</td>
+    <td>
+        <p><b>albS - albAsc</b></p>
+        <p>AAG = Serum:Ascites Albumin Ratio (<span class="min_d">0</span> + <span class="max_d">1.1</span> /2 g/dL) = <span class="answer_d">0.55</span></p>
+        <p>Alb = Albumin (<span class="min_d">3.5</span> + <span class="max_d">5.5</span> /2 g/dL) = <span class="answer_d">4.5</span></p>
+        <p>Alb = Albumin Asc (<span class="min_d">0</span> + <span class="max_d">2.5</span> /2 g/dL) = <span class="answer_d">1.25</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Maddrey Discriminant Function</td>
+    <td>Maddrey DiscFx</td>
+    <td>
+        <p><b>((PTpt - PTctrl) * 4.6) + bilirubin</b></p>
+        <p>Maddrey DiscFx = Maddrey Discriminant Function (<span class="min_d">0.8</span> + <span class="max_d">10</span> /2 arbitrary) = <span class="answer_d">5.4</span></p>
+        <p>PT (Pt) = Prothrombin Time (Patient) (<span class="min_d">11</span> + <span class="max_d">15</span> /2 s) = <span class="answer_d">13</span></p>
+        <p>PT (ctrl) = Prothrombin Time (control) (<span class="min_d">11</span> + <span class="max_d">15</span> /2 s) = <span class="answer_d">13</span></p>
+        <p>T Bili = Bilirubin, total (<span class="min_d">0.3</span> + <span class="max_d">1</span> /2 mg/dL) = <span class="answer_d">0.65</span></p>
+    </td>
+</tr>
+<tr>
+    <td>AST:ALT Ratio</td>
+    <td>AST:ALT_r</td>
+    <td>
+        <p><b>AST / ALT</b></p>
+        <p>AST:ALT_R = AST:ALT Ratio (<span class="min_d">0.8</span> + <span class="max_d">1.2</span> /2 ratio) = <span class="answer_d">1</span></p>
+        <p>AST = Aspartate aminotransferase (<span class="min_d">0</span> + <span class="max_d">35</span> /2 U/L) = <span class="answer_d">17.5</span></p>
+        <p>ALT = Alanine aminotransferase (<span class="min_d">0</span> + <span class="max_d">35</span> /2 U/L) = <span class="answer_d">17.5</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Model for End-stage Liver Disease - UNOS</td>
+    <td>MELD-unos</td>
+    <td>
+        <p><b>{[(0.957 * Ln Cr) + (0.378 * Ln bili) + (1.12 * Ln INR)] + 0.643} * 10</b></p>
+        <p>MELD-unos = Model for End-stage Liver Disease - UNOS (<span class="min_d">6</span> + <span class="max_d">10</span> /2 score) = <span class="answer_d">8</span></p>
+        <p>Cr = Creatinine (<span class="min_d">0.5</span> + <span class="max_d">1.5</span> /2 mg/dL) = <span class="answer_d">1</span></p>
+        <p>T Bili = Bilirubin, total (<span class="min_d">0.3</span> + <span class="max_d">1</span> /2 mg/dL) = <span class="answer_d">0.65</span></p>
+        <p>INR = International Normalized Ratio (<span class="min_d">0.8</span> + <span class="max_d">1.2</span> /2 ratio) = <span class="answer_d">1</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Model for End-stage Liver Disease - Na</td>
+    <td>MELD-Na</td>
+    <td>
+        <p><b>MELD - Na - (0.025 * MELD * (140 - Na)) + 140</b></p>
+        <p>MELD-unos = Model for End-stage Liver Disease - UNOS (<span class="min_d">6</span> + <span class="max_d">10</span> /2 score) = <span class="answer_d">8</span></p>
+        <p>Cr = Creatinine (<span class="min_d">0.5</span> + <span class="max_d">1.5</span> /2 mg/dL) = <span class="answer_d">1</span></p>
+        <p>T Bili = Bilirubin, total (<span class="min_d">0.3</span> + <span class="max_d">1</span> /2 mg/dL) = <span class="answer_d">0.65</span></p>
+        <p>INR = International Normalized Ratio (<span class="min_d">0.8</span> + <span class="max_d">1.2</span> /2 ratio) = <span class="answer_d">1</span></p>
+        <p>Na = Sodium (140 + 130 /2) = <span class="answer_d">135</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Pediatric End-stage Liver Disease</td>
+    <td>PELD</td>
+    <td>
+        <p><b>{[(0.480 * Ln bili) + (1.857 * Ln INR) - (0.687 * Ln alb) + (0.436 if age &lt; 1y) + (0.667 if growth delay)] * 10}</b></p>
+        <p>PELD = Pediatric End-stage Liver Disease (<span class="min_d">-8</span> + <span class="max_d">0</span> /2 score) = <span class="answer_d">-4</span></p>
+        <p>Age = Patient Age (<span class="min_d">0</span> < 90 years) = <span class="answer_d">10</span></p>
+        <p>T Bili = Bilirubin, total (<span class="min_d">0.3</span> + <span class="max_d">1</span> /2 mg/dL) = <span class="answer_d">0.65</span></p>
+        <p>Alb = Albumin (<span class="min_d">3.5</span> + <span class="max_d">5.5</span> /2 g/dL) = <span class="answer_d">4.5</span></p>
+        <p>INR = International Normalized Ratio (<span class="min_d">0.8</span> + <span class="max_d">1.2</span> /2 ratio) = <span class="answer_d">1</span></p>
+    </td>
+</tr>
+
+</table>
 </div>
 
 
