@@ -164,7 +164,9 @@ mjx-line{height: 7px !important;}
 .next {
     right: 0;
 }
-
+.min_d{color:green}
+.max_d{color:red;}
+.answer_d{color:yellow;}
 </style>
 <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" />
@@ -410,15 +412,15 @@ mjx-line{height: 7px !important;}
 </div>
 
 <div id="eq1">
-  <table>
+    <table>
         <tr>
             <td>Low Density Lipoprotein Cholesterol</td>
             <td>LDL</td>
             <td>
                 <p><b>chol = ((TG/5) + (HDL))</b></p>
-                <p>Chol = Cholesterol (140+240/2 mg/dL)</p>
-                <p>HDL = High Density Lipoprotein (30+85/2 mg/dL)</p>
-                <p>TG = Triglycerides (60+130/2 mg/dL)</p>
+                <p>Chol = Cholesterol (<span class="min_d">140</span> + <span class="max_d">240</span> /2 mg/dL) = <span class="answer_d">190</span></p>
+                <p>HDL = High Density Lipoprotein (<span class="min_d">30</span> + <span class="max_d">85</span> /2 mg/dL) = <span class="answer_d">57.5</span></p>
+                <p>TG = Triglycerides (<span class="min_d">60</span> + <span class="max_d">130</span> /2 mg/dL) = <span class="answer_d">95</span></p>
             </td>
         </tr>
         <tr>
@@ -426,8 +428,8 @@ mjx-line{height: 7px !important;}
             <td>VLDL</td>
             <td>
                 <p><b>TG/5</b></p>
-                <p>VLDL = Very Low Density Lipoprotein Cholesterol (12+30/2 mg/dL)</p>
-                <p>TG = Triglycerides (60+150/2 mg/dL)</p>
+                <p>VLDL = Very Low Density Lipoprotein Cholesterol (<span class="min_d">12</span> + <span class="max_d">30</span> /2 mg/dL) = <span class="answer_d">21</span></p>
+                <p>TG = Triglycerides (<span class="min_d">60</span> + <span class="max_d">150</span> /2 mg/dL) = <span class="answer_d">105</span></p>
             </td>
         </tr>
     </table>
