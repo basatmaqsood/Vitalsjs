@@ -794,6 +794,105 @@ Cardiology Hemodynamics
     </td>
 </tr>
 	</table>
+
+	<table>
+<tr>
+    <td>Cardiac Output (Fick)</td>
+    <td>CO_fick</td>
+    <td>
+        <p><b>VO2 / C(a-v)O2</b></p>
+        <p>CO_fick = Cardiac Output (Fick) (<span class="min_d">4.25</span> + <span class="max_d">6.12</span> /2 L/min) = <span class="answer_d">5.19</span></p>
+        <p>VO2 = Oxygen Consumption (<span class="min_d">200</span> + <span class="max_d">280</span> /2 mL/min) = <span class="answer_d">240</span></p>
+        <p>C(a-v)O2 = a-v Oxygen Content Difference (<span class="min_d">4.0</span> + <span class="max_d">5.0</span> /2 mL/dL) = <span class="answer_d">4.5</span></p>
+        <p><i>*C(a-v)O2 is multiplied by 10 to adjust mL/dL to mL/L.</i></p>
+        <p><i>**CO is the amount of blood pumped by the heart per minute.</i></p>
+    </td>
+</tr>
+<tr>
+    <td>Cardiac Index</td>
+    <td>CI</td>
+    <td>
+        <p><b>CO / BSA</b></p>
+        <p>CI = Cardiac Index (<span class="min_d">2.5</span> + <span class="max_d">3.6</span> /2 L/min/m<sup>2</sup>) = <span class="answer_d">3.05</span></p>
+        <p>CO = Cardiac Output (<span class="min_d">4.25</span> + <span class="max_d">6.12</span> /2 L/min) = <span class="answer_d">5.19</span></p>
+        <p>BSA = Body Surface Area (<span class="min_d">1.3</span> + <span class="max_d">2.5</span> /2 m<sup>2</sup>) = <span class="answer_d">1.9</span></p>
+        <p><i>**CI is the cardiac output indexed to BSA.</i></p>
+    </td>
+</tr>
+<tr>
+    <td>Ejection Fraction</td>
+    <td>EF</td>
+    <td>
+        <p><b>SI / EDV</b></p>
+        <p>EF = Ejection Fraction (<span class="min_d">55</span> + <span class="max_d">78</span> /2 fraction) = <span class="answer_d">66.5</span></p>
+        <p>SI = Stroke Index (<span class="min_d">41</span> + <span class="max_d">60</span> /2 mL/beat/m<sup>2</sup>) = <span class="answer_d">50.5</span></p>
+        <p>EDV = End-Diastolic Volume (<span class="min_d">60</span> + <span class="max_d">90</span> /2 mL/m<sup>2</sup>) = <span class="answer_d">75</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Heart Rate</td>
+    <td>HR</td>
+    <td>
+        <p><b>CO / SV</b></p>
+        <p>HR = Heart Rate (<span class="min_d">60</span> + <span class="max_d">90</span> /2 bpm) = <span class="answer_d">75</span></p>
+        <p>CO = Cardiac Output (<span class="min_d">4.25</span> + <span class="max_d">6.12</span> /2 L/min) = <span class="answer_d">5.19</span> L/min or <span class="answer_d">5190</span> mL/min</p>
+        <p>SV = Stroke Volume (<span class="min_d">69</span> + <span class="max_d">87</span> /2 mL/beat) = <span class="answer_d">78</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Maximum Heart Rate</td>
+    <td>HR_m</td>
+    <td>
+        <p><b>(220 - Age)</b></p>
+        <p>HR_m = Maximum Heart Rate (<span class="min_d">130</span> + <span class="max_d">202</span> /2 bpm) = <span class="answer_d">166</span></p>
+        <p>Age = Patient Age (<span class="min_d">0</span> + <span class="max_d">90</span> /2 years) = <span class="answer_d">45</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Target Heart Rate</td>
+    <td>HR_t</td>
+    <td>
+        <p><b>(220 - Age) * 0.7</b></p>
+        <p>HR_t = Target Heart Rate (<span class="min_d">91</span> + <span class="max_d">141</span> /2 bpm) = <span class="answer_d">116</span></p>
+        <p>Age = Patient Age (<span class="min_d">0</span> + <span class="max_d">90</span> /2 years) = <span class="answer_d">45</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Heart Rate (intrinsic)</td>
+    <td>HR_i</td>
+    <td>
+        <p><b>118.1 - (0.57 * Age)</b></p>
+        <p>HR_i = Heart Rate (intrinsic) (<span class="min_d">60</span> + <span class="max_d">90</span> /2 bpm) = <span class="answer_d">75</span></p>
+        <p>Age = Patient Age (<span class="min_d">0</span> + <span class="max_d">90</span> /2 years) = <span class="answer_d">45</span></p>
+    </td>
+</tr>
+<tr>
+    <td>Stroke Volume</td>
+    <td>SV</td>
+    <td>
+        <p><b>CO / HR</b></p>
+        <p>SV = Stroke Volume (<span class="min_d">69</span> + <span class="max_d">87</span> /2 mL/beat) = <span class="answer_d">78</span></p>
+        <p>CO = Cardiac Output (<span class="min_d">4.25</span> + <span class="max_d">6.12</span> /2 mL/min) = <span class="answer_d">5.19</span></p>
+        <p>HR = Heart Rate (<span class="min_d">60</span> + <span class="max_d">90</span> /2 bpm) = <span class="answer_d">75</span></p>
+        <p><i>*The CO input is in mL/min (or L/min multiplied by 1000 to adjust units to mL/min).</i></p>
+        <p><i>**SV is the amount of blood pumped by the heart with each beat; Also: SV = EDV - ESV.</i></p>
+    </td>
+</tr>
+<tr>
+    <td>Stroke Volume Index</td>
+    <td>SI</td>
+    <td>
+        <p><b>CI / HR</b></p>
+        <p>SI = Stroke Volume Index (<span class="min_d">41</span> + <span class="max_d">60</span> /2 mL/beat/m<sup>2</sup>) = <span class="answer_d">50.5</span></p>
+        <p>CI = Cardiac Index (<span class="min_d">2.5</span> + <span class="max_d">3.6</span> /2 mL/min/m<sup>2</sup>) = <span class="answer_d">3.05</span></p>
+        <p>HR = Heart Rate (<span class="min_d">60</span> + <span class="max_d">90</span> /2 bpm) = <span class="answer_d">75</span></p>
+        <p><i>*The CI input is in mL/min/m<sup>2</sup> (or L/min/m<sup>2</sup> multiplied by 1000 to adjust units to mL/min/m<sup>2</sup>).</i></p>
+        <p><i>**SI is the SV indexed to BSA.</i></p>
+    </td>
+</tr>
+
+		
+	</table>
 </div>
 
 
