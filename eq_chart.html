@@ -41,7 +41,7 @@
         for (let i = 1; i <= 100; i++) {
             const color = colors[(i - 1) % colors.length]; // Cycle through the colors
             css += `
-                td:nth-child(${i}) {
+                td:nth-child(${i}),tr:nth-child(${i}) {
                     background: ${color.replace("rgb", "rgba").replace(")", `, ${opacity})`)};
                 }
             `;
