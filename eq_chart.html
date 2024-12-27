@@ -1,1 +1,34 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+</head>
+<body>
+    <script>
+        // Create the table element
+        const table = document.createElement("table");
+        table.style.borderCollapse = "collapse"; // Optional: styling
+        table.style.width = "100%";
+
+        // Generate rows and columns
+        for (let i = 1; i <= 100; i++) {
+            const row = document.createElement("tr");
+            for (let j = 1; j <= 100; j++) {
+                const cell = document.createElement("td");
+                cell.textContent = j; // Populate with 1-100
+                cell.style.border = "1px solid black"; // Optional: styling
+                cell.style.padding = "5px";
+                cell.style.textAlign = "center";
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+
+        // Append the table to the document body
+        document.body.appendChild(table);
+    </script>
+</body>
+</html>
