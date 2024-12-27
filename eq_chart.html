@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Table</title>
+    <title>Dynamic Table with Calculations</title>
     <style>
         table {
             border-collapse: collapse;
@@ -33,8 +33,11 @@
                 } else if (j === 0 && i > 0) {
                     // Fill the first column (excluding the first cell)
                     cell.textContent = i;
+                } else if (i > 0 && j > 0) {
+                    // Fill other cells with the equation result
+                    cell.textContent = (i + j) / 2;
                 } else {
-                    // Keep other cells empty
+                    // Keep the top-left corner blank
                     cell.textContent = "";
                 }
 
