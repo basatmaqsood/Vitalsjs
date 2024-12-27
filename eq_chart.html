@@ -23,14 +23,34 @@
         const opacity = 0.75;
 
         // Predefined color palette for rows
-        const colors = [
-            "rgb(255, 0, 0)",   // Red
-            "rgb(0, 255, 0)",   // Green
-            "rgb(0, 0, 255)",   // Blue
-            "rgb(255, 255, 0)", // Yellow
-            "rgb(255, 0, 255)", // Magenta
-            "rgb(0, 255, 255)"  // Cyan
-        ];
+const colorsRed = [
+    "rgb(255, 0, 0)",    // Red
+    "rgb(255, 10, 0)",   // Slightly different red
+    "rgb(255, 20, 0)",   // Slightly different red
+    "rgb(255, 30, 0)",   // Slightly different red
+    "rgb(255, 40, 0)",   // Slightly different red
+    "rgb(255, 50, 0)",   // Slightly different red
+    "rgb(255, 60, 0)",   // Slightly different red
+    "rgb(255, 70, 0)",   // Slightly different red
+    "rgb(255, 80, 0)",   // Slightly different red
+    "rgb(255, 90, 0)",   // Slightly different red
+    "rgb(255, 100, 0)",  // Slightly different red
+    "rgb(255, 110, 0)",  // Slightly different red
+    "rgb(255, 120, 0)",  // Slightly different red
+    "rgb(255, 130, 0)",  // Slightly different red
+    "rgb(255, 140, 0)",  // Slightly different red
+    "rgb(255, 150, 0)",  // Slightly different red
+    "rgb(255, 160, 0)",  // Slightly different red
+    "rgb(255, 170, 0)",  // Slightly different red
+    "rgb(255, 180, 0)",  // Slightly different red
+    "rgb(255, 190, 0)",  // Slightly different red
+    "rgb(255, 200, 0)",  // Slightly different red
+    "rgb(255, 210, 0)",  // Slightly different red
+    "rgb(255, 220, 0)",  // Slightly different red
+    "rgb(255, 230, 0)",  // Slightly different red
+    "rgb(255, 240, 0)",  // Slightly different red
+    "rgb(255, 250, 0)",  // Slightly different red
+   ];
 
         // Create a <style> element
         const style = document.createElement("style");
@@ -39,7 +59,7 @@
         // Generate CSS rules for 100 rows
         let css = "";
         for (let i = 1; i <= 100; i++) {
-            const color = colors[(i - 1) % colors.length]; // Cycle through the colors
+            const color = colorsRed[(i - 1) % colorsRed.length]; // Cycle through the colors
             css += `
                 td:nth-child(${i}),tr:nth-child(${i}) {
                     background: ${color.replace("rgb", "rgba").replace(")", `, ${opacity})`)};
