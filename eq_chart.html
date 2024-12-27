@@ -1,27 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <script>
         // Create the table element
         const table = document.createElement("table");
-        table.style.borderCollapse = "collapse"; // Optional: styling
-        table.style.width = "100%";
 
         // Generate rows and columns
-        for (let i = 1; i <= 100; i++) {
+        for (let i = 0; i <= 100; i++) { // Include header row
             const row = document.createElement("tr");
-            for (let j = 1; j <= 100; j++) {
+            for (let j = 0; j <= 100; j++) { // Include header column
                 const cell = document.createElement("td");
-                cell.textContent = j; // Populate with 1-100
-                cell.style.border = "1px solid black"; // Optional: styling
-                cell.style.padding = "5px";
-                cell.style.textAlign = "center";
+
+                if (i === 0 && j > 0) {
+                    // Fill the first row (excluding the first cell)
+                    cell.textContent = j;
+                } else if (j === 0 && i > 0) {
+                    // Fill the first column (excluding the first cell)
+                    cell.textContent = i;
+                } else {
+                    // Keep other cells empty
+                    cell.textContent = "";
+                }
+
                 row.appendChild(cell);
             }
             table.appendChild(row);
