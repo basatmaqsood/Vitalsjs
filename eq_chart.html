@@ -246,7 +246,7 @@ const colorsBlue = [
         for (let i = 1; i <= 100; i++) {
             const color = colorsRed[(i - 1) % colorsRed.length]; // Cycle through the colors
             css += `
-                td:nth-child(${i}),tr:nth-child(${i}) {
+                td:nth-child(${i}) {
                     background: ${color.replace("rgb", "rgba").replace(")", `, ${opacity})`)};
                 }
             `;
@@ -254,7 +254,7 @@ const colorsBlue = [
     for (let i = 1; i <= 100; i++) {
             const color = colorsBlue[(i - 1) % colorsBlue.length]; // Cycle through the colors
             css += `
-                tr:nth-child(${i}),tr:nth-child(${i}) {
+                tr:nth-child(${i}) {
                     background: ${color.replace("rgb", "rgba").replace(")", `, ${opacity})`)};
                 }
             `;
