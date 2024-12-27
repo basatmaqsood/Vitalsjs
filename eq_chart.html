@@ -8,6 +8,8 @@
         table {
             border-collapse: collapse;
             width: 100%;
+                background: linear-gradient(120deg, #4a19a4, #b70e0e);
+    color: #fff;
         }
         td {
             border: 1px solid black;
@@ -18,6 +20,36 @@
 </head>
 <body>
     <script>
+        const opacity = 0.75;
+
+        // Predefined color palette for rows
+        const colors = [
+            "rgb(255, 0, 0)",   // Red
+            "rgb(0, 255, 0)",   // Green
+            "rgb(0, 0, 255)",   // Blue
+            "rgb(255, 255, 0)", // Yellow
+            "rgb(255, 0, 255)", // Magenta
+            "rgb(0, 255, 255)"  // Cyan
+        ];
+
+        // Create a <style> element
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+
+        // Generate CSS rules for 100 rows
+        let css = "";
+        for (let i = 1; i <= 100; i++) {
+            const color = colors[(i - 1) % colors.length]; // Cycle through the colors
+            css += `
+                tr:nth-child(${i}) {
+                    background: ${color.replace("rgb", "rgba").replace(")", `, ${opacity})`)};
+                }
+            `;
+        }
+
+        // Append the CSS rules to the <style> element
+        style.textContent = css;
+
         // Create the table element
         const table = document.createElement("table");
 
