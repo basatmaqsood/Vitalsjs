@@ -19,6 +19,8 @@
     </style>
 </head>
 <body>
+<button onclick="downloadEditedTable()">Download Table</button>
+
     <script>
         // Create the table element
         const table = document.createElement("table");
@@ -50,6 +52,42 @@
 
         // Append the table to the document body
         document.body.appendChild(table);
+
+function downloadEditedTable() {
+    // Get the table element
+    const table = document.getElementById("myTable");
+    
+    // Wrap the table in basic HTML structure
+    const htmlContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Edited Table</title>
+        </head>
+        <body>
+            ${table.outerHTML}
+        </body>
+        </html>
+    `;
+
+    // Create a Blob with the HTML content
+    const blob = new Blob([htmlContent], { type: "text/html" });
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "edited_table.html";
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Clean up the URL object
+    URL.revokeObjectURL(a.href);
+}
+
     </script>
+
 </body>
 </html>
