@@ -42,7 +42,7 @@
                     // Keep the top-left corner blank
                     cell.textContent = "";
                 }
-
+                cell.setAttribute("contenteditable", "true");
                 row.appendChild(cell);
             }
             table.appendChild(row);
