@@ -46,3 +46,29 @@ if (navigator.geolocation) {
     console.error("Geolocation is not supported by this browser.");
     alert("Geolocation is not supported by your browser.");
 }
+
+wwd.addEventListener("click", function (event) {
+    // Get the mouse click location
+    var x = event.clientX;
+    var y = event.clientY;
+
+    // Perform a pick at the mouse location
+    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+
+    if (pickList.objects.length > 0) {
+        // Get the clicked geographic position
+        var pickedObject = pickList.objects[0];
+        if (pickedObject.position) {
+            var latitude = pickedObject.position.latitude;
+            var longitude = pickedObject.position.longitude;
+            console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+            alert("Latitude: " + latitude + "\nLongitude: " + longitude");
+        }
+  var zoomLevel = wwd.navigator.range;
+    console.log("Current Zoom Level (Range): " + zoomLevel + " meters");
+    
+        
+    } else {
+        console.log("No geographic position found at this location.");
+    }
+});
