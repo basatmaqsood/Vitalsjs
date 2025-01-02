@@ -62,7 +62,7 @@ wwd.addEventListener("click", function (event) {
             var latitude = pickedObject.position.latitude;
             var longitude = pickedObject.position.longitude;
             console.log("Latitude: " + latitude + ", Longitude: " + longitude);
-            alert("Latitude: " + latitude + "\nLongitude: " + longitude");
+            alert("Latitude: " + latitude + "\nLongitude: " + longitude);
         }
   var zoomLevel = wwd.navigator.range;
     console.log("Current Zoom Level (Range): " + zoomLevel + " meters");
