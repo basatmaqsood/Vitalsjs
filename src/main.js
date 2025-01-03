@@ -170,7 +170,10 @@ if (navigator.geolocation) {
             placemarkLayer.addRenderable(placemark);
             wwd.addLayer(placemarkLayer);
 
-            console.log("User location loaded: Latitude " + latitude + ", Longitude " + longitude);
+            document.getElementById('gdval').innerHTML = `Zoom level: ${gdval}`;
+            document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
+            document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
+    
         },
         function (error) {
             console.error("Geolocation error: ", error);
@@ -200,6 +203,10 @@ wwd.addEventListener("click", function (event) {
            latval = pickedObject.position.latitude;
            lonval = pickedObject.position.longitude;
            gdval=wwd.navigator.range;
+    document.getElementById('gdval').innerHTML = `Zoom level: ${gdval}`;
+    document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
+    document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
+    
         }
 
     } else {
@@ -276,9 +283,6 @@ let currentDateTime = now.toLocaleString('en-GB', {
     document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${currentDateTime}`;
     document.getElementById('solar-nuclear-photovoltaic-video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
     document.getElementById('solar-nuclear-photovoltaic-signal').innerHTML = `X: ${xMeanData.x}`;
-    document.getElementById('gdval').innerHTML = `Zoom level: ${gdval}`;
-    document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
-    document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
     
     const fps = (++frameCount / video.currentTime).toFixed(3);
     document.getElementById('solar-nuclear-photovoltaic-frame-fps').innerHTML = `Frame count: ${frameCount}, FPS: ${fps}`;
