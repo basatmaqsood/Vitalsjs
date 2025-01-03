@@ -276,9 +276,9 @@ let currentDateTime = now.toLocaleString('en-GB', {
     document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${currentDateTime}`;
     document.getElementById('solar-nuclear-photovoltaic-video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
     document.getElementById('solar-nuclear-photovoltaic-signal').innerHTML = `X: ${xMeanData.x}`;
-    document.getElementById('gdval').innerHTML = `Zoom level: ${xMeanData.x}`;
-    document.getElementById('latval').innerHTML = `Latitude: ${xMeanData.x}`;
-    document.getElementById('lonval').innerHTML = `Longitude: ${xMeanData.x}`;
+    document.getElementById('gdval').innerHTML = `Zoom level: ${gdval}`;
+    document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
+    document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
     
     const fps = (++frameCount / video.currentTime).toFixed(3);
     document.getElementById('solar-nuclear-photovoltaic-frame-fps').innerHTML = `Frame count: ${frameCount}, FPS: ${fps}`;
