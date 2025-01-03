@@ -100,6 +100,9 @@ const DURATION = 100;
 let chart = realTimeLineChart();
 var pwrval=0;
 var zramval=0;
+var gdval;
+var lonval;
+var latval;
 let constraintsObj = {
   audio: false,
   video: {
@@ -139,7 +142,7 @@ wwd.addLayer(new WorldWind.BMNGLandsatLayer());
 wwd.addLayer(new WorldWind.CompassLayer());
 wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
-
+gdval=wwd.navigator.range;
 // Check if Geolocation API is available
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -147,7 +150,9 @@ if (navigator.geolocation) {
             // Get user's coordinates
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-
+            
+            latval = position.coords.latitude;
+            lonval = position.coords.longitude; 
             // Center the globe to the user's location
             wwd.navigator.lookAtLocation.latitude = latitude;
             wwd.navigator.lookAtLocation.longitude = longitude;
@@ -191,13 +196,12 @@ wwd.addEventListener("click", function (event) {
         if (pickedObject.position) {
             var latitude = pickedObject.position.latitude;
             var longitude = pickedObject.position.longitude;
-            console.log("Latitude: " + latitude + ", Longitude: " + longitude);
-           
+          
+           latval = pickedObject.position.latitude;
+           lonval = pickedObject.position.longitude;
+           gdval=wwd.navigator.range;
         }
-  var zoomLevel = wwd.navigator.range;
-    console.log("Current Zoom Level (Range): " + zoomLevel + " meters");
-    
-        
+
     } else {
         console.log("No geographic position found at this location.");
     }
@@ -272,6 +276,9 @@ let currentDateTime = now.toLocaleString('en-GB', {
     document.getElementById('solar-nuclear-photovoltaic-frame-time').innerHTML = `Frame time: ${currentDateTime}`;
     document.getElementById('solar-nuclear-photovoltaic-video-time').innerHTML = `Video time: ${(video.currentTime.toFixed(2))}`;
     document.getElementById('solar-nuclear-photovoltaic-signal').innerHTML = `X: ${xMeanData.x}`;
+    document.getElementById('gdval').innerHTML = `Zoom level: ${xMeanData.x}`;
+    document.getElementById('latval').innerHTML = `Latitude: ${xMeanData.x}`;
+    document.getElementById('lonval').innerHTML = `Longitude: ${xMeanData.x}`;
     
     const fps = (++frameCount / video.currentTime).toFixed(3);
     document.getElementById('solar-nuclear-photovoltaic-frame-fps').innerHTML = `Frame count: ${frameCount}, FPS: ${fps}`;
