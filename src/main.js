@@ -813,13 +813,16 @@ waitval;
 init$val;
 curval;
 empval;
+gdval;
+lonval;
+latval;
 
 
 // Test conversion
 var asciiarray = [ 
-`sum_(${b}=comGval)^${in$1val} ${b}^${n}=(((${in$1val}(${in$1val}+1))/2))^2`,
+`sum_(${gdval}=comGval)^${in$1val} ${b}^${lonval}=(((${latval}(${in$1val}+1))/2))^2`,
 `sum_(${n}=parval)^${kworval} ${i}^${n}=(((${kworval}(${kworval}+1))/2))^2`,
-`sum_(${i}=kwROval)^${ppval} ${n}^${a}=(((${ppval}(${ppval}+parval))/2))^2`,
+`sum_(${gdval}=kwROval)^${ppval} ${n}^${a}=(((${ppval}(${ppval}+parval))/2))^2`,
 `sum_(${n}=b)^${astrval} ${b}^${n}=(((${astrval}(${astrval}+plugval))/2))^2`,
 `sum_(${a}=in$1val)^${resWval} ${b}^${a}=(((${resWval}(${resWval}+comGval))/2))^2`,
 `sum_(${i}=n)^${lBval} ${n}^${b}=(((${lBval}(${lBval}+astrval))/2))^2`,
