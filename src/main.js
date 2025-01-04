@@ -203,7 +203,7 @@ wwd.addEventListener("click", function (event) {
            latval = pickedObject.position.latitude;
            lonval = pickedObject.position.longitude;
            gdval=wwd.navigator.range;
-    document.getElementById('gdval').innerHTML = `Zoom level: ${gdval}`;
+    document.getElementById('gdval').innerHTML = `Global Distance: ${gdval}`;
     document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
     document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
     
