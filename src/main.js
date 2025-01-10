@@ -774,12 +774,13 @@ html2canvas(document.querySelector("#chart100d"), { scale: 6 }).then(canvas => {
     window.onload = loadImages;
 
     // Handle the snapshot button click
-    snapshotBtn.addEventListener('click', function() {
-      html2canvas(captureElement).then(canvas => {
-        const imageData = canvas.toDataURL('image/png');
-        saveSnapshot(imageData);
-      });
-    });
+snapshotBtn.addEventListener('click', function() {
+  html2canvas(captureElement, { scale: 0.5 }).then(canvas => {  // Reduced scale
+    const imageData = canvas.toDataURL('image/jpeg', 0.5);     
+    saveSnapshot(imageData);
+  });
+});
+
 
     // Save snapshot and keep only the last 19 images
     function saveSnapshot(imageData) {
