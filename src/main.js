@@ -764,26 +764,60 @@ html2canvas(document.querySelector("#chart100d"), { scale: 6 }).then(canvas => {
 }
 
 /**Snapshots***/
-    document.getElementById('snapshot').addEventListener('click', async () => {
-      const element = document.getElementById('video');
+    const MAX_IMAGES = 19;
+    const STORAGE_KEY = 'snapshotGallery';
+    const snapshotBtn = document.getElementById('snapshot');
+    const captureElement = document.getElementById('video');
+    const imageGallery = document.getElementById('imageGallery');
 
-      // Use html2canvas to capture the element
-      const canvas = await html2canvas(element);
+    // Load existing images on page load
+    window.onload = loadImages;
 
-      // Convert canvas to Base64 image
-      const imageBase64 = canvas.toDataURL('image/png');
-
-      // Save the image in localStorage
-      localStorage.setItem('screenshot', imageBase64);
-
-      // Display the saved image
-      document.getElementById('savedImage').src = imageBase64;
+    // Handle the snapshot button click
+    snapshotBtn.addEventListener('click', function() {
+      html2canvas(captureElement).then(canvas => {
+        const imageData = canvas.toDataURL('image/png');
+        saveSnapshot(imageData);
+      });
     });
 
-    // Retrieve and display the saved image on page load (if exists)
-    const savedImage = localStorage.getItem('screenshot');
-    if (savedImage) {
-      document.getElementById('savedImage').src = savedImage;
+    // Save snapshot and keep only the last 19 images
+    function saveSnapshot(imageData) {
+      let images = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+      images.push(imageData); // Add new image
+
+      // Keep only the last 19 images
+      if (images.length > MAX_IMAGES) {
+        images.shift(); // Remove the oldest
+      }
+
+      // Save back to localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(images));
+
+      // Refresh the gallery
+      displayImages(images);
+    }
+
+    // Load images from localStorage
+    function loadImages() {
+      const images = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      displayImages(images);
+    }
+
+    // Display images in the gallery
+    function displayImages(images) {
+      imageGallery.innerHTML = ''; // Clear existing images
+      images.forEach(imgSrc => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.objectFit = 'cover';
+        img.style.border = '1px solid #ccc';
+        img.style.borderRadius = '5px';
+        imageGallery.appendChild(img);
+      });
     }
 
 document.querySelector('#showascii').addEventListener('click', showascii);
