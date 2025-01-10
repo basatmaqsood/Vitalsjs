@@ -202,7 +202,7 @@ $(function() {
       reload();
     });
 });
-   const STORAGE_KEY = 'snapshotGallery';
+   const STORAGE_KEY = 'imageGallery';
     const imageGallery = document.getElementById('gallery');
 
     // Load and display images from localStorage
@@ -213,8 +213,7 @@ $(function() {
         imageGallery.innerHTML = '<p>No snapshots available.</p>';
         return;
       }
-
-      // Display each image
+      
       images.forEach(imgSrc => {
         const img = document.createElement('img');
         img.src = imgSrc;
