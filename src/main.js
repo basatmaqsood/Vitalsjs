@@ -762,6 +762,30 @@ html2canvas(document.querySelector("#chart100d"), { scale: 6 }).then(canvas => {
 
  },2000)
 }
+
+/**Snapshots***/
+    document.getElementById('screenshotBtn').addEventListener('click', async () => {
+      const element = document.getElementById('capture');
+
+      // Use html2canvas to capture the element
+      const canvas = await html2canvas(element);
+
+      // Convert canvas to Base64 image
+      const imageBase64 = canvas.toDataURL('image/png');
+
+      // Save the image in localStorage
+      localStorage.setItem('screenshot', imageBase64);
+
+      // Display the saved image
+      document.getElementById('savedImage').src = imageBase64;
+    });
+
+    // Retrieve and display the saved image on page load (if exists)
+    const savedImage = localStorage.getItem('screenshot');
+    if (savedImage) {
+      document.getElementById('savedImage').src = savedImage;
+    }
+
 document.querySelector('#showascii').addEventListener('click', showascii);
 function showascii(){
 var n=pwrval
