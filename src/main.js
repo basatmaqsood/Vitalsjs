@@ -764,8 +764,8 @@ html2canvas(document.querySelector("#chart100d"), { scale: 6 }).then(canvas => {
 }
 
 /**Snapshots***/
-    document.getElementById('screenshotBtn').addEventListener('click', async () => {
-      const element = document.getElementById('capture');
+    document.getElementById('snapshot').addEventListener('click', async () => {
+      const element = document.getElementById('video');
 
       // Use html2canvas to capture the element
       const canvas = await html2canvas(element);
