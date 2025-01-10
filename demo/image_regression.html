@@ -202,32 +202,7 @@ $(function() {
       reload();
     });
 });
-   const STORAGE_KEY = 'snapshotGallery';
-    const imageGallery = document.getElementById('gallery');
 
-    // Load and display images from localStorage
-    function loadImages() {
-      const images = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-      if (images.length === 0) {
-        imageGallery.innerHTML = '<p>No snapshots available.</p>';
-        return;
-      }
-      
-      images.forEach(imgSrc => {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        img.style.width = '100px';
-        img.style.height = '100px';
-        img.style.objectFit = 'cover';
-        img.style.border = '1px solid #ccc';
-        img.style.borderRadius = '5px';
-        imageGallery.appendChild(img);
-      });
-    }
-
-    // Load images on page load
-    window.onload = loadImages;
 </script>
 
 <style type="text/css">
@@ -324,7 +299,34 @@ Choose your own image:
 <p>Go <a href="http://cs.stanford.edu/people/karpathy/convnetjs/">back to ConvNetJS</a></p>
 
 </div>
+<script>
+   const STORAGE_KEY = 'snapshotGallery';
+    const imageGallery = document.getElementById('gallery');
 
+    // Load and display images from localStorage
+    function loadImages() {
+      const images = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+      if (images.length === 0) {
+        imageGallery.innerHTML = '<p>No snapshots available.</p>';
+        return;
+      }
+      
+      images.forEach(imgSrc => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.objectFit = 'cover';
+        img.style.border = '1px solid #ccc';
+        img.style.borderRadius = '5px';
+        imageGallery.appendChild(img);
+      });
+    }
+
+    // Load images on page load
+    window.onload = loadImages;
+</script>
 </body>
 </html>
 
