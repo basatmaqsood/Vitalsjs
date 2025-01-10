@@ -202,7 +202,33 @@ $(function() {
       reload();
     });
 });
+   const STORAGE_KEY = 'snapshotGallery';
+    const imageGallery = document.getElementById('gallery');
 
+    // Load and display images from localStorage
+    function loadImages() {
+      const images = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+      if (images.length === 0) {
+        imageGallery.innerHTML = '<p>No snapshots available.</p>';
+        return;
+      }
+
+      // Display each image
+      images.forEach(imgSrc => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.objectFit = 'cover';
+        img.style.border = '1px solid #ccc';
+        img.style.borderRadius = '5px';
+        imageGallery.appendChild(img);
+      });
+    }
+
+    // Load images on page load
+    window.onload = loadImages;
 </script>
 
 <style type="text/css">
@@ -274,7 +300,7 @@ Choose your own image:
   You can upload your own image above (click Choose File), or you can click on any of the images below to load them.
 </div>
 <div id="gallery">
-  <img src="../assets/img/cat.jpg" class="ci" />
+<!--  <img src="../assets/img/cat.jpg" class="ci" />
   <img src="../assets/img/esher.png"  class="ci" />
   <img src="../assets/img/pencils.png" class="ci" />
   <img src="../assets/img/usa.png"  class="ci" />
@@ -292,7 +318,7 @@ Choose your own image:
   <img src="../assets/img/chess.png" class="ci" />
   <img src="../assets/img/gradient.png" class="ci" />
   <img src="../assets/img/battery.jpg" class="ci" />
-  <img src="../assets/img/starry.jpg" class="ci" />
+  <img src="../assets/img/starry.jpg" class="ci" />-->
 </div>
 
 <br><br>
