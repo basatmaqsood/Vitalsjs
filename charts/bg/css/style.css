@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*  */
+.main_wrapper {
+    background: #E5E7E9;
+    max-width: 1400px;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+.main_wrapper .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.main_wrapper .header img {
+    width: 150px;
+}
+
+.color_palette {
+    display: grid;
+    grid-template-columns: repeat(31, 1fr);
+}
+.color_palette .grid_box_text div {
+    font-size: 6px;
+    text-align: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.color_palette .grid_box_1 a {
+    display: block;
+    text-decoration: none;
+    aspect-ratio: 1/1;
+}
+
+.color_palette .grid_box_text {
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.color_palette .grid_box_1 {
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.color_palette .grid_box_1.border {
+    outline: 1px solid #2e2424;
+}
+
+.color_palette2 {
+    display: grid;
+    grid-template-columns: repeat(31, 1fr);
+}
+.color_palette2 .up_arrow {
+    grid-column: span 1;
+    font-size: 6px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.color_palette2 .up_arrow img {
+    width: 50%;
+}
+
+.color_palette2 div:nth-child(2) {
+    grid-column: span 1;
+}
+
+.color_palette2 .border {
+    grid-column: span 29;
+    outline: 1px solid #2e2424;
+    display: grid;
+    grid-template-columns: repeat(29, 1fr);
+    margin-top: 1px;
+    margin-left: 1px;
+    gap: 4px;
+    padding: 1px;
+}
+.color_palette2 .border a {
+    aspect-ratio: 1/1;
+}
+.color_palette2 .grid_box_text {
+    display: grid;
+    grid-template-columns: repeat(29, 1fr);
+}
+.color_palette2 .grid_box_text div {
+    font-size: 6px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.color_palette2.color_palette3 .right_arrow {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    justify-content: end;
+}
+.color_palette2.color_palette3 .right_arrow img {
+    width: 25%;
+}
+
+.color_palette2.color_palette3 .grid_box_text {
+    grid-column: span 29;
+}

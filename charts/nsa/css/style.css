@@ -1,0 +1,538 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+}
+
+.pie-wrapper{
+  max-width: 1330px;
+  padding: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pie-wrapper .slice a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* pie-1 */
+.pie-1 {
+  position: absolute;
+  top: 45%;
+  left: 46.5%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  z-index: 14;
+}
+
+.pie-1 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% 80%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-2 */
+.pie-2 {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 13;
+}
+
+.pie-2 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-3 */
+.pie-3 {
+  position: absolute;
+  width: 305px;
+  height: 305px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 12;
+}
+
+.pie-3 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-4 */
+.pie-4 {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 11;
+}
+
+.pie-4 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-5 */
+.pie-5 {
+  position: absolute;
+  width: 355px;
+  height: 355px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.pie-5 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-6 */
+.pie-6 {
+  position: absolute;
+  width: 375px;
+  height: 375px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 9;
+}
+
+.pie-6 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-7 */
+.pie-7 {
+  position: absolute;
+  width: 395px;
+  height: 395px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 8;
+}
+
+.pie-7 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -110%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-8 */
+.pie-8 {
+  position: absolute;
+  width: 445px;
+  height: 445px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 7;
+}
+
+.pie-8 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -318%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-9 */
+.pie-9 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 6;
+}
+
+.pie-9 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -318%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-10 */
+.pie-10 {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.pie-10 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -318%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-11 */
+.pie-11 {
+  position: absolute;
+  width: 630px;
+  height: 630px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.pie-11 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -318%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-12 */
+.pie-12 {
+  position: absolute;
+  width: 780px;
+  height: 780px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.pie-12 .slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% -318%, 100% 0, 50% 0);
+  transform-origin: 50% 50%;
+}
+
+/* pie-13 */
+/* .pie-13 {
+  position: relative;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  z-index: 2;
+} */
+
+/* .pie-13 {
+  background: red;
+  position: absolute;
+  width: 950px;
+  height: 950px;
+  border-radius: 50%;
+  z-index: 10;
+  clip-path: circle(50% at 50% 50%);
+} */
+
+.pieCircle {
+  position: absolute;
+  width: 102px;
+  height: 102px;
+  z-index: 10;
+  top: 60px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pieCircle a{
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  color: #fff;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pieCircle-1 {
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
+
+.pieCircle-2 {
+  top: 70px;
+  left: 53.8%;
+  transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+}
+
+.pieCircle-3 {
+  top: 108px;
+  left: 60.8%;
+  transform: rotate(25deg);
+  -webkit-transform: rotate(25deg);
+  -moz-transform: rotate(25deg);
+  -ms-transform: rotate(25deg);
+  -o-transform: rotate(25deg);
+}
+
+.pieCircle-4 {
+  top: 170px;
+  left: 66.8%;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+.pieCircle-5 {
+  top: 252px;
+  left: 71.4%;
+  transform: rotate(60deg);
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+}
+
+.pieCircle-6 {
+  top: 349px;
+  left: 74%;
+  transform: rotate(80deg);
+  -webkit-transform: rotate(80deg);
+  -moz-transform: rotate(80deg);
+  -ms-transform: rotate(80deg);
+  -o-transform: rotate(80deg);
+}
+
+.pieCircle-7 {
+  top: 450px;
+  left: 75%;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+
+.pieCircle-8 {
+  top: 551px;
+  left: 74.5%;
+  transform: rotate(105deg);
+  -webkit-transform: rotate(105deg);
+  -moz-transform: rotate(105deg);
+  -ms-transform: rotate(105deg);
+  -o-transform: rotate(105deg);
+}
+
+.pieCircle-9 {
+  top: 645px;
+  left: 71.5%;
+  transform: rotate(125deg);
+  -webkit-transform: rotate(125deg);
+  -moz-transform: rotate(125deg);
+  -ms-transform: rotate(125deg);
+  -o-transform: rotate(125deg);
+}
+
+.pieCircle-10 {
+  top: 727px;
+  left: 66.8%;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+}
+
+.pieCircle-11 {
+  top: 792px;
+  left: 60.8%;
+  transform: rotate(150deg);
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  -o-transform: rotate(150deg);
+}
+
+.pieCircle-12 {
+  top: 828px;
+  left: 53.7%;
+  transform: rotate(170deg);
+  -webkit-transform: rotate(170deg);
+  -moz-transform: rotate(170deg);
+  -ms-transform: rotate(170deg);
+  -o-transform: rotate(170deg);
+}
+
+.pieCircle-13 {
+  top: 837px;
+  left: 46%;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+.pieCircle-14 {
+  top: 824px;
+  left: 38.6%;
+  transform: rotate(195deg);
+  -webkit-transform: rotate(195deg);
+  -moz-transform: rotate(195deg);
+  -ms-transform: rotate(195deg);
+  -o-transform: rotate(195deg);
+}
+
+.pieCircle-15 {
+  top: 784px;
+  left: 31.7%;
+  transform: rotate(210deg);
+  -webkit-transform: rotate(210deg);
+  -moz-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  -o-transform: rotate(210deg);
+}
+
+.pieCircle-16 {
+  top: 723px;
+  left: 25.7%;
+  transform: rotate(230deg);
+  -webkit-transform: rotate(230deg);
+  -moz-transform: rotate(230deg);
+  -ms-transform: rotate(230deg);
+  -o-transform: rotate(230deg);
+}
+
+.pieCircle-17 {
+  top: 644px;
+  left: 21%;
+  transform: rotate(245deg);
+  -webkit-transform: rotate(245deg);
+  -moz-transform: rotate(245deg);
+  -ms-transform: rotate(245deg);
+  -o-transform: rotate(245deg);
+}
+
+.pieCircle-18 {
+  top: 551px;
+  left: 18%;
+  transform: rotate(255deg);
+  -webkit-transform: rotate(255deg);
+  -moz-transform: rotate(255deg);
+  -ms-transform: rotate(255deg);
+  -o-transform: rotate(255deg);
+}
+
+.pieCircle-19 {
+  top: 450px;
+  left: 17%;
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+}
+
+.pieCircle-20 {
+  top: 349px;
+  left: 18%;
+  transform: rotate(288deg);
+  -webkit-transform: rotate(288deg);
+  -moz-transform: rotate(288deg);
+  -ms-transform: rotate(288deg);
+  -o-transform: rotate(288deg);
+}
+
+.pieCircle-21 {
+  top: 255px;
+  left: 21%;
+  transform: rotate(295deg);
+  -webkit-transform: rotate(295deg);
+  -moz-transform: rotate(295deg);
+  -ms-transform: rotate(295deg);
+  -o-transform: rotate(295deg);
+}
+
+.pieCircle-22 {
+  top: 175px;
+  left: 25.8%;
+  transform: rotate(310deg);
+  -webkit-transform: rotate(310deg);
+  -moz-transform: rotate(310deg);
+  -ms-transform: rotate(310deg);
+  -o-transform: rotate(310deg);
+}
+
+.pieCircle-23 {
+  top: 112px;
+  left: 31.8%;
+  transform: rotate(330deg);
+  -webkit-transform: rotate(330deg);
+  -moz-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  -o-transform: rotate(330deg);
+}
+
+.pieCircle-24 {
+  top: 72px;
+  left: 38.8%;
+  transform: rotate(340deg);
+  -webkit-transform: rotate(340deg);
+  -moz-transform: rotate(340deg);
+  -ms-transform: rotate(340deg);
+  -o-transform: rotate(340deg);
+}
