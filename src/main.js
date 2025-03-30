@@ -132,6 +132,7 @@ function init() {
 /***MAP****/
 
 // Initialize the WorldWind globe
+/*
 var wwd = new WorldWind.WorldWindow("global");
 
 // Add base layers
@@ -184,7 +185,7 @@ if (navigator.geolocation) {
     console.error("Geolocation is not supported by this browser.");
     alert("Geolocation is not supported by your browser.");
 }
-
+*/
 wwd.addEventListener("click", function (event) {
     // Get the mouse click location
     var x = event.clientX;
