@@ -186,6 +186,49 @@ if (navigator.geolocation) {
     alert("Geolocation is not supported by your browser.");
 }
 */
+
+
+/*multi camera */
+
+async function getCameraStream(deviceId) {
+    return navigator.mediaDevices.getUserMedia({
+        video: { deviceId: deviceId ? { exact: deviceId } : undefined },
+        audio: false
+    });
+}
+
+async function startMixing() {
+    // Get available video input devices
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+    if (videoDevices.length < 2) {
+        console.error("At least two cameras are required.");
+        return;
+    }
+
+    // Get streams from two different cameras
+    const stream1 = await getCameraStream(videoDevices[0].deviceId);
+    const stream2 = await getCameraStream(videoDevices[1].deviceId);
+
+    // Initialize MultiStreamsMixer
+    const mixer = new MultiStreamsMixer([stream1, stream2]);
+    mixer.frameInterval = 10; // Optimize performance
+    mixer.startDrawingFrames(); // Start mixing video frames
+
+    // Get the final mixed stream
+    const mixedStream = mixer.getMixedStream();
+
+    // Attach to video element
+    const videoElement = document.getElementById("multivideo");
+    videoElement.srcObject = mixedStream;
+    videoElement.play();
+}
+
+// Run the function
+startMixing();
+
+
 wwd.addEventListener("click", function (event) {
     // Get the mouse click location
     var x = event.clientX;
