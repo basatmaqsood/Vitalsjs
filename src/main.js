@@ -229,34 +229,7 @@ async function startMixing() {
 startMixing();
 
 
-wwd.addEventListener("click", function (event) {
-    // Get the mouse click location
-    var x = event.clientX;
-    var y = event.clientY;
 
-    // Perform a pick at the mouse location
-    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-
-    if (pickList.objects.length > 0) {
-        // Get the clicked geographic position
-        var pickedObject = pickList.objects[0];
-        if (pickedObject.position) {
-            var latitude = pickedObject.position.latitude;
-            var longitude = pickedObject.position.longitude;
-          
-           latval = pickedObject.position.latitude;
-           lonval = pickedObject.position.longitude;
-           gdval=wwd.navigator.range;
-    document.getElementById('gdval').innerHTML = `Global Distance: ${gdval}`;
-    document.getElementById('latval').innerHTML = `Latitude: ${latval}`;
-    document.getElementById('lonval').innerHTML = `Longitude: ${lonval}`;
-    
-        }
-
-    } else {
-        console.log("No geographic position found at this location.");
-    }
-});
 
 
     
