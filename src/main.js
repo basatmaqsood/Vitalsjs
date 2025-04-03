@@ -190,43 +190,56 @@ if (navigator.geolocation) {
 
 /*multi camera */
 
-async function getCameraStream(deviceId) {
-    return navigator.mediaDevices.getUserMedia({
-        video: { deviceId: deviceId ? { exact: deviceId } : undefined },
-        audio: false
-    });
-}
+      async function getCameraStream(deviceId) {
+            return navigator.mediaDevices.getUserMedia({
+                video: { deviceId: deviceId ? { exact: deviceId } : undefined },
+                audio: false
+            });
+        }
 
-async function startMixing() {
-    // Get available video input devices
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        async function startMixing() {
+            try {
+                // Get all video input devices (including Bluetooth if recognized)
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-    if (videoDevices.length < 2) {
-        console.error("At least two cameras are required.");
-        return;
-    }
+                console.log("Detected Cameras:", videoDevices);
 
-    // Get streams from two different cameras
-    const stream1 = await getCameraStream(videoDevices[0].deviceId);
-    const stream2 = await getCameraStream(videoDevices[1].deviceId);
+                if (videoDevices.length < 2) {
+                    console.error("At least two cameras are required.");
+                    return;
+                }
 
-    // Initialize MultiStreamsMixer
-    const mixer = new MultiStreamsMixer([stream1, stream2]);
-    mixer.frameInterval = 10; // Optimize performance
-    mixer.startDrawingFrames(); // Start mixing video frames
+                // Select the first two available cameras
+                const cam1Id = videoDevices[0].deviceId;
+                const cam2Id = videoDevices[1].deviceId;
 
-    // Get the final mixed stream
-    const mixedStream = mixer.getMixedStream();
+                // Get streams from two different cameras
+                const stream1 = await getCameraStream(cam1Id);
+                const stream2 = await getCameraStream(cam2Id);
 
-    // Attach to video element
-    const videoElement = document.getElementById("multivideo");
-    videoElement.srcObject = mixedStream;
-    videoElement.play();
-}
+                // Initialize MultiStreamsMixer
+                const mixer = new MultiStreamsMixer([stream1, stream2]);
+                mixer.frameInterval = 10; // Optimize performance
+                mixer.startDrawingFrames(); // Start mixing video frames
 
-// Run the function
-startMixing();
+                // Get the final mixed stream
+                const mixedStream = mixer.getMixedStream();
+
+                // Attach to video element
+                const videoElement = document.getElementById("outputVideo");
+                videoElement.srcObject = mixedStream;
+                videoElement.play();
+
+                console.log("Mixing Started!");
+
+            } catch (error) {
+                console.error("Error accessing cameras:", error);
+            }
+        }
+
+        // Start the mixing process
+        startMixing();
 
 
 
