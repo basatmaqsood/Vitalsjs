@@ -3,7 +3,7 @@ const encoder = new TextEncoder();
 // Function to safely calculate the length of a variable
 function getVariableLength(value) {
     if (value === null || value === undefined) {
-        return 0; // No length for null or undefined
+        return 0; // No length for null or undefined 
     } else if (typeof value === "string" || Array.isArray(value)) {
         return value.length; // Works for strings and arrays
     } else if (typeof value === "object") {
