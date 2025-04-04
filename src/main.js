@@ -190,6 +190,29 @@ if (navigator.geolocation) {
 
 /*multi camera */
 
+async function listCameras() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+    if (videoDevices.length === 0) {
+        alert("No cameras found.");
+        return;
+    }
+
+    // Create a list of camera names
+    let cameraList = "Available Cameras:\n";
+    videoDevices.forEach((device, index) => {
+        cameraList += `${index + 1}. ${device.label || `Camera ${index + 1}`}\n`;
+    });
+
+    // Show the alert
+    alert(cameraList);
+}
+
+// Call the function to display the camera list
+listCameras();
+
+
       async function getCameraStream(deviceId) {
             return navigator.mediaDevices.getUserMedia({
                 video: { deviceId: deviceId ? { exact: deviceId } : undefined },
