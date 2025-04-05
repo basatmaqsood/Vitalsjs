@@ -189,7 +189,7 @@ if (navigator.geolocation) {
 
 
 /*multi camera */
-
+/*
 async function listCameras() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -266,7 +266,7 @@ listCameras();
 
 
 
-
+*/
 
     
 
