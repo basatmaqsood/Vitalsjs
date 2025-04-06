@@ -1,5 +1,5 @@
 const encoder = new TextEncoder();
-
+ 
 // Function to safely calculate the length of a variable
 function getVariableLength(value) {
     if (value === null || value === undefined) {
