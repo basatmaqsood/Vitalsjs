@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate, SpO₂ & Sound Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* .cursor {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+            transition: transform 0.1s ease-out, background 0.2s;
+            pointer-events: none;
+        } */
+
+
+        .cursor {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('Glass_plate_003.jpg') no-repeat center center / cover;
+            border-radius: 50%;
+            transition: transform 0.1s ease-out, background 0.2s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <canvas id="ppgChart"></canvas>
+
+    <div class="overlay">
+        ❤️ Heart Rate: <span id="heartRate">--</span> BPM | 🩸 SpO₂: <span id="spo2">--</span>% | 🎵 Sound: <span
+            id="soundLevel">--</span> dB
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        $(document).ready(function () {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const chartCanvas = document.getElementById('ppgChart');
+            const chartCtx = chartCanvas.getContext('2d');
+            const cursor = document.getElementById('cursor');
+
+            let heartRate = 70; // Default BPM
+            let lastPeakTime = 0;
+            let heartRates = [];
+            let updatePPG = false; // Only update when mouse moves
+            let soundData = [];
+
+            // Full-screen camera
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    analyzeSound(stream); // Start sound analysis
+                })
+                .catch(error => console.error("Webcam access denied:", error));
+
+            // Resize canvas
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                chartCanvas.width = window.innerWidth;
+                chartCanvas.height = window.innerHeight;
+            }
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            // Chart.js setup
+            let labels = [];
+            let heartRateData = [];
+            let spo2Data = [];
+            let chart = new Chart(chartCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Heart Rate', data: heartRateData, borderColor: 'red', borderWidth: 2, tension: 0.2 },
+                        { label: 'SpO₂', data: spo2Data, borderColor: 'green', borderWidth: 2, tension: 0.2 },
+                        { label: 'Sound Level', data: soundData, borderColor: 'yellow', borderWidth: 2, tension: 0.2 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    animation: false,
+                    elements: { point: { radius: 0 } },
+                    scales: { x: { display: false }, y: { min: 50, max: 150 } }
+
+                }
+            });
+
+            function processFrame() {
+                // if (!updatePPG) return; // Only update if cursor is moving
+
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                let frameData = ctx.getImageData(canvas.width / 2 - 25, canvas.height / 2 - 25, 50, 50).data;
+
+                let sumGreen = 0, sumRed = 0, sumYellow=0, count = 0;
+                for (let i = 0; i < frameData.length; i += 4) {
+                    sumRed += frameData[i];       // Red channel
+                    sumGreen += frameData[i + 1]; // Green channel
+                    sumYellow += frameData[i + 2]; // Yellow channel
+                    count++;
+                }
+
+                let avgGreen = sumGreen / count;
+                let avgRed = sumRed / count;
+                let avgYellow = sumYellow / count;
+
+                // Update chart data
+                if (labels.length > 50) {
+                    labels.shift();
+                    heartRateData.shift();
+                    spo2Data.shift();
+                    soundData.shift();
+                }
+                labels.push('');
+                heartRateData.push(avgGreen);
+                spo2Data.push(98 - (avgRed / avgGreen) * 20); // Approximate SpO₂
+                soundData.push(avgYellow);
+                chart.update();
+
+                // Heart Rate Calculation (Peak detection)
+                let currentTime = Date.now();
+                if (heartRates.length > 5) heartRates.shift();
+
+                if (avgGreen > 120 && currentTime - lastPeakTime > 500) { // Detect peak
+                    let bpm = 60000 / (currentTime - lastPeakTime);
+                    if (bpm > 50 && bpm < 180) {
+                        heartRates.push(bpm);
+                        heartRate = Math.round(heartRates.reduce((a, b) => a + b) / heartRates.length);
+                        $("#heartRate").text(heartRate);
+                    }
+                    lastPeakTime = currentTime;
+                }
+
+                // Display estimated SpO₂
+                let spo2Value = 98 - (avgRed / avgGreen) * 20;
+                if (spo2Value > 85 && spo2Value < 100) {
+                    $("#spo2").text(Math.round(spo2Value));
+                }
+
+                // Mouse Cursor Reaction
+                let pulseSize = 20 + (heartRate / 3);
+                let pulseColor = `rgb(${255 - heartRate}, ${heartRate}, 100)`;
+
+                cursor.style.width = cursor.style.height = `${pulseSize}px`;
+                // want to use image as background
+                cursor.style.background = `url('Glass_plate_003.jpg') no-repeat center center / cover`;
+                cursor.style.transform = `translate(-50%, -50%) scale(${pulseSize / 50})`;
+                cursor.style.transition = `transform 0.1s ease-out, background 0.2s`;
+                // cursor.style.boxShadow = `0 0 ${pulseSize}px ${pulseColor}`;
+                // cursor.style.opacity = 0.5 + (heartRate / 200);
+                cursor.style.opacity = 0.5;
+                cursor.style.pointerEvents = "none"; // Prevent cursor from blocking mouse events
+
+
+                // updatePPG = false; // Stop updating until next cursor move
+            }
+
+            setInterval(processFrame, 100);
+
+            // Sound Analysis
+            function analyzeSound(stream) {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioCtx.createAnalyser();
+                const microphone = audioCtx.createMediaStreamSource(stream);
+                microphone.connect(analyser);
+                analyser.fftSize = 256;
+
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+
+                function updateSound() {
+                    analyser.getByteFrequencyData(dataArray);
+                    let sum = dataArray.reduce((a, b) => a + b, 0);
+                    let avgVolume = sum / bufferLength;
+                    $("#soundLevel").text(Math.round(avgVolume) + " dB");
+                    requestAnimationFrame(updateSound);
+                }
+                updateSound();
+            }
+
+            // Mouse move event - Enable PPG update
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+                updatePPG = true; // Allow PPG updates
+            });
+        });
+    </script>
+
+</body>
+
+</html>
