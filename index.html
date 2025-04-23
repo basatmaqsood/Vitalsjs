@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="src/main.css">
 <link rel="icon" type="image/png" href="logo.png">
-<script src="dist/mrz-scanner.bundle.js"></script>
 <style>
     body {
         font-weight: bold;
@@ -400,40 +399,12 @@ mjx-line{height: 7px !important;}
     </div>
     <!-- BG -->
 <div id="chartsContainer">
-	<p id="scan-result"></p>
         <!-- Canvas elements will be dynamically added here -->
     </div>
 <div id="asciicontent" >
     <!-- Hidden content to generate PDF -->
 </div>
 
-<script>
-  window.onload = function() {
-    const startScanButton = document.getElementById("startCharts");
-    let result = null;
-    let firstLoad = true;
-
-    const mrzscanner = new Dynamsoft.MRZScanner({
-      license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzOTE3NzcxLVRYbFhaV0pRY205cSIsIm1haW5TZXJ2ZXJVUkwiOiJodHRwczovL21kbHMuZHluYW1zb2Z0b25saW5lLmNvbSIsIm9yZ2FuaXphdGlvbklEIjoiMTAzOTE3NzcxIiwic3RhbmRieVNlcnZlclVSTCI6Imh0dHBzOi8vc2Rscy5keW5hbXNvZnRvbmxpbmUuY29tIiwiY2hlY2tDb2RlIjotMTQ5MDkzNTQ3Nn0=",
-      resultViewConfig: {
-        toolbarButtonsConfig: {
-          done: {
-            label: "Return Home",
-          },
-        },
-      },
-    });
-
-    startScanButton.addEventListener("click", async function () {
-      try {
-        result = await mrzscanner.launch();
-        console.log(result);
-      } catch (error) {
-        console.error("Error scanning:", error);
-      }
-    });
-  };
-</script>
 
 
     <!-- Scripts -->
